@@ -4,6 +4,7 @@
 페이지: https://finance.naver.com/item/sise_day.naver?code=XXXXXX&page=N
 """
 import time
+import re
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -88,9 +89,4 @@ def get_stock_name(code: str) -> str:
         )
         resp.encoding = "euc-kr"
         soup = BeautifulSoup(resp.text, "lxml")
-        tag = soup.select_one("div.wrap_company h2 a")
-        if tag:
-            return tag.get_text(strip=True)
-    except requests.RequestException:
-        pass
-    return code
+        tag = soup.select_one("div.wrap_company
