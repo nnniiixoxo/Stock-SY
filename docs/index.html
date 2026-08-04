@@ -278,19 +278,43 @@ function collectAllCodes() {
 
 async function fetchLivePrices(codes) {
   if (!codes.length) return {};
-  const url = 'https://polling.finance.naver.com/api/realtime/domestic/stock/' + codes.join(',');
+  const targetUrl = 'https://polling.finance.naver.com/api/realtime/domestic/stock/' + codes.join(',');
+
+  // 1차: 직접 요청
   try {
-    const res = await fetch(url, { cache: 'no-store' });
-    const json = await res.json();
-    const list = (json && json.result && json.result.areas && json.result.areas[0] && json.result.areas[0].datas) || [];
-    const map = {};
-    list.forEach(d => {
-      map[d.cd] = { price: d.nv, change: d.cv, rate: d.cr };
-    });
-    return map;
+    const res = await fetch(targetUrl, { cache: 'no-store' });
+    if (res.ok) {
+      const json = await res.json();
+      const map = parseLiveResponse(json);
+      if (Object.keys(map).length > 0) return map;
+    }
+    console.warn('[실시간시세] 직접 요청 실패 또는 빈 응답, 프록시로 재시도');
   } catch (e) {
-    return {};
+    console.warn('[실시간시세] 직접 요청 오류(CORS 가능성):', e.message);
   }
+
+  // 2차: CORS 우회 프록시 경유
+  try {
+    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
+    const res2 = await fetch(proxyUrl, { cache: 'no-store' });
+    if (res2.ok) {
+      const json2 = await res2.json();
+      return parseLiveResponse(json2);
+    }
+  } catch (e2) {
+    console.warn('[실시간시세] 프록시 요청도 실패:', e2.message);
+  }
+
+  return {};
+}
+
+function parseLiveResponse(json) {
+  const list = (json && json.result && json.result.areas && json.result.areas[0] && json.result.areas[0].datas) || [];
+  const map = {};
+  list.forEach(d => {
+    map[d.cd] = { price: d.nv, change: d.cv, rate: d.cr };
+  });
+  return map;
 }
 
 function applyLivePrices(map) {
@@ -309,7 +333,7 @@ function applyLivePrices(map) {
   if (statusEl) {
     statusEl.textContent = hasAny
       ? '실시간 반영 · ' + new Date().toLocaleTimeString('ko-KR')
-      : '';
+      : '실시간 시세 연결 실패 (전일 종가만 표시 중)';
   }
 }
 
