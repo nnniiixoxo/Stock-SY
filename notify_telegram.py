@@ -17,16 +17,21 @@ RESULTS_PATH = os.path.join(os.path.dirname(__file__), "docs", "results.json")
 
 
 def build_message(data: dict) -> str:
-    if not data.get("stocks"):
-        return f"📊 {data.get('base_date')} 기준\n조건을 만족하는 종목이 없습니다."
-
-    lines = [f"📊 {data['base_date']} 기준 · 과매도+수급유입 {data['count']}종목\n"]
-    for i, s in enumerate(data["stocks"], start=1):
-        lines.append(
-            f"{i}. {s['name']}({s['code']}) "
-            f"RSI {s['rsi']} · 이격도 {s['disparity']} · 종가 {int(s['close']):,}원"
-        )
-    return "\n".join(lines)
+    lines = [f"📊 {data.get('base_date')} 기준 종목 탐색 결과\n"]
+    for market_label, market_name in (("kospi", "코스피"), ("kosdaq", "코스닥")):
+        m = data.get(market_label)
+        if not m:
+            continue
+        overlap = m.get("overlap_3plus") or []
+        lines.append(f"[{market_name}] 5개 지표 중 3개 이상 중복 {len(overlap)}종목")
+        if not overlap:
+            lines.append("  없음")
+        else:
+            for i, s in enumerate(overlap[:10], start=1):
+                tags = "+".join(s.get("matched_lists", []))
+                lines.append(f"  {i}. {s['name']}({s['code']}) RSI {s['rsi']} · {tags}")
+        lines.append("")
+    return "\n".join(lines).strip()
 
 
 def send_telegram_message(text: str) -> bool:
