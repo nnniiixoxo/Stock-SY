@@ -1,6 +1,6 @@
 {
   "base_date": "20260804",
-  "generated_at": "2026-08-04T06:42:14.510344",
+  "generated_at": "2026-08-04T07:06:50.032995",
   "conditions": {
     "rsi_threshold": 30,
     "rsi_top_n": 10,
@@ -45,7 +45,7 @@
         "rsi": 36.52,
         "disparity": 81.09,
         "net_buy_1d": 0,
-        "turnover": 2262523205910.0,
+        "turnover": 2262681271340.0,
         "volume_surge": 1.29,
         "w52_proximity": null,
         "matched_lists": [
@@ -60,7 +60,7 @@
         "rsi": 38.29,
         "disparity": 86.69,
         "net_buy_1d": 0,
-        "turnover": 8361580439000.0,
+        "turnover": 8361648250000.0,
         "volume_surge": 0.79,
         "w52_proximity": null,
         "matched_lists": [
@@ -75,7 +75,7 @@
         "rsi": 44.15,
         "disparity": 99.22,
         "net_buy_1d": 0,
-        "turnover": 976888255500.0,
+        "turnover": 976958875350.0,
         "volume_surge": 1.47,
         "w52_proximity": null,
         "matched_lists": [
@@ -90,7 +90,7 @@
         "rsi": 47.9,
         "disparity": 102.72,
         "net_buy_1d": 0,
-        "turnover": 860154374300.0,
+        "turnover": 860339261400.0,
         "volume_surge": 1.51,
         "w52_proximity": null,
         "matched_lists": [
@@ -108,7 +108,7 @@
         "rsi": 40.85,
         "disparity": 94.06,
         "net_buy_1d": 0,
-        "turnover": 7018173360000.0,
+        "turnover": 7019059200000.0,
         "volume_surge": 0.91,
         "w52_proximity": null
       },
@@ -119,7 +119,7 @@
         "rsi": 38.29,
         "disparity": 86.69,
         "net_buy_1d": 0,
-        "turnover": 8361580439000.0,
+        "turnover": 8361648250000.0,
         "volume_surge": 0.79,
         "w52_proximity": null
       },
@@ -130,7 +130,7 @@
         "rsi": 44.28,
         "disparity": 98.53,
         "net_buy_1d": 0,
-        "turnover": 449157970800.0,
+        "turnover": 449468082000.0,
         "volume_surge": 0.58,
         "w52_proximity": null
       },
@@ -141,7 +141,7 @@
         "rsi": 41.24,
         "disparity": 91.81,
         "net_buy_1d": 0,
-        "turnover": 1006596140000.0,
+        "turnover": 1006683060000.0,
         "volume_surge": 0.96,
         "w52_proximity": null
       },
@@ -152,7 +152,7 @@
         "rsi": 37.21,
         "disparity": 91.15,
         "net_buy_1d": 0,
-        "turnover": 1162540695000.0,
+        "turnover": 1162658010000.0,
         "volume_surge": 1.0,
         "w52_proximity": null
       },
@@ -163,7 +163,7 @@
         "rsi": 33.0,
         "disparity": 94.96,
         "net_buy_1d": 0,
-        "turnover": 267037767500.0,
+        "turnover": 267038945000.0,
         "volume_surge": 0.73,
         "w52_proximity": null
       },
@@ -242,7 +242,7 @@
         "rsi": 36.52,
         "disparity": 81.09,
         "net_buy_1d": 0,
-        "turnover": 2262523205910.0,
+        "turnover": 2262681271340.0,
         "volume_surge": 1.29,
         "w52_proximity": null
       },
@@ -253,7 +253,7 @@
         "rsi": 31.11,
         "disparity": 84.24,
         "net_buy_1d": 0,
-        "turnover": 39986975000.0,
+        "turnover": 39987230000.0,
         "volume_surge": 1.08,
         "w52_proximity": null
       },
@@ -264,7 +264,7 @@
         "rsi": 31.45,
         "disparity": 84.26,
         "net_buy_1d": 0,
-        "turnover": 134269800000.0,
+        "turnover": 134428875000.0,
         "volume_surge": 0.84,
         "w52_proximity": null
       },
@@ -286,7 +286,7 @@
         "rsi": 38.29,
         "disparity": 86.69,
         "net_buy_1d": 0,
-        "turnover": 8361580439000.0,
+        "turnover": 8361648250000.0,
         "volume_surge": 0.79,
         "w52_proximity": null
       },
@@ -319,7 +319,7 @@
         "rsi": 40.05,
         "disparity": 88.59,
         "net_buy_1d": 0,
-        "turnover": 113653380000.0,
+        "turnover": 113803600800.0,
         "volume_surge": 0.92,
         "w52_proximity": null
       }
@@ -332,7 +332,7 @@
         "rsi": 38.29,
         "disparity": 86.69,
         "net_buy_1d": 0,
-        "turnover": 8361580439000.0,
+        "turnover": 8361648250000.0,
         "volume_surge": 0.79,
         "w52_proximity": null
       },
@@ -343,7 +343,7 @@
         "rsi": 40.85,
         "disparity": 94.06,
         "net_buy_1d": 0,
-        "turnover": 7018173360000.0,
+        "turnover": 7019059200000.0,
         "volume_surge": 0.91,
         "w52_proximity": null
       },
@@ -354,7 +354,7 @@
         "rsi": 36.52,
         "disparity": 81.09,
         "net_buy_1d": 0,
-        "turnover": 2262523205910.0,
+        "turnover": 2262681271340.0,
         "volume_surge": 1.29,
         "w52_proximity": null
       },
@@ -365,7 +365,7 @@
         "rsi": 40.27,
         "disparity": 93.23,
         "net_buy_1d": 0,
-        "turnover": 2037889415450.0,
+        "turnover": 2038740815830.0,
         "volume_surge": 0.82,
         "w52_proximity": null
       },
@@ -376,7 +376,7 @@
         "rsi": 37.21,
         "disparity": 91.15,
         "net_buy_1d": 0,
-        "turnover": 1162540695000.0,
+        "turnover": 1162658010000.0,
         "volume_surge": 1.0,
         "w52_proximity": null
       },
@@ -387,7 +387,7 @@
         "rsi": 41.24,
         "disparity": 91.81,
         "net_buy_1d": 0,
-        "turnover": 1006596140000.0,
+        "turnover": 1006683060000.0,
         "volume_surge": 0.96,
         "w52_proximity": null
       },
@@ -398,7 +398,7 @@
         "rsi": 44.15,
         "disparity": 99.22,
         "net_buy_1d": 0,
-        "turnover": 976888255500.0,
+        "turnover": 976958875350.0,
         "volume_surge": 1.47,
         "w52_proximity": null
       },
@@ -409,7 +409,7 @@
         "rsi": 47.9,
         "disparity": 102.72,
         "net_buy_1d": 0,
-        "turnover": 860154374300.0,
+        "turnover": 860339261400.0,
         "volume_surge": 1.51,
         "w52_proximity": null
       },
@@ -420,7 +420,7 @@
         "rsi": 45.53,
         "disparity": 98.92,
         "net_buy_1d": 0,
-        "turnover": 553764415750.0,
+        "turnover": 553871830750.0,
         "volume_surge": 0.44,
         "w52_proximity": null
       },
@@ -431,7 +431,7 @@
         "rsi": 39.24,
         "disparity": 90.71,
         "net_buy_1d": 0,
-        "turnover": 528274853920.0,
+        "turnover": 528318425195.0,
         "volume_surge": 1.04,
         "w52_proximity": null
       }
@@ -444,7 +444,7 @@
         "rsi": 52.83,
         "disparity": 107.44,
         "net_buy_1d": 0,
-        "turnover": 25923774600.0,
+        "turnover": 25923949800.0,
         "volume_surge": 2.33,
         "w52_proximity": null
       },
@@ -455,7 +455,7 @@
         "rsi": 46.83,
         "disparity": 101.76,
         "net_buy_1d": 0,
-        "turnover": 146931757600.0,
+        "turnover": 146953554400.0,
         "volume_surge": 1.92,
         "w52_proximity": null
       },
@@ -466,7 +466,7 @@
         "rsi": 48.97,
         "disparity": 113.45,
         "net_buy_1d": 0,
-        "turnover": 516077758500.0,
+        "turnover": 516081835500.0,
         "volume_surge": 1.76,
         "w52_proximity": null
       },
@@ -477,7 +477,7 @@
         "rsi": 55.35,
         "disparity": 113.19,
         "net_buy_1d": 0,
-        "turnover": 119530350000.0,
+        "turnover": 119530800000.0,
         "volume_surge": 1.68,
         "w52_proximity": null
       },
@@ -488,7 +488,7 @@
         "rsi": 50.74,
         "disparity": 104.82,
         "net_buy_1d": 0,
-        "turnover": 223391928200.0,
+        "turnover": 223393482000.0,
         "volume_surge": 1.55,
         "w52_proximity": null
       },
@@ -499,7 +499,7 @@
         "rsi": 47.9,
         "disparity": 102.72,
         "net_buy_1d": 0,
-        "turnover": 860154374300.0,
+        "turnover": 860339261400.0,
         "volume_surge": 1.51,
         "w52_proximity": null
       },
@@ -521,7 +521,7 @@
         "rsi": 44.15,
         "disparity": 99.22,
         "net_buy_1d": 0,
-        "turnover": 976888255500.0,
+        "turnover": 976958875350.0,
         "volume_surge": 1.47,
         "w52_proximity": null
       },
@@ -561,7 +561,7 @@
         "rsi": 19.16,
         "disparity": 34.72,
         "net_buy_1d": 0,
-        "turnover": 66804889040.0,
+        "turnover": 66806481040.0,
         "volume_surge": 1.19,
         "w52_proximity": null,
         "matched_lists": [
@@ -576,7 +576,7 @@
         "rsi": 44.71,
         "disparity": 85.97,
         "net_buy_1d": 0,
-        "turnover": 181030552000.0,
+        "turnover": 181054216000.0,
         "volume_surge": 0.72,
         "w52_proximity": null,
         "matched_lists": [
@@ -608,7 +608,7 @@
         "rsi": 19.16,
         "disparity": 34.72,
         "net_buy_1d": 0,
-        "turnover": 66804889040.0,
+        "turnover": 66806481040.0,
         "volume_surge": 1.19,
         "w52_proximity": null
       }
@@ -632,7 +632,7 @@
         "rsi": 47.67,
         "disparity": 104.15,
         "net_buy_1d": 0,
-        "turnover": 109436872000.0,
+        "turnover": 109436954000.0,
         "volume_surge": 1.27,
         "w52_proximity": null
       },
@@ -665,7 +665,7 @@
         "rsi": 44.71,
         "disparity": 85.97,
         "net_buy_1d": 0,
-        "turnover": 181030552000.0,
+        "turnover": 181054216000.0,
         "volume_surge": 0.72,
         "w52_proximity": null
       },
@@ -676,7 +676,7 @@
         "rsi": 37.9,
         "disparity": 94.11,
         "net_buy_1d": 0,
-        "turnover": 38316454400.0,
+        "turnover": 38317742400.0,
         "volume_surge": 0.81,
         "w52_proximity": null
       },
@@ -687,7 +687,7 @@
         "rsi": 41.76,
         "disparity": 88.53,
         "net_buy_1d": 0,
-        "turnover": 105962114500.0,
+        "turnover": 106014224500.0,
         "volume_surge": 0.63,
         "w52_proximity": null
       },
@@ -698,7 +698,7 @@
         "rsi": 46.17,
         "disparity": 100.67,
         "net_buy_1d": 0,
-        "turnover": 48121258500.0,
+        "turnover": 48122392050.0,
         "volume_surge": 0.96,
         "w52_proximity": null
       },
@@ -709,7 +709,7 @@
         "rsi": 50.98,
         "disparity": 108.25,
         "net_buy_1d": 0,
-        "turnover": 51262396800.0,
+        "turnover": 51263442000.0,
         "volume_surge": 1.74,
         "w52_proximity": null
       },
@@ -733,7 +733,7 @@
         "rsi": 19.16,
         "disparity": 34.72,
         "net_buy_1d": 0,
-        "turnover": 66804889040.0,
+        "turnover": 66806481040.0,
         "volume_surge": 1.19,
         "w52_proximity": null
       },
@@ -788,7 +788,7 @@
         "rsi": 44.71,
         "disparity": 85.97,
         "net_buy_1d": 0,
-        "turnover": 181030552000.0,
+        "turnover": 181054216000.0,
         "volume_surge": 0.72,
         "w52_proximity": null
       },
@@ -867,7 +867,7 @@
         "rsi": 44.71,
         "disparity": 85.97,
         "net_buy_1d": 0,
-        "turnover": 181030552000.0,
+        "turnover": 181054216000.0,
         "volume_surge": 0.72,
         "w52_proximity": null
       },
@@ -878,7 +878,7 @@
         "rsi": 62.29,
         "disparity": 141.69,
         "net_buy_1d": 0,
-        "turnover": 147876281600.0,
+        "turnover": 147876390400.0,
         "volume_surge": 1.82,
         "w52_proximity": null
       },
@@ -889,7 +889,7 @@
         "rsi": 42.67,
         "disparity": 95.19,
         "net_buy_1d": 0,
-        "turnover": 132376860000.0,
+        "turnover": 132396040000.0,
         "volume_surge": 0.95,
         "w52_proximity": null
       },
@@ -911,7 +911,7 @@
         "rsi": 40.33,
         "disparity": 102.1,
         "net_buy_1d": 0,
-        "turnover": 116023363660.0,
+        "turnover": 116031894500.0,
         "volume_surge": 1.27,
         "w52_proximity": null
       },
@@ -922,7 +922,7 @@
         "rsi": 45.87,
         "disparity": 98.16,
         "net_buy_1d": 0,
-        "turnover": 115433553600.0,
+        "turnover": 115434136800.0,
         "volume_surge": 1.28,
         "w52_proximity": null
       },
@@ -933,7 +933,7 @@
         "rsi": 47.67,
         "disparity": 104.15,
         "net_buy_1d": 0,
-        "turnover": 109436872000.0,
+        "turnover": 109436954000.0,
         "volume_surge": 1.27,
         "w52_proximity": null
       },
@@ -944,7 +944,7 @@
         "rsi": 41.76,
         "disparity": 88.53,
         "net_buy_1d": 0,
-        "turnover": 105962114500.0,
+        "turnover": 106014224500.0,
         "volume_surge": 0.63,
         "w52_proximity": null
       }
@@ -990,7 +990,7 @@
         "rsi": 53.37,
         "disparity": 120.48,
         "net_buy_1d": 0,
-        "turnover": 67774573200.0,
+        "turnover": 67775552400.0,
         "volume_surge": 3.48,
         "w52_proximity": null
       },
@@ -1023,7 +1023,7 @@
         "rsi": 47.01,
         "disparity": 98.71,
         "net_buy_1d": 0,
-        "turnover": 31638115200.0,
+        "turnover": 31638659200.0,
         "volume_surge": 3.26,
         "w52_proximity": null
       },
