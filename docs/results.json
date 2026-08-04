@@ -1,0 +1,14 @@
+{
+  "base_date": null,
+  "generated_at": null,
+  "conditions": {
+    "rsi_threshold": 30,
+    "rsi_top_n": 10,
+    "net_buy_top_n": 30,
+    "disparity_ma_period": 20,
+    "disparity_top_n": 10,
+    "data_source": "naver"
+  },
+  "kospi": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] },
+  "kosdaq": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] }
+}
