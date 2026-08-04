@@ -149,4 +149,75 @@ def screen_market(sosok: int, market_label: str) -> dict:
 
     tag_map = {}  # code -> set of matched tag names (5개 지표 중)
     for tag in OVERLAP_TAGS:
-        for r in
+        for r in list_by_tag[tag]:
+            tag_map.setdefault(r["code"], set()).add(tag)
+
+    record_by_code = {r["code"]: r for r in records}
+
+    def build_overlap(min_count: int):
+        out = []
+        for code, tags in tag_map.items():
+            if len(tags) >= min_count:
+                item = dict(record_by_code[code])
+                item["matched_lists"] = sorted(tags)
+                out.append(item)
+        out.sort(key=lambda r: (-len(r["matched_lists"]), r["rsi"]))
+        return out
+
+    overlap_3plus = build_overlap(3)
+    overlap_2plus = build_overlap(2)
+
+    return {
+        "scanned_count": len(records),
+        "overlap_3plus": overlap_3plus,
+        "overlap_2plus": overlap_2plus,
+        "rsi_low": rsi_list,
+        "net_buy_top": net_buy_list,
+        "disparity_low": disparity_list,
+        "turnover_top": turnover_list,
+        "volume_surge_top": volume_surge_list,
+        "w52_high_top": w52_high_list,
+    }
+
+
+def main():
+    base_date = get_label_date()
+    print(f"기준일(라벨): {base_date}")
+
+    result = {
+        "base_date": base_date,
+        "generated_at": datetime.datetime.now().isoformat(),
+        "conditions": {
+            "rsi_threshold": RSI_THRESHOLD,
+            "rsi_top_n": RSI_TOP_N,
+            "net_buy_top_n": NET_BUY_TOP_N,
+            "disparity_ma_period": DISPARITY_MA_PERIOD,
+            "disparity_top_n": DISPARITY_TOP_N,
+            "turnover_top_n": TURNOVER_TOP_N,
+            "volume_surge_top_n": VOLUME_SURGE_TOP_N,
+            "w52_high_top_n": W52_HIGH_TOP_N,
+            "overlap_tags": OVERLAP_TAGS,
+            "data_source": "naver",
+        },
+    }
+
+    for market_label, sosok in MARKETS.items():
+        result[market_label] = screen_market(sosok, market_label)
+        m = result[market_label]
+        print(
+            f"[{market_label}] RSI:{len(m['rsi_low'])} 순매수:{len(m['net_buy_top'])} "
+            f"이격도:{len(m['disparity_low'])} 거래대금:{len(m['turnover_top'])} "
+            f"거래량급증:{len(m['volume_surge_top'])} 52주근접:{len(m['w52_high_top'])} "
+            f"중복3+:{len(m['overlap_3plus'])} 중복2+:{len(m['overlap_2plus'])}"
+        )
+
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(result, f, ensure_ascii=False, indent=2)
+
+    print(f"완료 -> {OUTPUT_PATH}")
+    return result
+
+
+if __name__ == "__main__":
+    main()
