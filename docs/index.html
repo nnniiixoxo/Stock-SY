@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,11 +60,6 @@
   .group-title h2{ font-size:15px; margin:0; font-weight:700; }
   .group-title span{ font-family:var(--mono); font-size:11px; color:var(--text-dim); }
 
-  .overlap-card{
-    background:linear-gradient(180deg, rgba(232,163,61,0.12), rgba(232,163,61,0.03));
-    border:1px solid rgba(232,163,61,0.4);
-  }
-
   .row-list{ display:flex; flex-direction:column; gap:8px; }
   a.row-link{ text-decoration:none; color:inherit; display:block; }
   .row{
@@ -73,7 +67,9 @@
     border-radius:12px; padding:11px 14px;
     display:flex; align-items:center; justify-content:space-between; gap:10px;
   }
-  a.row-link:active .row{ background:var(--panel-border); }
+  .row.overlap3{ border-color:rgba(232,163,61,0.6); background:linear-gradient(180deg, rgba(232,163,61,0.14), rgba(232,163,61,0.03)); }
+  .row.overlap2{ border-color:rgba(157,140,255,0.4); }
+  a.row-link:active .row{ filter:brightness(1.15); }
   .row-left{ display:flex; align-items:center; gap:10px; min-width:0; }
   .rank{
     font-family:var(--mono); font-size:11px; color:var(--bg); background:var(--text-dim);
@@ -83,7 +79,7 @@
   .name-block{ min-width:0; }
   .name{ font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .code{ font-family:var(--mono); font-size:10px; color:var(--text-dim); }
-  .tags{ display:flex; gap:4px; margin-top:3px; }
+  .tags{ display:flex; gap:4px; margin-top:3px; flex-wrap:wrap; }
   .tag{
     font-family:var(--mono); font-size:9px; padding:1px 6px; border-radius:8px;
     background:rgba(157,140,255,0.15); color:var(--purple); white-space:nowrap;
@@ -125,7 +121,7 @@
 </div>
 
 <div class="conditions-note">
-  RSI(14)≤30 상위10 · 전일 외국인+기관 순매수 상위30 · 이격도(20일) 하위10 · 2개 이상 겹치면 중복 표시
+  RSI(14)≤30 · 전일 순매수 · 이격도(20일) · 거래대금 · 거래량급증배수 · 52주신고가근접도 각 상위10 (순매수 제외 5개 지표 기준 중복 표시)
 </div>
 
 <section class="market active" id="market-kospi"></section>
@@ -169,16 +165,23 @@ function formatShares(v) {
   return (v >= 0 ? '+' : '') + v.toLocaleString() + '주';
 }
 
-const TAG_LABEL = { rsi: 'RSI', net_buy: '순매수', disparity: '이격도' };
+function formatEok(v) {
+  return (v / 100000000).toFixed(1) + '억';
+}
 
-function rowHtml(item, rank, mainLabel, mainValue, mainClass) {
+const TAG_LABEL = {
+  rsi: 'RSI', net_buy: '순매수', disparity: '이격도',
+  turnover: '거래대금', volume_surge: '거래량급증', w52_high: '52주신고가'
+};
+
+function rowHtml(item, rank, mainLabel, mainValue, mainClass, rowExtraClass) {
   const tags = item.matched_lists
     ? item.matched_lists.map(t => `<span class="tag">${TAG_LABEL[t] || t}</span>`).join('')
     : '';
   const naverUrl = `https://finance.naver.com/item/main.naver?code=${item.code}`;
   return `
     <a class="row-link" href="${naverUrl}" target="_blank" rel="noopener">
-      <div class="row" data-code="${item.code}">
+      <div class="row ${rowExtraClass || ''}" data-code="${item.code}">
         <div class="row-left">
           <div class="rank">${rank}</div>
           <div class="name-block">
@@ -197,13 +200,13 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass) {
   `;
 }
 
-function renderGroup(containerId, title, countLabel, items, mainLabelFn, emptyMsg) {
+function renderGroup(containerId, items, mainLabelFn, emptyMsg, rowExtraClass) {
   const el = document.getElementById(containerId);
   if (!items || items.length === 0) {
     el.innerHTML = `<div class="empty">${emptyMsg}</div>`;
     return;
   }
-  el.innerHTML = items.map((it, i) => rowHtml(it, i + 1, ...mainLabelFn(it))).join('');
+  el.innerHTML = items.map((it, i) => rowHtml(it, i + 1, ...mainLabelFn(it), rowExtraClass)).join('');
 }
 
 function renderMarket(market) {
@@ -215,58 +218,57 @@ function renderMarket(market) {
   }
 
   const sections = [];
-
   sections.push(`<div class="scanned">스캔 종목 수: ${m.scanned_count}개</div>`);
 
-  if (m.overlap && m.overlap.length > 0) {
+  if (m.overlap_3plus && m.overlap_3plus.length > 0) {
     sections.push(`
-      <div class="group-title"><h2>⭐ 2개 이상 조건 중복</h2><span>${m.overlap.length}개</span></div>
-      <div class="row-list" id="${market}-overlap"></div>
+      <div class="group-title"><h2>⭐⭐ 5개 지표 중 3개 이상 중복</h2><span>${m.overlap_3plus.length}개</span></div>
+      <div class="row-list" id="${market}-overlap3"></div>
+    `);
+  }
+  if (m.overlap_2plus && m.overlap_2plus.length > 0) {
+    sections.push(`
+      <div class="group-title"><h2>⭐ 5개 지표 중 2개 이상 중복</h2><span>${m.overlap_2plus.length}개</span></div>
+      <div class="row-list" id="${market}-overlap2"></div>
     `);
   }
 
-  sections.push(`
-    <div class="group-title"><h2>RSI 30 이하 (과매도)</h2><span>${m.rsi_low.length}개</span></div>
-    <div class="row-list" id="${market}-rsi"></div>
-  `);
-
-  sections.push(`
-    <div class="group-title"><h2>전일 순매수 상위 30</h2><span>${m.net_buy_top.length}개</span></div>
-    <div class="row-list" id="${market}-netbuy"></div>
-  `);
-
-  sections.push(`
-    <div class="group-title"><h2>이격도 하위 10 (평균 대비 최다 이탈)</h2><span>${m.disparity_low.length}개</span></div>
-    <div class="row-list" id="${market}-disparity"></div>
-  `);
+  const groupDefs = [
+    ['rsi', 'RSI 30 이하 (과매도)', m.rsi_low],
+    ['netbuy', '전일 순매수 상위 10', m.net_buy_top],
+    ['disparity', '이격도 하위 10', m.disparity_low],
+    ['turnover', '거래대금 상위 10', m.turnover_top],
+    ['volsurge', '거래량 급증배수 상위 10', m.volume_surge_top],
+    ['w52', '52주 신고가 근접도 상위 10', m.w52_high_top],
+  ];
+  for (const [key, title, list] of groupDefs) {
+    sections.push(`
+      <div class="group-title"><h2>${title}</h2><span>${(list || []).length}개</span></div>
+      <div class="row-list" id="${market}-${key}"></div>
+    `);
+  }
 
   container.innerHTML = sections.join('');
 
-  if (m.overlap && m.overlap.length > 0) {
-    renderGroup(`${market}-overlap`, '', '', m.overlap,
-      (it) => [`RSI ${it.rsi}`, 'flow-pos'],
-      '없음');
+  if (m.overlap_3plus && m.overlap_3plus.length > 0) {
+    renderGroup(`${market}-overlap3`, m.overlap_3plus, (it) => [`RSI ${it.rsi}`, 'flow-pos'], '없음', 'overlap3');
   }
-  renderGroup(`${market}-rsi`, '', '', m.rsi_low,
-    (it) => [`RSI ${it.rsi}`, ''],
-    '조건을 만족하는 종목이 없습니다.');
-  renderGroup(`${market}-netbuy`, '', '', m.net_buy_top,
-    (it) => [formatShares(it.net_buy_1d), it.net_buy_1d >= 0 ? 'flow-pos' : 'flow-neg'],
-    '데이터가 없습니다.');
-  renderGroup(`${market}-disparity`, '', '', m.disparity_low,
-    (it) => [`이격도 ${it.disparity}`, ''],
-    '데이터가 없습니다.');
+  if (m.overlap_2plus && m.overlap_2plus.length > 0) {
+    renderGroup(`${market}-overlap2`, m.overlap_2plus, (it) => [`RSI ${it.rsi}`, 'flow-pos'], '없음', 'overlap2');
+  }
+  renderGroup(`${market}-rsi`, m.rsi_low, (it) => [`RSI ${it.rsi}`, ''], '조건을 만족하는 종목이 없습니다.');
+  renderGroup(`${market}-netbuy`, m.net_buy_top,
+    (it) => [formatShares(it.net_buy_1d), it.net_buy_1d >= 0 ? 'flow-pos' : 'flow-neg'], '데이터가 없습니다.');
+  renderGroup(`${market}-disparity`, m.disparity_low, (it) => [`이격도 ${it.disparity}`, ''], '데이터가 없습니다.');
+  renderGroup(`${market}-turnover`, m.turnover_top, (it) => [formatEok(it.turnover), ''], '데이터가 없습니다.');
+  renderGroup(`${market}-volsurge`, m.volume_surge_top, (it) => [`${it.volume_surge}배`, 'flow-pos'], '데이터가 없습니다.');
+  renderGroup(`${market}-w52`, m.w52_high_top, (it) => [`${it.w52_proximity}%`, ''], '데이터가 없습니다.');
 }
 
 load();
 startLivePriceLoop();
 
-// ----------------------------------------------------------------------------
-// 장중 시세 — GitHub Actions가 15분마다 네이버에서 조회해 docs/live.json에 저장하고,
-// 이 페이지는 그 파일을 읽기만 한다 (같은 사이트 내 파일이라 CORS 문제 없음).
-// 완전한 초단위 실시간은 아니며, 최대 15분 지연될 수 있다.
-// ----------------------------------------------------------------------------
-const LIVE_REFRESH_MS = 60000;  // live.json은 서버가 15분마다 갱신하므로, 화면은 1분마다만 재확인
+const LIVE_REFRESH_MS = 60000;
 let liveTimer = null;
 
 async function fetchLivePrices() {
