@@ -1,6 +1,6 @@
 {
-  "base_date": null,
-  "generated_at": null,
+  "base_date": "20260804",
+  "generated_at": "2026-08-04T06:07:54.749040",
   "conditions": {
     "rsi_threshold": 30,
     "rsi_top_n": 10,
@@ -10,17 +10,1057 @@
     "turnover_top_n": 10,
     "volume_surge_top_n": 10,
     "w52_high_top_n": 10,
-    "overlap_tags": ["rsi", "disparity", "turnover", "volume_surge", "w52_high"],
+    "overlap_tags": [
+      "rsi",
+      "disparity",
+      "turnover",
+      "volume_surge",
+      "w52_high"
+    ],
     "data_source": "naver"
   },
   "kospi": {
-    "scanned_count": 0, "overlap_3plus": [], "overlap_2plus": [],
-    "rsi_low": [], "net_buy_top": [], "disparity_low": [],
-    "turnover_top": [], "volume_surge_top": [], "w52_high_top": []
+    "scanned_count": 150,
+    "overlap_3plus": [],
+    "overlap_2plus": [
+      {
+        "code": "032830",
+        "name": "삼성생명",
+        "close": 273500.0,
+        "rsi": 34.4,
+        "disparity": 87.07,
+        "net_buy_1d": 0,
+        "turnover": 173036065500.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null,
+        "matched_lists": [
+          "disparity",
+          "volume_surge"
+        ]
+      },
+      {
+        "code": "122630",
+        "name": "KODEX 레버리지",
+        "close": 95190.0,
+        "rsi": 36.48,
+        "disparity": 80.97,
+        "net_buy_1d": 0,
+        "turnover": 2226805656870.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null,
+        "matched_lists": [
+          "disparity",
+          "turnover"
+        ]
+      },
+      {
+        "code": "000660",
+        "name": "SK하이닉스",
+        "close": 1560000.0,
+        "rsi": 37.85,
+        "disparity": 85.79,
+        "net_buy_1d": 0,
+        "turnover": 7297506840000.0,
+        "volume_surge": 0.7,
+        "w52_proximity": null,
+        "matched_lists": [
+          "disparity",
+          "turnover"
+        ]
+      },
+      {
+        "code": "233740",
+        "name": "KODEX 코스닥150레버리지",
+        "close": 6350.0,
+        "rsi": 44.18,
+        "disparity": 99.29,
+        "net_buy_1d": 0,
+        "turnover": 971288195850.0,
+        "volume_surge": 1.46,
+        "w52_proximity": null,
+        "matched_lists": [
+          "turnover",
+          "volume_surge"
+        ]
+      },
+      {
+        "code": "229200",
+        "name": "KODEX 코스닥150",
+        "close": 13340.0,
+        "rsi": 47.95,
+        "disparity": 102.79,
+        "net_buy_1d": 0,
+        "turnover": 848789142480.0,
+        "volume_surge": 1.49,
+        "w52_proximity": null,
+        "matched_lists": [
+          "turnover",
+          "volume_surge"
+        ]
+      }
+    ],
+    "rsi_low": [],
+    "net_buy_top": [
+      {
+        "code": "005930",
+        "name": "삼성전자",
+        "close": 237500.0,
+        "rsi": 40.37,
+        "disparity": 93.13,
+        "net_buy_1d": 0,
+        "turnover": 6250731625000.0,
+        "volume_surge": 0.82,
+        "w52_proximity": null
+      },
+      {
+        "code": "000660",
+        "name": "SK하이닉스",
+        "close": 1560000.0,
+        "rsi": 37.85,
+        "disparity": 85.79,
+        "net_buy_1d": 0,
+        "turnover": 7297506840000.0,
+        "volume_surge": 0.7,
+        "w52_proximity": null
+      },
+      {
+        "code": "005935",
+        "name": "삼성전자우",
+        "close": 175400.0,
+        "rsi": 43.99,
+        "disparity": 98.0,
+        "net_buy_1d": 0,
+        "turnover": 395574533400.0,
+        "volume_surge": 0.51,
+        "w52_proximity": null
+      },
+      {
+        "code": "402340",
+        "name": "SK스퀘어",
+        "close": 1056000.0,
+        "rsi": 41.06,
+        "disparity": 91.48,
+        "net_buy_1d": 0,
+        "turnover": 899853504000.0,
+        "volume_surge": 0.86,
+        "w52_proximity": null
+      },
+      {
+        "code": "009150",
+        "name": "삼성전기",
+        "close": 1182000.0,
+        "rsi": 37.08,
+        "disparity": 90.93,
+        "net_buy_1d": 0,
+        "turnover": 1076813820000.0,
+        "volume_surge": 0.94,
+        "w52_proximity": null
+      },
+      {
+        "code": "005380",
+        "name": "현대차",
+        "close": 390000.0,
+        "rsi": 32.64,
+        "disparity": 94.39,
+        "net_buy_1d": 0,
+        "turnover": 239326620000.0,
+        "volume_surge": 0.66,
+        "w52_proximity": null
+      },
+      {
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "close": 329500.0,
+        "rsi": 45.73,
+        "disparity": 101.69,
+        "net_buy_1d": 0,
+        "turnover": 77558369000.0,
+        "volume_surge": 0.7,
+        "w52_proximity": null
+      },
+      {
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "close": 1468000.0,
+        "rsi": 54.3,
+        "disparity": 102.88,
+        "net_buy_1d": 0,
+        "turnover": 64828348000.0,
+        "volume_surge": 0.65,
+        "w52_proximity": null
+      },
+      {
+        "code": "105560",
+        "name": "KB금융",
+        "close": 168800.0,
+        "rsi": 49.37,
+        "disparity": 97.38,
+        "net_buy_1d": 0,
+        "turnover": 100743891200.0,
+        "volume_surge": 0.39,
+        "w52_proximity": null
+      },
+      {
+        "code": "032830",
+        "name": "삼성생명",
+        "close": 273500.0,
+        "rsi": 34.4,
+        "disparity": 87.07,
+        "net_buy_1d": 0,
+        "turnover": 173036065500.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null
+      }
+    ],
+    "disparity_low": [
+      {
+        "code": "000500",
+        "name": "가온전선",
+        "close": 146500.0,
+        "rsi": 37.06,
+        "disparity": 76.93,
+        "net_buy_1d": 0,
+        "turnover": 34533273000.0,
+        "volume_surge": 0.98,
+        "w52_proximity": null
+      },
+      {
+        "code": "004170",
+        "name": "신세계",
+        "close": 426000.0,
+        "rsi": 40.34,
+        "disparity": 79.95,
+        "net_buy_1d": 0,
+        "turnover": 41374824000.0,
+        "volume_surge": 0.98,
+        "w52_proximity": null
+      },
+      {
+        "code": "122630",
+        "name": "KODEX 레버리지",
+        "close": 95190.0,
+        "rsi": 36.48,
+        "disparity": 80.97,
+        "net_buy_1d": 0,
+        "turnover": 2226805656870.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null
+      },
+      {
+        "code": "011070",
+        "name": "LG이노텍",
+        "close": 519000.0,
+        "rsi": 30.72,
+        "disparity": 83.33,
+        "net_buy_1d": 0,
+        "turnover": 120281364000.0,
+        "volume_surge": 0.76,
+        "w52_proximity": null
+      },
+      {
+        "code": "023530",
+        "name": "롯데쇼핑",
+        "close": 114100.0,
+        "rsi": 38.33,
+        "disparity": 84.16,
+        "net_buy_1d": 0,
+        "turnover": 18198950000.0,
+        "volume_surge": 1.09,
+        "w52_proximity": null
+      },
+      {
+        "code": "000990",
+        "name": "DB하이텍",
+        "close": 85000.0,
+        "rsi": 31.11,
+        "disparity": 84.24,
+        "net_buy_1d": 0,
+        "turnover": 38692170000.0,
+        "volume_surge": 1.05,
+        "w52_proximity": null
+      },
+      {
+        "code": "000660",
+        "name": "SK하이닉스",
+        "close": 1560000.0,
+        "rsi": 37.85,
+        "disparity": 85.79,
+        "net_buy_1d": 0,
+        "turnover": 7297506840000.0,
+        "volume_surge": 0.7,
+        "w52_proximity": null
+      },
+      {
+        "code": "032830",
+        "name": "삼성생명",
+        "close": 273500.0,
+        "rsi": 34.4,
+        "disparity": 87.07,
+        "net_buy_1d": 0,
+        "turnover": 173036065500.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null
+      },
+      {
+        "code": "138930",
+        "name": "BNK금융지주",
+        "close": 15060.0,
+        "rsi": 31.01,
+        "disparity": 87.54,
+        "net_buy_1d": 0,
+        "turnover": 15157859880.0,
+        "volume_surge": 0.89,
+        "w52_proximity": null
+      },
+      {
+        "code": "353200",
+        "name": "대덕전자",
+        "close": 98000.0,
+        "rsi": 40.16,
+        "disparity": 88.76,
+        "net_buy_1d": 0,
+        "turnover": 108902108000.0,
+        "volume_surge": 0.88,
+        "w52_proximity": null
+      }
+    ],
+    "turnover_top": [
+      {
+        "code": "000660",
+        "name": "SK하이닉스",
+        "close": 1560000.0,
+        "rsi": 37.85,
+        "disparity": 85.79,
+        "net_buy_1d": 0,
+        "turnover": 7297506840000.0,
+        "volume_surge": 0.7,
+        "w52_proximity": null
+      },
+      {
+        "code": "005930",
+        "name": "삼성전자",
+        "close": 237500.0,
+        "rsi": 40.37,
+        "disparity": 93.13,
+        "net_buy_1d": 0,
+        "turnover": 6250731625000.0,
+        "volume_surge": 0.82,
+        "w52_proximity": null
+      },
+      {
+        "code": "122630",
+        "name": "KODEX 레버리지",
+        "close": 95190.0,
+        "rsi": 36.48,
+        "disparity": 80.97,
+        "net_buy_1d": 0,
+        "turnover": 2226805656870.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null
+      },
+      {
+        "code": "069500",
+        "name": "KODEX 200",
+        "close": 99805.0,
+        "rsi": 39.91,
+        "disparity": 92.77,
+        "net_buy_1d": 0,
+        "turnover": 1947781804570.0,
+        "volume_surge": 0.79,
+        "w52_proximity": null
+      },
+      {
+        "code": "009150",
+        "name": "삼성전기",
+        "close": 1182000.0,
+        "rsi": 37.08,
+        "disparity": 90.93,
+        "net_buy_1d": 0,
+        "turnover": 1076813820000.0,
+        "volume_surge": 0.94,
+        "w52_proximity": null
+      },
+      {
+        "code": "233740",
+        "name": "KODEX 코스닥150레버리지",
+        "close": 6350.0,
+        "rsi": 44.18,
+        "disparity": 99.29,
+        "net_buy_1d": 0,
+        "turnover": 971288195850.0,
+        "volume_surge": 1.46,
+        "w52_proximity": null
+      },
+      {
+        "code": "402340",
+        "name": "SK스퀘어",
+        "close": 1056000.0,
+        "rsi": 41.06,
+        "disparity": 91.48,
+        "net_buy_1d": 0,
+        "turnover": 899853504000.0,
+        "volume_surge": 0.86,
+        "w52_proximity": null
+      },
+      {
+        "code": "229200",
+        "name": "KODEX 코스닥150",
+        "close": 13340.0,
+        "rsi": 47.95,
+        "disparity": 102.79,
+        "net_buy_1d": 0,
+        "turnover": 848789142480.0,
+        "volume_surge": 1.49,
+        "w52_proximity": null
+      },
+      {
+        "code": "360750",
+        "name": "TIGER 미국S&P500",
+        "close": 27095.0,
+        "rsi": 45.09,
+        "disparity": 98.81,
+        "net_buy_1d": 0,
+        "turnover": 548630262525.0,
+        "volume_surge": 0.43,
+        "w52_proximity": null
+      },
+      {
+        "code": "396500",
+        "name": "TIGER 반도체TOP10",
+        "close": 32280.0,
+        "rsi": 39.05,
+        "disparity": 90.41,
+        "net_buy_1d": 0,
+        "turnover": 518926856280.0,
+        "volume_surge": 1.03,
+        "w52_proximity": null
+      }
+    ],
+    "volume_surge_top": [
+      {
+        "code": "377300",
+        "name": "카카오페이",
+        "close": 43450.0,
+        "rsi": 52.0,
+        "disparity": 106.63,
+        "net_buy_1d": 0,
+        "turnover": 24780404000.0,
+        "volume_surge": 2.25,
+        "w52_proximity": null
+      },
+      {
+        "code": "047040",
+        "name": "대우건설",
+        "close": 15130.0,
+        "rsi": 46.55,
+        "disparity": 101.32,
+        "net_buy_1d": 0,
+        "turnover": 141480266880.0,
+        "volume_surge": 1.87,
+        "w52_proximity": null
+      },
+      {
+        "code": "035420",
+        "name": "NAVER",
+        "close": 226000.0,
+        "rsi": 48.79,
+        "disparity": 113.22,
+        "net_buy_1d": 0,
+        "turnover": 489040496000.0,
+        "volume_surge": 1.68,
+        "w52_proximity": null
+      },
+      {
+        "code": "010060",
+        "name": "OCI홀딩스",
+        "close": 223500.0,
+        "rsi": 55.05,
+        "disparity": 112.48,
+        "net_buy_1d": 0,
+        "turnover": 116925142500.0,
+        "volume_surge": 1.66,
+        "w52_proximity": null
+      },
+      {
+        "code": "229200",
+        "name": "KODEX 코스닥150",
+        "close": 13340.0,
+        "rsi": 47.95,
+        "disparity": 102.79,
+        "net_buy_1d": 0,
+        "turnover": 848789142480.0,
+        "volume_surge": 1.49,
+        "w52_proximity": null
+      },
+      {
+        "code": "017670",
+        "name": "SK텔레콤",
+        "close": 91800.0,
+        "rsi": 51.13,
+        "disparity": 105.25,
+        "net_buy_1d": 0,
+        "turnover": 212619632400.0,
+        "volume_surge": 1.47,
+        "w52_proximity": null
+      },
+      {
+        "code": "233740",
+        "name": "KODEX 코스닥150레버리지",
+        "close": 6350.0,
+        "rsi": 44.18,
+        "disparity": 99.29,
+        "net_buy_1d": 0,
+        "turnover": 971288195850.0,
+        "volume_surge": 1.46,
+        "w52_proximity": null
+      },
+      {
+        "code": "267270",
+        "name": "HD건설기계",
+        "close": 127600.0,
+        "rsi": 50.4,
+        "disparity": 101.08,
+        "net_buy_1d": 0,
+        "turnover": 56482905600.0,
+        "volume_surge": 1.44,
+        "w52_proximity": null
+      },
+      {
+        "code": "078930",
+        "name": "GS",
+        "close": 97000.0,
+        "rsi": 64.12,
+        "disparity": 114.34,
+        "net_buy_1d": 0,
+        "turnover": 70111115000.0,
+        "volume_surge": 1.33,
+        "w52_proximity": null
+      },
+      {
+        "code": "032830",
+        "name": "삼성생명",
+        "close": 273500.0,
+        "rsi": 34.4,
+        "disparity": 87.07,
+        "net_buy_1d": 0,
+        "turnover": 173036065500.0,
+        "volume_surge": 1.28,
+        "w52_proximity": null
+      }
+    ],
+    "w52_high_top": []
   },
   "kosdaq": {
-    "scanned_count": 0, "overlap_3plus": [], "overlap_2plus": [],
-    "rsi_low": [], "net_buy_top": [], "disparity_low": [],
-    "turnover_top": [], "volume_surge_top": [], "w52_high_top": []
+    "scanned_count": 150,
+    "overlap_3plus": [],
+    "overlap_2plus": [
+      {
+        "code": "950160",
+        "name": "코오롱티슈진",
+        "close": 15930.0,
+        "rsi": 19.18,
+        "disparity": 34.75,
+        "net_buy_1d": 0,
+        "turnover": 66277322550.0,
+        "volume_surge": 1.18,
+        "w52_proximity": null,
+        "matched_lists": [
+          "disparity",
+          "rsi"
+        ]
+      },
+      {
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "close": 135800.0,
+        "rsi": 44.65,
+        "disparity": 85.85,
+        "net_buy_1d": 0,
+        "turnover": 178728145400.0,
+        "volume_surge": 0.71,
+        "w52_proximity": null,
+        "matched_lists": [
+          "disparity",
+          "turnover"
+        ]
+      },
+      {
+        "code": "119850",
+        "name": "지엔씨에너지",
+        "close": 51400.0,
+        "rsi": 71.65,
+        "disparity": 149.83,
+        "net_buy_1d": 0,
+        "turnover": 183485561200.0,
+        "volume_surge": 3.34,
+        "w52_proximity": null,
+        "matched_lists": [
+          "turnover",
+          "volume_surge"
+        ]
+      }
+    ],
+    "rsi_low": [
+      {
+        "code": "950160",
+        "name": "코오롱티슈진",
+        "close": 15930.0,
+        "rsi": 19.18,
+        "disparity": 34.75,
+        "net_buy_1d": 0,
+        "turnover": 66277322550.0,
+        "volume_surge": 1.18,
+        "w52_proximity": null
+      }
+    ],
+    "net_buy_top": [
+      {
+        "code": "196170",
+        "name": "알테오젠",
+        "close": 349500.0,
+        "rsi": 57.48,
+        "disparity": 116.51,
+        "net_buy_1d": 0,
+        "turnover": 193867999500.0,
+        "volume_surge": 1.21,
+        "w52_proximity": null
+      },
+      {
+        "code": "086520",
+        "name": "에코프로",
+        "close": 82200.0,
+        "rsi": 47.82,
+        "disparity": 104.39,
+        "net_buy_1d": 0,
+        "turnover": 107287275600.0,
+        "volume_surge": 1.24,
+        "w52_proximity": null
+      },
+      {
+        "code": "247540",
+        "name": "에코프로비엠",
+        "close": 102500.0,
+        "rsi": 39.95,
+        "disparity": 94.05,
+        "net_buy_1d": 0,
+        "turnover": 55297622500.0,
+        "volume_surge": 1.19,
+        "w52_proximity": null
+      },
+      {
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "close": 466500.0,
+        "rsi": 48.65,
+        "disparity": 108.56,
+        "net_buy_1d": 0,
+        "turnover": 66593341500.0,
+        "volume_surge": 0.79,
+        "w52_proximity": null
+      },
+      {
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "close": 135800.0,
+        "rsi": 44.65,
+        "disparity": 85.85,
+        "net_buy_1d": 0,
+        "turnover": 178728145400.0,
+        "volume_surge": 0.71,
+        "w52_proximity": null
+      },
+      {
+        "code": "058470",
+        "name": "리노공업",
+        "close": 64000.0,
+        "rsi": 37.42,
+        "disparity": 93.55,
+        "net_buy_1d": 0,
+        "turnover": 35606080000.0,
+        "volume_surge": 0.76,
+        "w52_proximity": null
+      },
+      {
+        "code": "240810",
+        "name": "원익IPS",
+        "close": 96800.0,
+        "rsi": 41.91,
+        "disparity": 88.79,
+        "net_buy_1d": 0,
+        "turnover": 104340623200.0,
+        "volume_surge": 0.62,
+        "w52_proximity": null
+      },
+      {
+        "code": "028300",
+        "name": "HLB",
+        "close": 34350.0,
+        "rsi": 46.17,
+        "disparity": 100.67,
+        "net_buy_1d": 0,
+        "turnover": 47316678450.0,
+        "volume_surge": 0.95,
+        "w52_proximity": null
+      },
+      {
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "close": 80400.0,
+        "rsi": 50.98,
+        "disparity": 108.25,
+        "net_buy_1d": 0,
+        "turnover": 50564444400.0,
+        "volume_surge": 1.72,
+        "w52_proximity": null
+      },
+      {
+        "code": "087010",
+        "name": "펩트론",
+        "close": 174000.0,
+        "rsi": 57.08,
+        "disparity": 133.01,
+        "net_buy_1d": 0,
+        "turnover": 87241512000.0,
+        "volume_surge": 1.29,
+        "w52_proximity": null
+      }
+    ],
+    "disparity_low": [
+      {
+        "code": "950160",
+        "name": "코오롱티슈진",
+        "close": 15930.0,
+        "rsi": 19.18,
+        "disparity": 34.75,
+        "net_buy_1d": 0,
+        "turnover": 66277322550.0,
+        "volume_surge": 1.18,
+        "w52_proximity": null
+      },
+      {
+        "code": "089970",
+        "name": "브이엠",
+        "close": 66900.0,
+        "rsi": 43.81,
+        "disparity": 80.67,
+        "net_buy_1d": 0,
+        "turnover": 41665253100.0,
+        "volume_surge": 0.76,
+        "w52_proximity": null
+      },
+      {
+        "code": "319660",
+        "name": "피에스케이",
+        "close": 125600.0,
+        "rsi": 42.92,
+        "disparity": 80.78,
+        "net_buy_1d": 0,
+        "turnover": 53847232000.0,
+        "volume_surge": 0.63,
+        "w52_proximity": null
+      },
+      {
+        "code": "183300",
+        "name": "코미코",
+        "close": 54400.0,
+        "rsi": 38.84,
+        "disparity": 82.22,
+        "net_buy_1d": 0,
+        "turnover": 0.0,
+        "volume_surge": 0.0,
+        "w52_proximity": null
+      },
+      {
+        "code": "131970",
+        "name": "두산테스나",
+        "close": 67400.0,
+        "rsi": 43.25,
+        "disparity": 84.12,
+        "net_buy_1d": 0,
+        "turnover": 18687728400.0,
+        "volume_surge": 0.92,
+        "w52_proximity": null
+      },
+      {
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "close": 135800.0,
+        "rsi": 44.65,
+        "disparity": 85.85,
+        "net_buy_1d": 0,
+        "turnover": 178728145400.0,
+        "volume_surge": 0.71,
+        "w52_proximity": null
+      },
+      {
+        "code": "095610",
+        "name": "테스",
+        "close": 132400.0,
+        "rsi": 46.82,
+        "disparity": 86.34,
+        "net_buy_1d": 0,
+        "turnover": 72104907600.0,
+        "volume_surge": 0.84,
+        "w52_proximity": null
+      },
+      {
+        "code": "420770",
+        "name": "기가비스",
+        "close": 114800.0,
+        "rsi": 45.32,
+        "disparity": 87.1,
+        "net_buy_1d": 0,
+        "turnover": 13478782800.0,
+        "volume_surge": 0.65,
+        "w52_proximity": null
+      },
+      {
+        "code": "376900",
+        "name": "로킷헬스케어",
+        "close": 36000.0,
+        "rsi": 45.26,
+        "disparity": 87.2,
+        "net_buy_1d": 0,
+        "turnover": 4779108000.0,
+        "volume_surge": 0.34,
+        "w52_proximity": null
+      },
+      {
+        "code": "031980",
+        "name": "피에스케이홀딩스",
+        "close": 102800.0,
+        "rsi": 48.71,
+        "disparity": 87.46,
+        "net_buy_1d": 0,
+        "turnover": 15183560000.0,
+        "volume_surge": 0.6,
+        "w52_proximity": null
+      }
+    ],
+    "turnover_top": [
+      {
+        "code": "196170",
+        "name": "알테오젠",
+        "close": 349500.0,
+        "rsi": 57.48,
+        "disparity": 116.51,
+        "net_buy_1d": 0,
+        "turnover": 193867999500.0,
+        "volume_surge": 1.21,
+        "w52_proximity": null
+      },
+      {
+        "code": "119850",
+        "name": "지엔씨에너지",
+        "close": 51400.0,
+        "rsi": 71.65,
+        "disparity": 149.83,
+        "net_buy_1d": 0,
+        "turnover": 183485561200.0,
+        "volume_surge": 3.34,
+        "w52_proximity": null
+      },
+      {
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "close": 135800.0,
+        "rsi": 44.65,
+        "disparity": 85.85,
+        "net_buy_1d": 0,
+        "turnover": 178728145400.0,
+        "volume_surge": 0.71,
+        "w52_proximity": null
+      },
+      {
+        "code": "058610",
+        "name": "에스피지",
+        "close": 108500.0,
+        "rsi": 62.12,
+        "disparity": 141.33,
+        "net_buy_1d": 0,
+        "turnover": 145905917500.0,
+        "volume_surge": 1.8,
+        "w52_proximity": null
+      },
+      {
+        "code": "080220",
+        "name": "제주반도체",
+        "close": 69900.0,
+        "rsi": 42.61,
+        "disparity": 95.06,
+        "net_buy_1d": 0,
+        "turnover": 130682313900.0,
+        "volume_surge": 0.94,
+        "w52_proximity": null
+      },
+      {
+        "code": "439960",
+        "name": "코스모로보틱스",
+        "close": 17980.0,
+        "rsi": 47.62,
+        "disparity": 129.32,
+        "net_buy_1d": 0,
+        "turnover": 119073952440.0,
+        "volume_surge": 1.65,
+        "w52_proximity": null
+      },
+      {
+        "code": "010170",
+        "name": "대한광통신",
+        "close": 10160.0,
+        "rsi": 40.23,
+        "disparity": 101.91,
+        "net_buy_1d": 0,
+        "turnover": 115023483440.0,
+        "volume_surge": 1.26,
+        "w52_proximity": null
+      },
+      {
+        "code": "347850",
+        "name": "디앤디파마텍",
+        "close": 65000.0,
+        "rsi": 46.02,
+        "disparity": 98.44,
+        "net_buy_1d": 0,
+        "turnover": 114982920000.0,
+        "volume_surge": 1.27,
+        "w52_proximity": null
+      },
+      {
+        "code": "086520",
+        "name": "에코프로",
+        "close": 82200.0,
+        "rsi": 47.82,
+        "disparity": 104.39,
+        "net_buy_1d": 0,
+        "turnover": 107287275600.0,
+        "volume_surge": 1.24,
+        "w52_proximity": null
+      },
+      {
+        "code": "240810",
+        "name": "원익IPS",
+        "close": 96800.0,
+        "rsi": 41.91,
+        "disparity": 88.79,
+        "net_buy_1d": 0,
+        "turnover": 104340623200.0,
+        "volume_surge": 0.62,
+        "w52_proximity": null
+      }
+    ],
+    "volume_surge_top": [
+      {
+        "code": "078600",
+        "name": "대주전자재료",
+        "close": 85300.0,
+        "rsi": 54.59,
+        "disparity": 113.79,
+        "net_buy_1d": 0,
+        "turnover": 62723393100.0,
+        "volume_surge": 4.54,
+        "w52_proximity": null
+      },
+      {
+        "code": "295310",
+        "name": "에이치브이엠",
+        "close": 45500.0,
+        "rsi": 50.66,
+        "disparity": 111.01,
+        "net_buy_1d": 0,
+        "turnover": 23877899500.0,
+        "volume_surge": 4.26,
+        "w52_proximity": null
+      },
+      {
+        "code": "115180",
+        "name": "큐리언트",
+        "close": 21850.0,
+        "rsi": 58.02,
+        "disparity": 123.68,
+        "net_buy_1d": 0,
+        "turnover": 11827186500.0,
+        "volume_surge": 4.14,
+        "w52_proximity": null
+      },
+      {
+        "code": "030530",
+        "name": "원익홀딩스",
+        "close": 20400.0,
+        "rsi": 53.37,
+        "disparity": 120.48,
+        "net_buy_1d": 0,
+        "turnover": 66971690400.0,
+        "volume_surge": 3.45,
+        "w52_proximity": null
+      },
+      {
+        "code": "119850",
+        "name": "지엔씨에너지",
+        "close": 51400.0,
+        "rsi": 71.65,
+        "disparity": 149.83,
+        "net_buy_1d": 0,
+        "turnover": 183485561200.0,
+        "volume_surge": 3.34,
+        "w52_proximity": null
+      },
+      {
+        "code": "347700",
+        "name": "스피어",
+        "close": 19580.0,
+        "rsi": 53.63,
+        "disparity": 109.73,
+        "net_buy_1d": 0,
+        "turnover": 68466717440.0,
+        "volume_surge": 3.25,
+        "w52_proximity": null
+      },
+      {
+        "code": "140410",
+        "name": "메지온",
+        "close": 54300.0,
+        "rsi": 46.92,
+        "disparity": 98.54,
+        "net_buy_1d": 0,
+        "turnover": 30839522100.0,
+        "volume_surge": 3.2,
+        "w52_proximity": null
+      },
+      {
+        "code": "475830",
+        "name": "오름테라퓨틱",
+        "close": 57900.0,
+        "rsi": 61.22,
+        "disparity": 126.35,
+        "net_buy_1d": 0,
+        "turnover": 17756540400.0,
+        "volume_surge": 2.82,
+        "w52_proximity": null
+      },
+      {
+        "code": "083650",
+        "name": "비에이치아이",
+        "close": 49850.0,
+        "rsi": 52.17,
+        "disparity": 114.61,
+        "net_buy_1d": 0,
+        "turnover": 30563882450.0,
+        "volume_surge": 2.73,
+        "w52_proximity": null
+      },
+      {
+        "code": "476830",
+        "name": "알지노믹스",
+        "close": 31400.0,
+        "rsi": 39.28,
+        "disparity": 111.22,
+        "net_buy_1d": 0,
+        "turnover": 26723284000.0,
+        "volume_surge": 2.72,
+        "w52_proximity": null
+      }
+    ],
+    "w52_high_top": []
   }
 }
