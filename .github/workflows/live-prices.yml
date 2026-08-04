@@ -1,0 +1,35 @@
+name: Live Price Update
+
+on:
+  schedule:
+    - cron: "*/15 0-6 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 의존성 설치
+        run: pip install requests
+
+      - name: 현재가 갱신
+        run: python update_prices.py
+
+      - name: 결과 커밋 & 푸시
+        run: |
+          git config user.name "screening-bot"
+          git config user.email "actions@github.com"
+          git add docs/live.json
+          git diff --staged --quiet && echo "변경 없음" || git commit -m "chore: update live prices"
+          git push
