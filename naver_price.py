@@ -27,7 +27,6 @@ def get_daily_ohlcv(code: str, days: int = 40, sleep: float = 0.3) -> pd.DataFra
     """
     rows = []
     page = 1
-    # 한 페이지당 10개 행 -> 필요한 페이지 수 계산 (여유있게 +1)
     max_page = (days // 10) + 2
 
     while len(rows) < days and page <= max_page:
@@ -70,7 +69,7 @@ def get_daily_ohlcv(code: str, days: int = 40, sleep: float = 0.3) -> pd.DataFra
                 }
             )
         page += 1
-        time.sleep(sleep)  # 네이버 서버 부하 방지용 딜레이
+        time.sleep(sleep)
 
     if not rows:
         return pd.DataFrame(columns=["date", "close", "open", "high", "low", "volume"])
@@ -89,4 +88,41 @@ def get_stock_name(code: str) -> str:
         )
         resp.encoding = "euc-kr"
         soup = BeautifulSoup(resp.text, "lxml")
-        tag = soup.select_one("div.wrap_company
+        tag = soup.select_one("div.wrap_company h2 a")
+        if tag:
+            return tag.get_text(strip=True)
+    except requests.RequestException:
+        pass
+    return code
+
+
+def get_52w_high(code: str):
+    """
+    네이버 종목 메인 페이지에서 '52주최고' 값을 가져온다.
+    페이지 구조 변화에 대비해 표 기반 파싱 + 텍스트 정규식 파싱을 순서대로 시도한다.
+    실패 시 None 반환.
+    """
+    try:
+        resp = requests.get(
+            f"https://finance.naver.com/item/main.naver?code={code}",
+            headers=HEADERS,
+            timeout=5,
+        )
+        resp.encoding = "euc-kr"
+        text = resp.text
+        soup = BeautifulSoup(text, "lxml")
+
+        for th in soup.select("th"):
+            if "52주최고" in th.get_text(strip=True).replace(" ", ""):
+                td = th.find_next("td")
+                if td:
+                    m = re.search(r"([\d,]+)", td.get_text())
+                    if m:
+                        return float(m.group(1).replace(",", ""))
+
+        m2 = re.search(r"52주\s*최고[^\d]{0,30}?([\d,]{4,})", text)
+        if m2:
+            return float(m2.group(1).replace(",", ""))
+    except requests.RequestException:
+        pass
+    return None
