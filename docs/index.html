@@ -88,6 +88,14 @@
   .row-right{ text-align:right; flex-shrink:0; }
   .metric-main{ font-family:var(--mono); font-size:14px; font-weight:700; }
   .metric-sub{ font-family:var(--mono); font-size:10px; color:var(--text-dim); }
+  .live-price{ font-family:var(--mono); font-size:11px; margin-top:2px; }
+  .live-price.up{ color:var(--up); }
+  .live-price.down{ color:var(--down); }
+  .live-price.flat{ color:var(--text-dim); }
+  .live-badge{
+    display:inline-block; width:5px; height:5px; border-radius:50%;
+    background:var(--accent); margin-right:5px; vertical-align:1px;
+  }
   .flow-pos{ color:var(--up); }
   .flow-neg{ color:var(--down); }
 
@@ -105,6 +113,7 @@
   <div class="eyebrow">Daily Screening &middot; 전일 종가 기준</div>
   <h1>조건별 종목 탐색기</h1>
   <div class="subline" id="baseDate">불러오는 중...</div>
+  <div class="subline" id="liveStatus" style="margin-top:2px;"></div>
 </header>
 
 <div class="market-tabs">
@@ -164,7 +173,7 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass) {
     ? item.matched_lists.map(t => `<span class="tag">${TAG_LABEL[t] || t}</span>`).join('')
     : '';
   return `
-    <div class="row">
+    <div class="row" data-code="${item.code}">
       <div class="row-left">
         <div class="rank">${rank}</div>
         <div class="name-block">
@@ -175,7 +184,8 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass) {
       </div>
       <div class="row-right">
         <div class="metric-main ${mainClass || ''}">${mainValue}</div>
-        <div class="metric-sub">${item.close.toLocaleString()}원</div>
+        <div class="metric-sub">전일종가 ${item.close.toLocaleString()}</div>
+        <div class="live-price flat" data-live="${item.code}">·</div>
       </div>
     </div>
   `;
@@ -243,6 +253,99 @@ function renderMarket(market) {
 }
 
 load();
+startLivePriceLoop();
+
+// ----------------------------------------------------------------------------
+// 실시간(폴링) 현재가 — 네이버 증권 폴링 API 사용.
+// 완전한 초단위 실시간은 아니며, 페이지가 열려있는 동안 주기적으로 갱신됩니다.
+// 네트워크/브라우저 정책에 따라 실패할 수 있으며, 실패해도 전일 종가는 항상 표시됩니다.
+// ----------------------------------------------------------------------------
+const LIVE_REFRESH_MS = 15000;
+let liveTimer = null;
+
+function collectAllCodes() {
+  if (!DATA) return [];
+  const codes = new Set();
+  for (const market of ['kospi', 'kosdaq']) {
+    const m = DATA[market];
+    if (!m) continue;
+    for (const list of [m.overlap, m.rsi_low, m.net_buy_top, m.disparity_low]) {
+      (list || []).forEach(it => codes.add(it.code));
+    }
+  }
+  return Array.from(codes);
+}
+
+async function fetchLivePrices(codes) {
+  if (!codes.length) return {};
+  const url = 'https://polling.finance.naver.com/api/realtime/domestic/stock/' + codes.join(',');
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    const json = await res.json();
+    const list = (json && json.result && json.result.areas && json.result.areas[0] && json.result.areas[0].datas) || [];
+    const map = {};
+    list.forEach(d => {
+      map[d.cd] = { price: d.nv, change: d.cv, rate: d.cr };
+    });
+    return map;
+  } catch (e) {
+    return {};
+  }
+}
+
+function applyLivePrices(map) {
+  const hasAny = Object.keys(map).length > 0;
+  document.querySelectorAll('[data-live]').forEach(el => {
+    const code = el.getAttribute('data-live');
+    const info = map[code];
+    if (!info || typeof info.price !== 'number') return;
+    const dir = info.change > 0 ? 'up' : info.change < 0 ? 'down' : 'flat';
+    const sign = info.change > 0 ? '+' : info.change < 0 ? '-' : '';
+    const rate = Math.abs(info.rate ?? 0).toFixed(2);
+    el.className = 'live-price ' + dir;
+    el.innerHTML = `<span class="live-badge"></span>${info.price.toLocaleString()}원 ${sign}${Math.abs(info.change).toLocaleString()} (${sign}${rate}%)`;
+  });
+  const statusEl = document.getElementById('liveStatus');
+  if (statusEl) {
+    statusEl.textContent = hasAny
+      ? '실시간 반영 · ' + new Date().toLocaleTimeString('ko-KR')
+      : '';
+  }
+}
+
+async function refreshLivePrices() {
+  const codes = collectAllCodes();
+  const map = await fetchLivePrices(codes);
+  applyLivePrices(map);
+}
+
+function startLivePriceLoop() {
+  const kickoff = async () => {
+    // DATA가 로드될 때까지 대기 후 시작
+    if (!DATA) {
+      setTimeout(kickoff, 300);
+      return;
+    }
+    await refreshLivePrices();
+    liveTimer = setInterval(refreshLivePrices, LIVE_REFRESH_MS);
+  };
+  kickoff();
+}
 </script>
 </body>
 </html>
+
+{
+  "base_date": null,
+  "generated_at": null,
+  "conditions": {
+    "rsi_threshold": 30,
+    "rsi_top_n": 10,
+    "net_buy_top_n": 30,
+    "disparity_ma_period": 20,
+    "disparity_top_n": 10,
+    "data_source": "naver"
+  },
+  "kospi": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] },
+  "kosdaq": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] }
+}
