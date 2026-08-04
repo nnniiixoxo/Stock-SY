@@ -1,0 +1,43 @@
+name: Daily Stock Screening
+
+on:
+  schedule:
+    # UTC 기준 21:30, 일~목 = 한국시간(KST) 06:30, 월~금
+    - cron: "30 21 * * 0-4"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 스크리닝 실행
+        run: python main.py
+
+      - name: (선택) 텔레그램 알림 발송
+        if: ${{ env.TELEGRAM_BOT_TOKEN != '' }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python notify_telegram.py
+
+      - name: 결과 커밋 & 푸시 (GitHub Pages 반영)
+        run: |
+          git config user.name "screening-bot"
+          git config user.email "actions@github.com"
+          git add docs/results.json
+          git diff --staged --quiet && echo "변경 없음" || git commit -m "chore: update daily screening results"
+          git push
