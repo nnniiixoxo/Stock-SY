@@ -1,3 +1,23 @@
+{
+  "updated_at": null,
+  "prices": {}
+}
+
+{
+  "base_date": null,
+  "generated_at": null,
+  "conditions": {
+    "rsi_threshold": 30,
+    "rsi_top_n": 10,
+    "net_buy_top_n": 30,
+    "disparity_ma_period": 20,
+    "disparity_top_n": 10,
+    "data_source": "naver"
+  },
+  "kospi": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] },
+  "kosdaq": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] }
+}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -66,11 +86,13 @@
   }
 
   .row-list{ display:flex; flex-direction:column; gap:8px; }
+  a.row-link{ text-decoration:none; color:inherit; display:block; }
   .row{
     background:var(--panel); border:1px solid var(--panel-border);
     border-radius:12px; padding:11px 14px;
     display:flex; align-items:center; justify-content:space-between; gap:10px;
   }
+  a.row-link:active .row{ background:var(--panel-border); }
   .row-left{ display:flex; align-items:center; gap:10px; min-width:0; }
   .rank{
     font-family:var(--mono); font-size:11px; color:var(--bg); background:var(--text-dim);
@@ -172,22 +194,25 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass) {
   const tags = item.matched_lists
     ? item.matched_lists.map(t => `<span class="tag">${TAG_LABEL[t] || t}</span>`).join('')
     : '';
+  const naverUrl = `https://finance.naver.com/item/main.naver?code=${item.code}`;
   return `
-    <div class="row" data-code="${item.code}">
-      <div class="row-left">
-        <div class="rank">${rank}</div>
-        <div class="name-block">
-          <div class="name">${item.name}</div>
-          <div class="code">${item.code}</div>
-          ${tags ? `<div class="tags">${tags}</div>` : ''}
+    <a class="row-link" href="${naverUrl}" target="_blank" rel="noopener">
+      <div class="row" data-code="${item.code}">
+        <div class="row-left">
+          <div class="rank">${rank}</div>
+          <div class="name-block">
+            <div class="name">${item.name}</div>
+            <div class="code">${item.code}</div>
+            ${tags ? `<div class="tags">${tags}</div>` : ''}
+          </div>
+        </div>
+        <div class="row-right">
+          <div class="metric-main ${mainClass || ''}">${mainValue}</div>
+          <div class="metric-sub">전일종가 ${item.close.toLocaleString()}</div>
+          <div class="live-price flat" data-live="${item.code}">·</div>
         </div>
       </div>
-      <div class="row-right">
-        <div class="metric-main ${mainClass || ''}">${mainValue}</div>
-        <div class="metric-sub">전일종가 ${item.close.toLocaleString()}</div>
-        <div class="live-price flat" data-live="${item.code}">·</div>
-      </div>
-    </div>
+    </a>
   `;
 }
 
@@ -314,23 +339,3 @@ function startLivePriceLoop() {
 </script>
 </body>
 </html>
-
-{
-  "updated_at": null,
-  "prices": {}
-}
-
-{
-  "base_date": null,
-  "generated_at": null,
-  "conditions": {
-    "rsi_threshold": 30,
-    "rsi_top_n": 10,
-    "net_buy_top_n": 30,
-    "disparity_ma_period": 20,
-    "disparity_top_n": 10,
-    "data_source": "naver"
-  },
-  "kospi": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] },
-  "kosdaq": { "scanned_count": 0, "rsi_low": [], "net_buy_top": [], "disparity_low": [], "overlap": [] }
-}
