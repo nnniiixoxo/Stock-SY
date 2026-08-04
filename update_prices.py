@@ -32,7 +32,10 @@ def collect_codes(results: dict) -> list:
     codes = set()
     for market in ("kospi", "kosdaq"):
         m = results.get(market) or {}
-        for key in ("overlap", "rsi_low", "net_buy_top", "disparity_low"):
+        for key in (
+            "overlap_3plus", "overlap_2plus", "rsi_low", "net_buy_top",
+            "disparity_low", "turnover_top", "volume_surge_top", "w52_high_top",
+        ):
             for item in m.get(key) or []:
                 codes.add(item["code"])
     return sorted(codes)
