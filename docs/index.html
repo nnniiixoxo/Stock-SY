@@ -256,68 +256,26 @@ load();
 startLivePriceLoop();
 
 // ----------------------------------------------------------------------------
-// 실시간(폴링) 현재가 — 네이버 증권 폴링 API 사용.
-// 완전한 초단위 실시간은 아니며, 페이지가 열려있는 동안 주기적으로 갱신됩니다.
-// 네트워크/브라우저 정책에 따라 실패할 수 있으며, 실패해도 전일 종가는 항상 표시됩니다.
+// 장중 시세 — GitHub Actions가 15분마다 네이버에서 조회해 docs/live.json에 저장하고,
+// 이 페이지는 그 파일을 읽기만 한다 (같은 사이트 내 파일이라 CORS 문제 없음).
+// 완전한 초단위 실시간은 아니며, 최대 15분 지연될 수 있다.
 // ----------------------------------------------------------------------------
-const LIVE_REFRESH_MS = 15000;
+const LIVE_REFRESH_MS = 60000;  // live.json은 서버가 15분마다 갱신하므로, 화면은 1분마다만 재확인
 let liveTimer = null;
 
-function collectAllCodes() {
-  if (!DATA) return [];
-  const codes = new Set();
-  for (const market of ['kospi', 'kosdaq']) {
-    const m = DATA[market];
-    if (!m) continue;
-    for (const list of [m.overlap, m.rsi_low, m.net_buy_top, m.disparity_low]) {
-      (list || []).forEach(it => codes.add(it.code));
-    }
-  }
-  return Array.from(codes);
-}
-
-async function fetchLivePrices(codes) {
-  if (!codes.length) return {};
-  const targetUrl = 'https://polling.finance.naver.com/api/realtime/domestic/stock/' + codes.join(',');
-
-  // 1차: 직접 요청
+async function fetchLivePrices() {
   try {
-    const res = await fetch(targetUrl, { cache: 'no-store' });
-    if (res.ok) {
-      const json = await res.json();
-      const map = parseLiveResponse(json);
-      if (Object.keys(map).length > 0) return map;
-    }
-    console.warn('[실시간시세] 직접 요청 실패 또는 빈 응답, 프록시로 재시도');
+    const res = await fetch('live.json', { cache: 'no-store' });
+    if (!res.ok) return null;
+    return await res.json();
   } catch (e) {
-    console.warn('[실시간시세] 직접 요청 오류(CORS 가능성):', e.message);
+    console.warn('[실시간시세] live.json 로드 실패:', e.message);
+    return null;
   }
-
-  // 2차: CORS 우회 프록시 경유
-  try {
-    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
-    const res2 = await fetch(proxyUrl, { cache: 'no-store' });
-    if (res2.ok) {
-      const json2 = await res2.json();
-      return parseLiveResponse(json2);
-    }
-  } catch (e2) {
-    console.warn('[실시간시세] 프록시 요청도 실패:', e2.message);
-  }
-
-  return {};
 }
 
-function parseLiveResponse(json) {
-  const list = (json && json.result && json.result.areas && json.result.areas[0] && json.result.areas[0].datas) || [];
-  const map = {};
-  list.forEach(d => {
-    map[d.cd] = { price: d.nv, change: d.cv, rate: d.cr };
-  });
-  return map;
-}
-
-function applyLivePrices(map) {
+function applyLivePrices(liveData) {
+  const map = (liveData && liveData.prices) || {};
   const hasAny = Object.keys(map).length > 0;
   document.querySelectorAll('[data-live]').forEach(el => {
     const code = el.getAttribute('data-live');
@@ -332,20 +290,18 @@ function applyLivePrices(map) {
   const statusEl = document.getElementById('liveStatus');
   if (statusEl) {
     statusEl.textContent = hasAny
-      ? '실시간 반영 · ' + new Date().toLocaleTimeString('ko-KR')
-      : '실시간 시세 연결 실패 (전일 종가만 표시 중)';
+      ? '장중 시세(15분 주기) 갱신: ' + new Date(liveData.updated_at).toLocaleTimeString('ko-KR')
+      : '장중 시세 데이터가 아직 없습니다 (전일 종가만 표시 중)';
   }
 }
 
 async function refreshLivePrices() {
-  const codes = collectAllCodes();
-  const map = await fetchLivePrices(codes);
-  applyLivePrices(map);
+  const liveData = await fetchLivePrices();
+  if (liveData) applyLivePrices(liveData);
 }
 
 function startLivePriceLoop() {
   const kickoff = async () => {
-    // DATA가 로드될 때까지 대기 후 시작
     if (!DATA) {
       setTimeout(kickoff, 300);
       return;
@@ -358,6 +314,11 @@ function startLivePriceLoop() {
 </script>
 </body>
 </html>
+
+{
+  "updated_at": null,
+  "prices": {}
+}
 
 {
   "base_date": null,
