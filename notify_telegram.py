@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 (선택 기능) 스크리닝 결과를 텔레그램 봇 메시지로 발송.
-아이폰에 텔레그램 앱이 설치되어 있으면 실제 푸시 알림으로 옵니다.
 
 필요한 환경변수(= GitHub Secrets):
   TELEGRAM_BOT_TOKEN : @BotFather 로 만든 봇의 토큰
   TELEGRAM_CHAT_ID   : 알림 받을 사용자/채팅방 ID
-
-설정 방법은 README.md 참고.
 """
 import os
 import json

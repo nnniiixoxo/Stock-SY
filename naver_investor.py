@@ -5,8 +5,6 @@
 페이지: https://finance.naver.com/item/frgn.naver?code=XXXXXX&page=N
 
 주의: 이 페이지는 순매매를 '금액'이 아니라 '주식 수량'으로 제공합니다.
-KRX 데이터(금액 기준)와 다른 단위이지만, 조건 판단(양수/음수, 즉 순매수 여부)에는
-문제가 없습니다.
 """
 import time
 import requests

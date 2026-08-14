@@ -2,9 +2,6 @@
 """
 네이버 증권 '시가총액' 순위 페이지에서 KOSPI/KOSDAQ 종목 목록(코드/이름/시가총액)을 가져온다.
 페이지: https://finance.naver.com/sise/sise_market_sum.naver?sosok=0&page=N (0=KOSPI, 1=KOSDAQ)
-
-KRX API 없이 스캔 대상 종목을 정하기 위한 용도 (전종목을 다 스캔하면 느리므로
-시가총액 상위 위주로 축소).
 """
 import re
 import time
@@ -65,10 +62,7 @@ def _parse_page(sosok: int, page: int):
 
 
 def get_top_market_cap_universe(top_n: int = 600, sleep: float = 0.3) -> list:
-    """
-    KOSPI(sosok=0) + KOSDAQ(sosok=1) 전체에서 시가총액 상위 top_n개 종목 코드를 반환.
-    각 시장에서 넉넉히(top_n에 맞춰) 페이지를 가져온 뒤 합쳐서 재정렬한다.
-    """
+    """KOSPI + KOSDAQ 전체에서 시가총액 상위 top_n개 종목 코드를 반환."""
     all_rows = []
     for sosok in (0, 1):
         page = 1

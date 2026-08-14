@@ -3,9 +3,6 @@
 장중(9:00~15:30) 15분마다 실행되는 가벼운 스크립트.
 전체 스크리닝(main.py)은 다시 하지 않고, 이미 결과 리스트에 있는 종목들의
 "현재가/등락폭/등락률"만 빠르게 조회해서 docs/live.json에 저장한다.
-
-브라우저에서 직접 네이버 API를 호출하면 CORS/헤더 문제로 차단되지만,
-여기서는 서버(GitHub Actions)가 적절한 헤더를 갖춰서 요청하므로 문제없이 동작한다.
 """
 import os
 import json
@@ -34,7 +31,7 @@ def collect_codes(results: dict) -> list:
         m = results.get(market) or {}
         for key in (
             "overlap_3plus", "overlap_2plus", "rsi_low", "net_buy_top",
-            "disparity_low", "turnover_top", "volume_surge_top", "w52_high_top",
+            "disparity_low", "turnover_top", "volume_surge_top", "ma_align_top",
         ):
             for item in m.get(key) or []:
                 codes.add(item["code"])
@@ -42,7 +39,6 @@ def collect_codes(results: dict) -> list:
 
 
 def fetch_prices(codes: list) -> dict:
-    """네이버 실시간 폴링 API에서 현재가/등락폭/등락률을 조회. 코드가 많으면 나눠서 요청."""
     prices = {}
     batch_size = 50
     for i in range(0, len(codes), batch_size):

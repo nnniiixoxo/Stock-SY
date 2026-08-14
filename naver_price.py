@@ -4,7 +4,6 @@
 페이지: https://finance.naver.com/item/sise_day.naver?code=XXXXXX&page=N
 """
 import time
-import re
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -94,35 +93,3 @@ def get_stock_name(code: str) -> str:
     except requests.RequestException:
         pass
     return code
-
-
-def get_52w_high(code: str):
-    """
-    네이버 종목 메인 페이지에서 '52주최고' 값을 가져온다.
-    페이지 구조 변화에 대비해 표 기반 파싱 + 텍스트 정규식 파싱을 순서대로 시도한다.
-    실패 시 None 반환.
-    """
-    try:
-        resp = requests.get(
-            f"https://finance.naver.com/item/main.naver?code={code}",
-            headers=HEADERS,
-            timeout=5,
-        )
-        resp.encoding = "euc-kr"
-        text = resp.text
-        soup = BeautifulSoup(text, "lxml")
-
-        for th in soup.select("th"):
-            if "52주최고" in th.get_text(strip=True).replace(" ", ""):
-                td = th.find_next("td")
-                if td:
-                    m = re.search(r"([\d,]+)", td.get_text())
-                    if m:
-                        return float(m.group(1).replace(",", ""))
-
-        m2 = re.search(r"52주\s*최고[^\d]{0,30}?([\d,]{4,})", text)
-        if m2:
-            return float(m2.group(1).replace(",", ""))
-    except requests.RequestException:
-        pass
-    return None

@@ -1,0 +1,11 @@
+{
+  "updated_at": null,
+  "kospi": {
+    "1w": {"avg_return": null, "win_rate": null, "count": 0},
+    "1m": {"avg_return": null, "win_rate": null, "count": 0}
+  },
+  "kosdaq": {
+    "1w": {"avg_return": null, "win_rate": null, "count": 0},
+    "1m": {"avg_return": null, "win_rate": null, "count": 0}
+  }
+}
