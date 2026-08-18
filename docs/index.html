@@ -91,6 +91,11 @@
   }
   .row.overlap3{ border-color:rgba(232,163,61,0.6); background:linear-gradient(180deg, rgba(232,163,61,0.14), rgba(232,163,61,0.03)); }
   .row.overlap2{ border-color:rgba(157,140,255,0.4); }
+  .row.risky{ border-color:rgba(229,72,77,0.5); background:linear-gradient(180deg, rgba(229,72,77,0.10), rgba(229,72,77,0.02)); }
+  .risky-note{
+    font-family:var(--mono); font-size:10.5px; color:var(--text-dim);
+    line-height:1.5; margin:6px 0 10px;
+  }
   a.row-link:active .row{ filter:brightness(1.15); }
   .row-left{ display:flex; align-items:center; gap:10px; min-width:0; }
   .rank{
@@ -365,6 +370,15 @@ function renderMarket(market) {
     `);
   }
 
+  // 화면 최하단: 2개 이상 중복이지만 "방향 구분이 안 되는 지표 조합"이라 하락 가능성도 있는 종목들
+  if (m.risky_2plus && m.risky_2plus.length > 0) {
+    sections.push(`
+      <div class="group-title"><h2>⚠️ 2개 이상 중복이지만 하락 주의</h2><span>${m.risky_2plus.length}개</span></div>
+      <div class="risky-note">이격도+거래량급증 / 거래대금+거래량급증 / 이격도+RSI 조합은 급락 당일에도 걸릴 수 있어 별도 표시합니다.</div>
+      <div class="row-list" id="${market}-risky"></div>
+    `);
+  }
+
   container.innerHTML = sections.join('');
 
   if (m.overlap_3plus && m.overlap_3plus.length > 0) {
@@ -372,6 +386,9 @@ function renderMarket(market) {
   }
   if (m.overlap_2plus && m.overlap_2plus.length > 0) {
     renderGroup(`${market}-overlap2`, m.overlap_2plus, null, '없음', 'overlap2', true);
+  }
+  if (m.risky_2plus && m.risky_2plus.length > 0) {
+    renderGroup(`${market}-risky`, m.risky_2plus, null, '없음', 'risky', true);
   }
   renderGroup(`${market}-rsi`, m.rsi_low, (it) => [`RSI ${it.rsi}`, ''], '조건을 만족하는 종목이 없습니다.');
   // 아래 5개는 화면에서 숨긴 리스트라 렌더링도 생략 (컨테이너 자체가 없음)

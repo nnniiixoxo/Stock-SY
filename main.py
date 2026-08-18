@@ -62,6 +62,15 @@ MARKETS = {"kospi": 0, "kosdaq": 1}
 # 중복(overlap) 판정에 사용할 5개 지표 (순매수는 제외)
 OVERLAP_TAGS = ["rsi", "disparity", "turnover", "volume_surge", "ma_align"]
 
+# 아래 2개 지표 조합은 "방향(상승/하락) 구분이 안 되는 지표끼리의 조합"이라
+# 실제로는 급락 당일에 걸리는 경우가 많아, 일반 중복 리스트가 아닌
+# 별도의 "하락 주의" 리스트로 분리한다. (정확히 이 2개 지표만 겹칠 때 해당)
+RISKY_COMBOS = [
+    {"disparity", "volume_surge"},
+    {"turnover", "volume_surge"},
+    {"disparity", "rsi"},
+]
+
 
 def get_label_date() -> str:
     d = datetime.date.today()
@@ -195,12 +204,19 @@ def screen_market(sosok: int, market_label: str) -> dict:
         return out
 
     overlap_3plus = build_overlap(3)
-    overlap_2plus = build_overlap(2)
+    overlap_2plus_all = build_overlap(2)
+
+    def is_risky_combo(matched_lists):
+        return set(matched_lists) in RISKY_COMBOS
+
+    overlap_2plus = [r for r in overlap_2plus_all if not is_risky_combo(r["matched_lists"])]
+    risky_2plus = [r for r in overlap_2plus_all if is_risky_combo(r["matched_lists"])]
 
     return {
         "scanned_count": len(records),
         "overlap_3plus": overlap_3plus,
         "overlap_2plus": overlap_2plus,
+        "risky_2plus": risky_2plus,
         "rsi_low": rsi_list,
         "net_buy_top": net_buy_list,
         "disparity_low": disparity_list,

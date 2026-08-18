@@ -78,7 +78,7 @@ def collect_codes(results: dict) -> list:
     for market in ("kospi", "kosdaq"):
         m = results.get(market) or {}
         for key in (
-            "overlap_3plus", "overlap_2plus", "rsi_low", "net_buy_top",
+            "overlap_3plus", "overlap_2plus", "risky_2plus", "rsi_low", "net_buy_top",
             "disparity_low", "turnover_top", "volume_surge_top", "ma_align_top",
         ):
             for item in m.get(key) or []:
