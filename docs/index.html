@@ -42,6 +42,17 @@
   h1{ font-size:21px; margin:6px 0 2px; font-weight:700; letter-spacing:-0.01em; }
   .subline{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
 
+  .index-section{ padding:14px 18px 0; }
+  .index-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .index-card{
+    background:var(--panel); border:1px solid var(--panel-border); border-radius:12px;
+    padding:12px 14px;
+  }
+  .index-card .name{ font-size:13px; font-weight:700; color:var(--text-dim); }
+  .index-card .value{ font-family:var(--mono); font-size:20px; font-weight:700; margin-top:4px; }
+  .index-card .chg{ font-family:var(--mono); font-size:12px; margin-top:2px; }
+  .index-card svg{ width:100%; height:34px; margin-top:6px; display:block; }
+
   .perf-section{ padding:14px 18px 4px; }
   .perf-title{ font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px; }
   .perf-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
@@ -126,6 +137,13 @@
   <div class="subline" id="liveStatus" style="margin-top:2px;"></div>
 </header>
 
+<div class="index-section">
+  <div class="index-grid" id="indexGrid">
+    <div class="index-card"><div class="name">코스피</div><div class="value" style="color:var(--text-dim)">불러오는 중</div></div>
+    <div class="index-card"><div class="name">코스닥</div><div class="value" style="color:var(--text-dim)">불러오는 중</div></div>
+  </div>
+</div>
+
 <div class="perf-section">
   <div class="perf-title">📈 지난 픽(2개 이상 중복) 사후 성과</div>
   <div class="perf-grid" id="perfGrid">
@@ -162,9 +180,11 @@ async function load() {
     const res = await fetch('results.json', { cache: 'no-store' });
     DATA = await res.json();
 
-    document.getElementById('baseDate').textContent = formatDate(DATA.base_date) + ' 기준';
+    document.getElementById('baseDate').textContent =
+      formatDate(DATA.base_date) + ' 기준 · 스크리닝 갱신 ' +
+      new Date(DATA.generated_at).toLocaleTimeString('ko-KR');
     document.getElementById('updatedAt').textContent =
-      '업데이트: ' + new Date(DATA.generated_at).toLocaleString('ko-KR');
+      '전체 갱신 시각: ' + new Date(DATA.generated_at).toLocaleString('ko-KR');
 
     renderMarket('kospi');
     renderMarket('kosdaq');
@@ -232,11 +252,19 @@ const TAG_LABEL = {
   turnover: '거래대금', volume_surge: '거래량급증', ma_align: '정배열'
 };
 
+function formatChangePct(v) {
+  if (v === null || v === undefined) return { text: '', cls: '' };
+  const sign = v > 0 ? '+' : '';
+  const cls = v > 0 ? 'flow-pos' : v < 0 ? 'flow-neg' : '';
+  return { text: `${sign}${v}%`, cls };
+}
+
 function rowHtml(item, rank, mainLabel, mainValue, mainClass, rowExtraClass) {
   const tags = item.matched_lists
     ? item.matched_lists.map(t => `<span class="tag">${TAG_LABEL[t] || t}</span>`).join('')
     : '';
   const naverUrl = `https://finance.naver.com/item/main.naver?code=${item.code}`;
+  const chg = formatChangePct(item.change_pct);
   return `
     <a class="row-link" href="${naverUrl}" target="_blank" rel="noopener">
       <div class="row ${rowExtraClass || ''}" data-code="${item.code}">
@@ -250,7 +278,7 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass, rowExtraClass) {
         </div>
         <div class="row-right">
           <div class="metric-main ${mainClass || ''}">${mainValue}</div>
-          <div class="metric-sub">전일종가 ${item.close.toLocaleString()}</div>
+          <div class="metric-sub">전일종가 ${item.close.toLocaleString()} <span class="${chg.cls}">${chg.text}</span></div>
           <div class="live-price flat" data-live="${item.code}">·</div>
         </div>
       </div>
@@ -258,13 +286,43 @@ function rowHtml(item, rank, mainLabel, mainValue, mainClass, rowExtraClass) {
   `;
 }
 
-function renderGroup(containerId, items, mainLabelFn, emptyMsg, rowExtraClass) {
+function overlapRowHtml(item, rank, rowExtraClass) {
+  const tags = item.matched_lists
+    ? item.matched_lists.map(t => `<span class="tag">${TAG_LABEL[t] || t}</span>`).join('')
+    : '';
+  const naverUrl = `https://finance.naver.com/item/main.naver?code=${item.code}`;
+  const chg = formatChangePct(item.change_pct);
+  const bigCls = item.change_pct > 0 ? 'flow-pos' : item.change_pct < 0 ? 'flow-neg' : '';
+  return `
+    <a class="row-link" href="${naverUrl}" target="_blank" rel="noopener">
+      <div class="row ${rowExtraClass || ''}" data-code="${item.code}">
+        <div class="row-left">
+          <div class="rank">${rank}</div>
+          <div class="name-block">
+            <div class="name">${item.name}</div>
+            <div class="code">${item.code}</div>
+            ${tags ? `<div class="tags">${tags}</div>` : ''}
+          </div>
+        </div>
+        <div class="row-right">
+          <div class="metric-main ${bigCls}" style="font-size:18px;" data-live-pct="${item.code}">${chg.text || '-'}</div>
+          <div class="metric-sub" data-live-time="${item.code}">전일 대비</div>
+        </div>
+      </div>
+    </a>
+  `;
+}
+
+function renderGroup(containerId, items, mainLabelFn, emptyMsg, rowExtraClass, useOverlapStyle) {
   const el = document.getElementById(containerId);
+  if (!el) return;
   if (!items || items.length === 0) {
     el.innerHTML = `<div class="empty">${emptyMsg}</div>`;
     return;
   }
-  el.innerHTML = items.map((it, i) => rowHtml(it, i + 1, ...mainLabelFn(it), rowExtraClass)).join('');
+  el.innerHTML = useOverlapStyle
+    ? items.map((it, i) => overlapRowHtml(it, i + 1, rowExtraClass)).join('')
+    : items.map((it, i) => rowHtml(it, i + 1, ...mainLabelFn(it), rowExtraClass)).join('');
 }
 
 function renderMarket(market) {
@@ -293,11 +351,12 @@ function renderMarket(market) {
 
   const groupDefs = [
     ['rsi', 'RSI 30 이하 (과매도)', m.rsi_low],
-    ['netbuy', '전일 순매수 상위 10', m.net_buy_top],
-    ['disparity', '이격도 하위 10', m.disparity_low],
-    ['turnover', '거래대금 상위 10', m.turnover_top],
-    ['volsurge', '거래량 급증배수 상위 10', m.volume_surge_top],
-    ['maalign', '정배열(5>20>60일선) 상위 10', m.ma_align_top],
+    // 아래 5개는 화면에서 숨김 처리 (요청에 따라). 중복 판정 계산에는 계속 사용됨.
+    // ['netbuy', '전일 순매수 상위 10', m.net_buy_top],
+    // ['disparity', '이격도 하위 10', m.disparity_low],
+    // ['turnover', '거래대금 상위 10', m.turnover_top],
+    // ['volsurge', '거래량 급증배수 상위 10', m.volume_surge_top],
+    // ['maalign', '정배열(5>20>60일선) 상위 10', m.ma_align_top],
   ];
   for (const [key, title, list] of groupDefs) {
     sections.push(`
@@ -309,18 +368,61 @@ function renderMarket(market) {
   container.innerHTML = sections.join('');
 
   if (m.overlap_3plus && m.overlap_3plus.length > 0) {
-    renderGroup(`${market}-overlap3`, m.overlap_3plus, (it) => [`RSI ${it.rsi}`, 'flow-pos'], '없음', 'overlap3');
+    renderGroup(`${market}-overlap3`, m.overlap_3plus, null, '없음', 'overlap3', true);
   }
   if (m.overlap_2plus && m.overlap_2plus.length > 0) {
-    renderGroup(`${market}-overlap2`, m.overlap_2plus, (it) => [`RSI ${it.rsi}`, 'flow-pos'], '없음', 'overlap2');
+    renderGroup(`${market}-overlap2`, m.overlap_2plus, null, '없음', 'overlap2', true);
   }
   renderGroup(`${market}-rsi`, m.rsi_low, (it) => [`RSI ${it.rsi}`, ''], '조건을 만족하는 종목이 없습니다.');
-  renderGroup(`${market}-netbuy`, m.net_buy_top,
-    (it) => [formatShares(it.net_buy_1d), it.net_buy_1d >= 0 ? 'flow-pos' : 'flow-neg'], '데이터가 없습니다.');
-  renderGroup(`${market}-disparity`, m.disparity_low, (it) => [`이격도 ${it.disparity}`, ''], '데이터가 없습니다.');
-  renderGroup(`${market}-turnover`, m.turnover_top, (it) => [formatEok(it.turnover), ''], '데이터가 없습니다.');
-  renderGroup(`${market}-volsurge`, m.volume_surge_top, (it) => [`${it.volume_surge}배`, 'flow-pos'], '데이터가 없습니다.');
-  renderGroup(`${market}-maalign`, m.ma_align_top, (it) => [`+${it.ma_strength}%`, 'flow-pos'], '정배열 종목이 없습니다.');
+  // 아래 5개는 화면에서 숨긴 리스트라 렌더링도 생략 (컨테이너 자체가 없음)
+  // renderGroup(`${market}-netbuy`, m.net_buy_top, ...);
+  // renderGroup(`${market}-disparity`, m.disparity_low, ...);
+  // renderGroup(`${market}-turnover`, m.turnover_top, ...);
+  // renderGroup(`${market}-volsurge`, m.volume_surge_top, ...);
+  // renderGroup(`${market}-maalign`, m.ma_align_top, ...);
+}
+
+function buildSparkline(history, isUp) {
+  if (!history || history.length < 2) return '';
+  const values = history.map(h => h.value);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = (max - min) || 1;
+  const w = 200, h = 34, pad = 2;
+  const stepX = (w - pad * 2) / (values.length - 1);
+  const points = values.map((v, i) => {
+    const x = pad + i * stepX;
+    const y = pad + (h - pad * 2) * (1 - (v - min) / range);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const color = isUp ? 'var(--up)' : 'var(--down)';
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+function renderIndices(indices) {
+  const grid = document.getElementById('indexGrid');
+  if (!indices) return;
+  const labelMap = { KOSPI: '코스피', KOSDAQ: '코스닥' };
+  const cards = ['KOSPI', 'KOSDAQ'].map(key => {
+    const idx = indices[key];
+    if (!idx || typeof idx.value !== 'number') {
+      return `<div class="index-card"><div class="name">${labelMap[key]}</div><div class="value" style="color:var(--text-dim)">데이터 없음</div></div>`;
+    }
+    const isUp = idx.change >= 0;
+    const cls = isUp ? 'flow-pos' : 'flow-neg';
+    const sign = idx.change > 0 ? '+' : idx.change < 0 ? '-' : '';
+    const rate = Math.abs(idx.rate ?? 0).toFixed(2);
+    const spark = buildSparkline(idx.history, isUp);
+    return `
+      <div class="index-card">
+        <div class="name">${labelMap[key]}</div>
+        <div class="value">${idx.value.toLocaleString()}</div>
+        <div class="chg ${cls}">${sign}${Math.abs(idx.change).toLocaleString()} (${sign}${rate}%)</div>
+        ${spark}
+      </div>
+    `;
+  });
+  grid.innerHTML = cards.join('');
 }
 
 load();
@@ -357,10 +459,29 @@ function applyLivePrices(liveData) {
     el.className = 'live-price ' + dir;
     el.innerHTML = `<span class="live-badge"></span>${info.price.toLocaleString()}원 ${sign}${Math.abs(info.change).toLocaleString()} (${sign}${rate}%)`;
   });
+
+  // 중복(overlap) 리스트의 등락률 슬롯: 실시간 데이터가 오면 전일 대비 → 실시간 값으로 교체
+  document.querySelectorAll('[data-live-pct]').forEach(el => {
+    const code = el.getAttribute('data-live-pct');
+    const info = map[code];
+    if (!info || typeof info.rate !== 'number') return;
+    const sign = info.change > 0 ? '+' : info.change < 0 ? '-' : '';
+    const cls = info.change > 0 ? 'flow-pos' : info.change < 0 ? 'flow-neg' : '';
+    el.className = 'metric-main ' + cls;
+    el.style.fontSize = '18px';
+    el.textContent = `${sign}${Math.abs(info.rate).toFixed(2)}%`;
+  });
+  document.querySelectorAll('[data-live-time]').forEach(el => {
+    const code = el.getAttribute('data-live-time');
+    if (map[code]) el.textContent = '실시간';
+  });
+
+  renderIndices(liveData && liveData.indices);
+
   const statusEl = document.getElementById('liveStatus');
   if (statusEl) {
     statusEl.textContent = hasAny
-      ? '장중 시세(15분 주기) 갱신: ' + new Date(liveData.updated_at).toLocaleTimeString('ko-KR')
+      ? '장중 시세(5분 주기) 갱신: ' + new Date(liveData.updated_at).toLocaleTimeString('ko-KR')
       : '장중 시세 데이터가 아직 없습니다 (전일 종가만 표시 중)';
   }
 }

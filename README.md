@@ -28,19 +28,19 @@ stock-screener/
 ├── naver_price.py           # 네이버 증권 일봉 시세 크롤링
 ├── naver_investor.py        # 네이버 증권 외국인/기관 순매매 크롤링
 ├── naver_universe.py        # 네이버 증권 시가총액 순위 크롤링 (시장별 종목 목록)
-├── update_prices.py         # 장중 15분마다 현재가만 빠르게 갱신
+├── update_prices.py         # 장중 5분마다 현재가만 빠르게 갱신
 ├── retry_util.py            # 요청 실패 시 재시도 헬퍼
 ├── notify_telegram.py       # (선택) 텔레그램 알림
 ├── requirements.txt
 ├── docs/
 │   ├── index.html                # 아이폰에서 볼 모바일 웹페이지
 │   ├── results.json              # 매일 자동 갱신되는 오늘의 스크리닝 결과
-│   ├── live.json                 # 장중 15분마다 갱신되는 현재가
+│   ├── live.json                 # 장중 5분마다 갱신되는 현재가
 │   ├── history.json              # 매일 누적되는 "2개 이상 중복" 픽 기록
 │   └── performance_summary.json  # history.json을 집계한 성과 통계
 └── .github/workflows/
     ├── daily-screen.yml   # 매일 자동 실행 (스크리닝 + 사후검증 + 커밋을 한 번에 처리)
-    └── live-prices.yml    # 장중 15분마다 자동 실행 (현재가만)
+    └── live-prices.yml    # 장중 5분마다 자동 실행 (현재가만)
 ```
 
 ## 2. 셋업
@@ -74,7 +74,7 @@ stock-screener/
 
 ## 5. 장중 가격 갱신
 
-전체 스크리닝과는 별도로, 이미 뽑힌 종목들의 **현재가/등락률**만 장중(09:00~15:45) 15분마다
+전체 스크리닝과는 별도로, 이미 뽑힌 종목들의 **현재가/등락률**만 장중(09:00~15:45) 5분마다
 `update_prices.py`가 갱신해 `docs/live.json`에 저장합니다. `docs/index.html`이 이 파일을
 읽어서 화면에 표시합니다 (같은 사이트 내 파일이라 브라우저 CORS 제한이 없음).
 
@@ -102,3 +102,13 @@ HISTORY_MAX_ENTRIES = 200    # history.json에 보관할 최대 일수
 
 `evaluate_picks.py` 상단의 `HORIZONS = {"1w": 7, "1m": 30}` 값을 바꾸면
 평가 시점(며칠 후 수익률을 볼지)을 조정할 수 있습니다.
+
+## 7. 화면 표시 관련 참고
+
+- 하단의 순매수/이격도/거래대금/거래량급증/정배열 개별 리스트는 화면에서 숨겨져 있습니다
+  (중복 판정 계산에는 계속 사용됩니다). `docs/index.html`의 `groupDefs` 배열에서 주석을
+  해제하면 다시 보이게 할 수 있습니다.
+- "2개 이상 / 3개 이상 중복" 리스트는 우측에 전일 대비 등락률을 크게 표시하며,
+  장중에는 5분마다 실시간 등락률로 자동 갱신됩니다.
+- 상단에 코스피/코스닥 지수 현재가 + 최근 추이 그래프가 표시됩니다 (장중 5분 간격 데이터 기준).
+

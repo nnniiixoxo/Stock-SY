@@ -23,6 +23,54 @@ HEADERS = {
 }
 
 POLLING_URL_TMPL = "https://polling.finance.naver.com/api/realtime/domestic/stock/{codes}"
+INDEX_URL_TMPL = "https://polling.finance.naver.com/api/realtime/domestic/index/{code}"
+INDEX_HISTORY_MAX_POINTS = 40  # 장중 5분 간격 기준 하루치 정도(약 6.5시간 -> 78포인트 여유있게 축소 보관)
+
+
+def fetch_index(code: str):
+    """코스피(KOSPI) / 코스닥(KOSDAQ) 지수 현재가를 조회."""
+    url = INDEX_URL_TMPL.format(code=code)
+
+    def _get():
+        resp = requests.get(url, headers=HEADERS, timeout=8)
+        resp.raise_for_status()
+        return resp.json()
+
+    try:
+        data = retry_call(_get, retries=3, delay=2.0)
+    except RuntimeError as e:
+        print(f"[WARN] 지수 조회 실패({code}): {e}")
+        return None
+
+    areas = (data or {}).get("result", {}).get("areas", [])
+    rows = areas[0].get("datas", []) if areas else []
+    if not rows:
+        return None
+    row = rows[0]
+    return {"value": row.get("nv"), "change": row.get("cv"), "rate": row.get("cr")}
+
+
+def build_index_data(prev_indices: dict) -> dict:
+    """지수 현재가 조회 + 기존 기록에 이어서 추이(history) 축적."""
+    now_label = datetime.datetime.now().strftime("%H:%M")
+    result = {}
+    for label, code in (("KOSPI", "KOSPI"), ("KOSDAQ", "KOSDAQ")):
+        info = fetch_index(code)
+        prev = (prev_indices or {}).get(label, {})
+        history = list(prev.get("history", []))
+        if info:
+            history.append({"time": now_label, "value": info["value"]})
+            history = history[-INDEX_HISTORY_MAX_POINTS:]
+            result[label] = {
+                "value": info["value"],
+                "change": info["change"],
+                "rate": info["rate"],
+                "history": history,
+            }
+        else:
+            # 조회 실패 시 이전 값을 그대로 유지 (화면이 비지 않도록)
+            result[label] = prev
+    return result
 
 
 def collect_codes(results: dict) -> list:
@@ -74,15 +122,28 @@ def main():
     with open(RESULTS_PATH, encoding="utf-8") as f:
         results = json.load(f)
 
+    prev_indices = {}
+    if os.path.exists(LIVE_PATH):
+        try:
+            with open(LIVE_PATH, encoding="utf-8") as f:
+                prev_live = json.load(f)
+            prev_indices = prev_live.get("indices", {})
+        except (json.JSONDecodeError, OSError):
+            prev_indices = {}
+
     codes = collect_codes(results)
     print(f"현재가 조회 대상: {len(codes)}개")
 
     prices = fetch_prices(codes)
     print(f"조회 성공: {len(prices)}개")
 
+    indices = build_index_data(prev_indices)
+    print(f"지수 조회: {list(indices.keys())}")
+
     output = {
         "updated_at": datetime.datetime.now().isoformat(),
         "prices": prices,
+        "indices": indices,
     }
     with open(LIVE_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)

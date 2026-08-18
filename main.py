@@ -88,6 +88,13 @@ def build_record(code: str, name: str) -> dict | None:
         ma_long = calc_ma(close, MA_LONG)
 
         latest_close = float(close.iloc[-1])
+        prev_close = float(close.iloc[-2]) if len(close) >= 2 else None
+        change_pct = (
+            round((latest_close - prev_close) / prev_close * 100, 2)
+            if prev_close
+            else None
+        )
+
         latest_rsi = rsi.iloc[-1]
         latest_disparity = disparity.iloc[-1]
         latest_ma_short = ma_short.iloc[-1]
@@ -120,6 +127,7 @@ def build_record(code: str, name: str) -> dict | None:
             "code": code,
             "name": name,
             "close": latest_close,
+            "change_pct": change_pct,
             "rsi": round(float(latest_rsi), 2),
             "disparity": round(float(latest_disparity), 2),
             "net_buy_1d": net_buy_1d,
