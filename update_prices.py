@@ -10,6 +10,7 @@ import datetime
 import requests
 
 from retry_util import retry_call
+from hankyung_flow import get_market_flow
 
 RESULTS_PATH = os.path.join(os.path.dirname(__file__), "docs", "results.json")
 LIVE_PATH = os.path.join(os.path.dirname(__file__), "docs", "live.json")
@@ -139,6 +140,20 @@ def main():
 
     indices = build_index_data(prev_indices)
     print(f"지수 조회: {list(indices.keys())}")
+
+    market_flow = get_market_flow()
+    if market_flow:
+        for label in ("KOSPI", "KOSDAQ"):
+            flow = market_flow.get(label)
+            if flow and label in indices and indices[label]:
+                indices[label]["flow"] = {
+                    "personal": flow.get("personal"),
+                    "institution": flow.get("institution"),
+                    "foreign": flow.get("foreign"),
+                }
+        print("한경 시장 수급 반영 완료")
+    else:
+        print("한경 시장 수급 조회 실패 (수급 정보 없이 진행)")
 
     output = {
         "updated_at": datetime.datetime.now().isoformat(),

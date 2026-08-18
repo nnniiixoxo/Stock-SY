@@ -46,12 +46,21 @@
   .index-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .index-card{
     background:var(--panel); border:1px solid var(--panel-border); border-radius:12px;
-    padding:12px 14px;
+    padding:14px 14px 10px;
   }
-  .index-card .name{ font-size:13px; font-weight:700; color:var(--text-dim); }
-  .index-card .value{ font-family:var(--mono); font-size:20px; font-weight:700; margin-top:4px; }
-  .index-card .chg{ font-family:var(--mono); font-size:12px; margin-top:2px; }
-  .index-card svg{ width:100%; height:34px; margin-top:6px; display:block; }
+  .index-card .name{ font-size:13px; font-weight:700; color:var(--text-dim); text-align:center; }
+  .index-card .value{ font-family:var(--mono); font-size:22px; font-weight:700; margin-top:4px; text-align:center; }
+  .index-card .chg{ font-family:var(--mono); font-size:12.5px; margin-top:2px; text-align:center; }
+  .index-card .chg .arrow{ font-size:10px; margin-right:2px; }
+  .index-card svg{ width:100%; height:46px; margin-top:8px; display:block; }
+  .index-card .asof{ font-family:var(--mono); font-size:9.5px; color:var(--text-dim); text-align:right; margin-top:4px; }
+  .index-flow{
+    display:flex; justify-content:space-between; gap:4px; margin-top:8px;
+    font-family:var(--mono); font-size:10px;
+  }
+  .index-flow .item{ text-align:center; flex:1; }
+  .index-flow .item .k{ color:var(--text-dim); }
+  .index-flow .item .v{ margin-top:1px; }
 
   .perf-section{ padding:14px 18px 4px; }
   .perf-title{ font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px; }
@@ -399,21 +408,45 @@ function renderMarket(market) {
   // renderGroup(`${market}-maalign`, m.ma_align_top, ...);
 }
 
-function buildSparkline(history, isUp) {
+function buildAreaChart(history, currentChange) {
   if (!history || history.length < 2) return '';
   const values = history.map(h => h.value);
-  const min = Math.min(...values);
-  const max = Math.max(...values);
+  const lastValue = values[values.length - 1];
+  const baseline = lastValue - (currentChange ?? 0); // 전일 종가(기준선) 역산
+
+  const allForRange = values.concat([baseline]);
+  const min = Math.min(...allForRange);
+  const max = Math.max(...allForRange);
   const range = (max - min) || 1;
-  const w = 200, h = 34, pad = 2;
+  const w = 300, h = 46, pad = 3;
   const stepX = (w - pad * 2) / (values.length - 1);
-  const points = values.map((v, i) => {
-    const x = pad + i * stepX;
-    const y = pad + (h - pad * 2) * (1 - (v - min) / range);
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(' ');
-  const color = isUp ? 'var(--up)' : 'var(--down)';
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+
+  const toY = (v) => pad + (h - pad * 2) * (1 - (v - min) / range);
+  const baselineY = toY(baseline);
+
+  const points = values.map((v, i) => ({ x: pad + i * stepX, y: toY(v) }));
+
+  const redY = points.map(p => Math.min(p.y, baselineY));
+  const blueY = points.map(p => Math.max(p.y, baselineY));
+
+  const areaPath = (ys) => {
+    const top = points.map((p, i) => `${p.x.toFixed(1)},${ys[i].toFixed(1)}`).join(' L ');
+    const first = points[0].x.toFixed(1);
+    const last = points[points.length - 1].x.toFixed(1);
+    return `M ${first},${baselineY.toFixed(1)} L ${top} L ${last},${baselineY.toFixed(1)} Z`;
+  };
+  const linePath = (ys) => points.map((p, i) => `${p.x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+
+  return `
+    <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+      <line x1="${pad}" y1="${baselineY.toFixed(1)}" x2="${w - pad}" y2="${baselineY.toFixed(1)}"
+            stroke="var(--text-dim)" stroke-width="1" stroke-dasharray="2,2" opacity="0.5" />
+      <path d="${areaPath(redY)}" fill="var(--up)" opacity="0.16" />
+      <path d="${areaPath(blueY)}" fill="var(--down)" opacity="0.16" />
+      <polyline points="${linePath(redY)}" fill="none" stroke="var(--up)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" />
+      <polyline points="${linePath(blueY)}" fill="none" stroke="var(--down)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" />
+    </svg>
+  `;
 }
 
 function renderIndices(indices) {
@@ -425,21 +458,43 @@ function renderIndices(indices) {
     if (!idx || typeof idx.value !== 'number') {
       return `<div class="index-card"><div class="name">${labelMap[key]}</div><div class="value" style="color:var(--text-dim)">데이터 없음</div></div>`;
     }
-    const isUp = idx.change >= 0;
-    const cls = isUp ? 'flow-pos' : 'flow-neg';
-    const sign = idx.change > 0 ? '+' : idx.change < 0 ? '-' : '';
+    const isUp = idx.change > 0;
+    const isDown = idx.change < 0;
+    const cls = isUp ? 'flow-pos' : isDown ? 'flow-neg' : '';
+    const arrow = isUp ? '▲' : isDown ? '▼' : '-';
+    const sign = isUp ? '+' : '';
     const rate = Math.abs(idx.rate ?? 0).toFixed(2);
-    const spark = buildSparkline(idx.history, isUp);
+    const chart = buildAreaChart(idx.history, idx.change);
+    const lastTime = idx.history && idx.history.length ? idx.history[idx.history.length - 1].time : '';
+    const flow = idx.flow;
+    const flowHtml = flow ? `
+      <div class="index-flow">
+        ${flowItem('외인', flow.foreign)}
+        ${flowItem('기관', flow.institution)}
+        ${flowItem('개인', flow.personal)}
+      </div>
+    ` : '';
     return `
       <div class="index-card">
         <div class="name">${labelMap[key]}</div>
         <div class="value">${idx.value.toLocaleString()}</div>
-        <div class="chg ${cls}">${sign}${Math.abs(idx.change).toLocaleString()} (${sign}${rate}%)</div>
-        ${spark}
+        <div class="chg ${cls}"><span class="arrow">${arrow}</span>${Math.abs(idx.change).toLocaleString()} ${sign}${rate}%</div>
+        ${chart}
+        ${flowHtml}
+        <div class="asof">${lastTime} 장중</div>
       </div>
     `;
   });
   grid.innerHTML = cards.join('');
+}
+
+function flowItem(label, amountEok) {
+  if (amountEok === null || amountEok === undefined) {
+    return `<div class="item"><div class="k">${label}</div><div class="v" style="color:var(--text-dim)">-</div></div>`;
+  }
+  const cls = amountEok > 0 ? 'flow-pos' : amountEok < 0 ? 'flow-neg' : '';
+  const sign = amountEok > 0 ? '+' : '';
+  return `<div class="item"><div class="k">${label}</div><div class="v ${cls}">${sign}${amountEok.toLocaleString()}</div></div>`;
 }
 
 load();
