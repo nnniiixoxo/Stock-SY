@@ -1,6 +1,6 @@
 {
-  "base_date": "20260819",
-  "generated_at": "2026-08-19T15:42:05.568764+09:00",
+  "base_date": "20260820",
+  "generated_at": "2026-08-20T07:03:22.999629+09:00",
   "conditions": {
     "rsi_threshold": 30,
     "rsi_top_n": 10,
@@ -72,7 +72,7 @@
         "rsi": 39.23,
         "disparity": 91.57,
         "net_buy_1d": 0,
-        "turnover": 79893670900.0,
+        "turnover": 79894586400.0,
         "volume_surge": 1.77,
         "ma_aligned": false,
         "ma_strength": -11.59,
@@ -106,7 +106,7 @@
         "rsi": 41.76,
         "disparity": 98.72,
         "net_buy_1d": 0,
-        "turnover": 627304317435.0,
+        "turnover": 627305407905.0,
         "volume_surge": 1.83,
         "ma_aligned": false,
         "ma_strength": -4.53,
@@ -123,7 +123,7 @@
         "rsi": 45.96,
         "disparity": 99.51,
         "net_buy_1d": 0,
-        "turnover": 1301663657830.0,
+        "turnover": 1301663759825.0,
         "volume_surge": 2.17,
         "ma_aligned": false,
         "ma_strength": -11.58,
@@ -142,7 +142,7 @@
         "rsi": 27.89,
         "disparity": 95.18,
         "net_buy_1d": 0,
-        "turnover": 17542996770.0,
+        "turnover": 17547711770.0,
         "volume_surge": 1.12,
         "ma_aligned": false,
         "ma_strength": -7.07
@@ -157,7 +157,7 @@
         "rsi": 47.39,
         "disparity": 100.97,
         "net_buy_1d": 0,
-        "turnover": 5614030620000.0,
+        "turnover": 5614135065000.0,
         "volume_surge": 0.76,
         "ma_aligned": false,
         "ma_strength": -9.23
@@ -170,7 +170,7 @@
         "rsi": 43.22,
         "disparity": 94.36,
         "net_buy_1d": 0,
-        "turnover": 6308920500000.0,
+        "turnover": 6309025500000.0,
         "volume_surge": 0.74,
         "ma_aligned": false,
         "ma_strength": -22.99
@@ -183,7 +183,7 @@
         "rsi": 46.55,
         "disparity": 97.83,
         "net_buy_1d": 0,
-        "turnover": 515477852100.0,
+        "turnover": 515701404000.0,
         "volume_surge": 0.76,
         "ma_aligned": false,
         "ma_strength": -4.29
@@ -196,7 +196,7 @@
         "rsi": 44.58,
         "disparity": 96.96,
         "net_buy_1d": 0,
-        "turnover": 628815240000.0,
+        "turnover": 628824276000.0,
         "volume_surge": 0.76,
         "ma_aligned": false,
         "ma_strength": -16.24
@@ -209,7 +209,7 @@
         "rsi": 50.19,
         "disparity": 108.38,
         "net_buy_1d": 0,
-        "turnover": 1023847338000.0,
+        "turnover": 1023880626000.0,
         "volume_surge": 0.81,
         "ma_aligned": false,
         "ma_strength": -10.9
@@ -222,7 +222,7 @@
         "rsi": 47.3,
         "disparity": 103.02,
         "net_buy_1d": 0,
-        "turnover": 220739004000.0,
+        "turnover": 220775022000.0,
         "volume_surge": 0.71,
         "ma_aligned": false,
         "ma_strength": -16.07
@@ -235,7 +235,7 @@
         "rsi": 53.09,
         "disparity": 105.1,
         "net_buy_1d": 0,
-        "turnover": 96587205000.0,
+        "turnover": 96596142500.0,
         "volume_surge": 0.89,
         "ma_aligned": false,
         "ma_strength": -1.0
@@ -248,7 +248,7 @@
         "rsi": 55.91,
         "disparity": 102.16,
         "net_buy_1d": 0,
-        "turnover": 43852688000.0,
+        "turnover": 43872760000.0,
         "volume_surge": 0.41,
         "ma_aligned": true,
         "ma_strength": 9.45
@@ -261,7 +261,7 @@
         "rsi": 62.06,
         "disparity": 115.68,
         "net_buy_1d": 0,
-        "turnover": 479859369000.0,
+        "turnover": 479948821000.0,
         "volume_surge": 1.79,
         "ma_aligned": false,
         "ma_strength": 10.56
@@ -274,7 +274,7 @@
         "rsi": 46.14,
         "disparity": 98.21,
         "net_buy_1d": 0,
-        "turnover": 148176870400.0,
+        "turnover": 148202163200.0,
         "volume_surge": 0.87,
         "ma_aligned": false,
         "ma_strength": 1.34
@@ -302,7 +302,7 @@
         "rsi": 31.79,
         "disparity": 89.58,
         "net_buy_1d": 0,
-        "turnover": 69858560150.0,
+        "turnover": 69859208000.0,
         "volume_surge": 1.37,
         "ma_aligned": false,
         "ma_strength": -9.25
@@ -341,7 +341,7 @@
         "rsi": 39.23,
         "disparity": 91.57,
         "net_buy_1d": 0,
-        "turnover": 79893670900.0,
+        "turnover": 79894586400.0,
         "volume_surge": 1.77,
         "ma_aligned": false,
         "ma_strength": -11.59
@@ -421,7 +421,7 @@
         "rsi": 43.22,
         "disparity": 94.36,
         "net_buy_1d": 0,
-        "turnover": 6308920500000.0,
+        "turnover": 6309025500000.0,
         "volume_surge": 0.74,
         "ma_aligned": false,
         "ma_strength": -22.99
@@ -434,7 +434,7 @@
         "rsi": 47.39,
         "disparity": 100.97,
         "net_buy_1d": 0,
-        "turnover": 5614030620000.0,
+        "turnover": 5614135065000.0,
         "volume_surge": 0.76,
         "ma_aligned": false,
         "ma_strength": -9.23
@@ -447,7 +447,7 @@
         "rsi": 45.88,
         "disparity": 99.45,
         "net_buy_1d": 0,
-        "turnover": 1946516160000.0,
+        "turnover": 1946538343680.0,
         "volume_surge": 0.93,
         "ma_aligned": false,
         "ma_strength": -11.7
@@ -460,7 +460,7 @@
         "rsi": 43.59,
         "disparity": 95.78,
         "net_buy_1d": 0,
-        "turnover": 1808501093000.0,
+        "turnover": 1808503995200.0,
         "volume_surge": 0.95,
         "ma_aligned": false,
         "ma_strength": -31.54
@@ -473,7 +473,7 @@
         "rsi": 45.96,
         "disparity": 99.51,
         "net_buy_1d": 0,
-        "turnover": 1301663657830.0,
+        "turnover": 1301663759825.0,
         "volume_surge": 2.17,
         "ma_aligned": false,
         "ma_strength": -11.58
@@ -486,7 +486,7 @@
         "rsi": 50.19,
         "disparity": 108.38,
         "net_buy_1d": 0,
-        "turnover": 1023847338000.0,
+        "turnover": 1023880626000.0,
         "volume_surge": 0.81,
         "ma_aligned": false,
         "ma_strength": -10.9
@@ -499,7 +499,7 @@
         "rsi": 39.96,
         "disparity": 98.49,
         "net_buy_1d": 0,
-        "turnover": 837345030585.0,
+        "turnover": 837390736245.0,
         "volume_surge": 1.1,
         "ma_aligned": false,
         "ma_strength": -2.62
@@ -512,7 +512,7 @@
         "rsi": 48.73,
         "disparity": 111.56,
         "net_buy_1d": 0,
-        "turnover": 808142770400.0,
+        "turnover": 808145121530.0,
         "volume_surge": 0.96,
         "ma_aligned": false,
         "ma_strength": -20.16
@@ -525,7 +525,7 @@
         "rsi": 44.58,
         "disparity": 96.96,
         "net_buy_1d": 0,
-        "turnover": 628815240000.0,
+        "turnover": 628824276000.0,
         "volume_surge": 0.76,
         "ma_aligned": false,
         "ma_strength": -16.24
@@ -538,7 +538,7 @@
         "rsi": 41.76,
         "disparity": 98.72,
         "net_buy_1d": 0,
-        "turnover": 627304317435.0,
+        "turnover": 627305407905.0,
         "volume_surge": 1.83,
         "ma_aligned": false,
         "ma_strength": -4.53
@@ -566,7 +566,7 @@
         "rsi": 45.96,
         "disparity": 99.51,
         "net_buy_1d": 0,
-        "turnover": 1301663657830.0,
+        "turnover": 1301663759825.0,
         "volume_surge": 2.17,
         "ma_aligned": false,
         "ma_strength": -11.58
@@ -592,7 +592,7 @@
         "rsi": 41.76,
         "disparity": 98.72,
         "net_buy_1d": 0,
-        "turnover": 627304317435.0,
+        "turnover": 627305407905.0,
         "volume_surge": 1.83,
         "ma_aligned": false,
         "ma_strength": -4.53
@@ -605,7 +605,7 @@
         "rsi": 62.06,
         "disparity": 115.68,
         "net_buy_1d": 0,
-        "turnover": 479859369000.0,
+        "turnover": 479948821000.0,
         "volume_surge": 1.79,
         "ma_aligned": false,
         "ma_strength": 10.56
@@ -618,7 +618,7 @@
         "rsi": 39.23,
         "disparity": 91.57,
         "net_buy_1d": 0,
-        "turnover": 79893670900.0,
+        "turnover": 79894586400.0,
         "volume_surge": 1.77,
         "ma_aligned": false,
         "ma_strength": -11.59
@@ -644,7 +644,7 @@
         "rsi": 41.59,
         "disparity": 98.67,
         "net_buy_1d": 0,
-        "turnover": 420369947140.0,
+        "turnover": 420369974310.0,
         "volume_surge": 1.69,
         "ma_aligned": false,
         "ma_strength": -4.66
@@ -685,7 +685,7 @@
         "rsi": 77.49,
         "disparity": 123.07,
         "net_buy_1d": 0,
-        "turnover": 53111488500.0,
+        "turnover": 53111727900.0,
         "volume_surge": 0.73,
         "ma_aligned": true,
         "ma_strength": 37.95
@@ -698,7 +698,7 @@
         "rsi": 73.88,
         "disparity": 123.18,
         "net_buy_1d": 0,
-        "turnover": 50475500000.0,
+        "turnover": 50476500000.0,
         "volume_surge": 1.47,
         "ma_aligned": true,
         "ma_strength": 20.6
@@ -724,7 +724,7 @@
         "rsi": 58.76,
         "disparity": 104.42,
         "net_buy_1d": 0,
-        "turnover": 15550282000.0,
+        "turnover": 15550886000.0,
         "volume_surge": 0.42,
         "ma_aligned": true,
         "ma_strength": 18.48
@@ -750,7 +750,7 @@
         "rsi": 60.42,
         "disparity": 108.05,
         "net_buy_1d": 0,
-        "turnover": 58160840100.0,
+        "turnover": 58161613500.0,
         "volume_surge": 0.52,
         "ma_aligned": true,
         "ma_strength": 14.16
@@ -789,7 +789,7 @@
         "rsi": 55.91,
         "disparity": 102.16,
         "net_buy_1d": 0,
-        "turnover": 43852688000.0,
+        "turnover": 43872760000.0,
         "volume_surge": 0.41,
         "ma_aligned": true,
         "ma_strength": 9.45
@@ -802,7 +802,7 @@
         "rsi": 58.82,
         "disparity": 106.83,
         "net_buy_1d": 0,
-        "turnover": 67506776000.0,
+        "turnover": 67508080000.0,
         "volume_surge": 0.74,
         "ma_aligned": true,
         "ma_strength": 8.65
