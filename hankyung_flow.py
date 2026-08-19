@@ -55,6 +55,7 @@ def get_market_flow():
     """
     try:
         resp = requests.get(MARKET_URL, headers=HEADERS, timeout=8)
+        print(f"[진단] 한경 응답 상태코드: {resp.status_code}")
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, "lxml")
         text = soup.get_text("\n")
@@ -63,6 +64,7 @@ def get_market_flow():
         kosdaq = _extract_market_block(text, "코스닥")
 
         if not kospi and not kosdaq:
+            print(f"[WARN] 한경 페이지에서 코스피/코스닥 블록을 못 찾음. 페이지 텍스트 앞 500자: {text[:500]}")
             return None
 
         return {"KOSPI": kospi, "KOSDAQ": kosdaq}

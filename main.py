@@ -150,18 +150,11 @@ def build_record(code: str, name: str) -> dict | None:
         return None
 
 
-def screen_market(sosok: int, market_label: str) -> dict:
-    stock_list = retry_call(get_market_universe, sosok, TOP_N_PER_MARKET, retries=3, delay=3.0)
-    print(f"[{market_label}] 스캔 대상: {len(stock_list)}개")
-
-    records = []
-    for idx, item in enumerate(stock_list, start=1):
-        rec = build_record(item["code"], item["name"])
-        if rec:
-            records.append(rec)
-        if idx % 50 == 0:
-            print(f"[{market_label}] 진행 상황: {idx}/{len(stock_list)}")
-
+def rank_and_tag_records(records: list) -> dict:
+    """
+    종목 record 리스트(하루치, 한 시장)를 받아서 6개 리스트 + 중복 판정을 계산.
+    main.py(실시간 스크리닝)와 backtest.py(과거 검증)가 동일 로직을 쓰도록 분리.
+    """
     rsi_candidates = [r for r in records if r["rsi"] <= RSI_THRESHOLD]
     rsi_list = sorted(rsi_candidates, key=lambda r: r["rsi"])[:RSI_TOP_N]
 
@@ -224,6 +217,21 @@ def screen_market(sosok: int, market_label: str) -> dict:
         "volume_surge_top": volume_surge_list,
         "ma_align_top": ma_align_list,
     }
+
+
+def screen_market(sosok: int, market_label: str) -> dict:
+    stock_list = retry_call(get_market_universe, sosok, TOP_N_PER_MARKET, retries=3, delay=3.0)
+    print(f"[{market_label}] 스캔 대상: {len(stock_list)}개")
+
+    records = []
+    for idx, item in enumerate(stock_list, start=1):
+        rec = build_record(item["code"], item["name"])
+        if rec:
+            records.append(rec)
+        if idx % 50 == 0:
+            print(f"[{market_label}] 진행 상황: {idx}/{len(stock_list)}")
+
+    return rank_and_tag_records(records)
 
 
 def append_history(base_date: str, result: dict):

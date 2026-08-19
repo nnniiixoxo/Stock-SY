@@ -34,6 +34,8 @@ def fetch_index(code: str):
 
     def _get():
         resp = requests.get(url, headers=HEADERS, timeout=8)
+        print(f"[진단] 지수({code}) 응답 상태코드: {resp.status_code}")
+        print(f"[진단] 지수({code}) 응답 본문(앞 300자): {resp.text[:300]}")
         resp.raise_for_status()
         return resp.json()
 
@@ -46,6 +48,7 @@ def fetch_index(code: str):
     areas = (data or {}).get("result", {}).get("areas", [])
     rows = areas[0].get("datas", []) if areas else []
     if not rows:
+        print(f"[WARN] 지수({code}) 응답은 받았지만 datas가 비어있음: {data}")
         return None
     row = rows[0]
     return {"value": row.get("nv"), "change": row.get("cv"), "rate": row.get("cr")}
@@ -96,6 +99,9 @@ def fetch_prices(codes: list) -> dict:
 
         def _get():
             resp = requests.get(url, headers=HEADERS, timeout=8)
+            if i == 0:  # 첫 배치만 진단 로그 남김 (로그 너무 길어지지 않게)
+                print(f"[진단] 가격 응답 상태코드: {resp.status_code}")
+                print(f"[진단] 가격 응답 본문(앞 300자): {resp.text[:300]}")
             resp.raise_for_status()
             return resp.json()
 
@@ -107,6 +113,8 @@ def fetch_prices(codes: list) -> dict:
 
         areas = (data or {}).get("result", {}).get("areas", [])
         rows = areas[0].get("datas", []) if areas else []
+        if not rows and i == 0:
+            print(f"[WARN] 가격 응답은 받았지만 datas가 비어있음: {data}")
         for row in rows:
             code = row.get("cd")
             if not code:
