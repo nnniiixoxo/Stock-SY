@@ -72,8 +72,15 @@ RISKY_COMBOS = [
 ]
 
 
+KST = datetime.timezone(datetime.timedelta(hours=9))
+
+
 def get_label_date() -> str:
-    d = datetime.date.today()
+    """
+    한국시간(KST) 기준 날짜를 반환. GitHub Actions 서버는 UTC로 동작하므로,
+    datetime.date.today()를 그대로 쓰면 실행 시각에 따라 하루 어긋날 수 있어 명시적으로 KST로 변환한다.
+    """
+    d = datetime.datetime.now(KST).date()
     while d.weekday() >= 5:
         d -= datetime.timedelta(days=1)
     return d.strftime("%Y%m%d")
@@ -288,7 +295,7 @@ def main():
 
     result = {
         "base_date": base_date,
-        "generated_at": datetime.datetime.now().isoformat(),
+        "generated_at": datetime.datetime.now(KST).isoformat(),
         "conditions": {
             "rsi_threshold": RSI_THRESHOLD,
             "rsi_top_n": RSI_TOP_N,

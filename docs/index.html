@@ -145,9 +145,12 @@
 </head>
 <body>
 <header>
-  <div class="eyebrow">Daily Screening &middot; 전일 종가 기준</div>
+  <div class="eyebrow">Daily Screening &middot; 당일 종가 기준 (장마감 직후 갱신)</div>
   <h1>조건별 종목 탐색기</h1>
   <div class="subline" id="baseDate">불러오는 중...</div>
+  <div class="subline" style="margin-top:2px; color:var(--accent, #e8a33d);">
+    ⏱ 당일 마감가 기준 → 당일 애프터마켓(16:00~18:00 시간외단일가)에서 매수 검토용
+  </div>
   <div class="subline" id="liveStatus" style="margin-top:2px;"></div>
 </header>
 
@@ -171,7 +174,7 @@
 </div>
 
 <div class="conditions-note">
-  RSI(14)≤30 · 전일 순매수 · 이격도(20일) · 거래대금 · 거래량급증배수 · 정배열(5>20>60일선) 각 상위10 (순매수 제외 5개 지표 기준 중복 표시)
+  RSI(14)≤30 · 당일 순매수 · 이격도(20일) · 거래대금 · 거래량급증배수 · 정배열(5>20>60일선) 각 상위10 (순매수 제외 5개 지표 기준 중복 표시)
 </div>
 
 <section class="market active" id="market-kospi"></section>
@@ -554,7 +557,7 @@ function applyLivePrices(liveData) {
   if (statusEl) {
     statusEl.textContent = hasAny
       ? '장중 시세(5분 주기) 갱신: ' + new Date(liveData.updated_at).toLocaleTimeString('ko-KR')
-      : '장중 시세 데이터가 아직 없습니다 (전일 종가만 표시 중)';
+      : '장중 시세 데이터가 아직 없습니다 (당일 종가만 표시 중)';
   }
 }
 
