@@ -148,6 +148,7 @@
   <div class="eyebrow">Daily Screening &middot; 당일 종가 기준 (장마감 직후 갱신)</div>
   <h1>조건별 종목 탐색기</h1>
   <div class="subline" id="baseDate">불러오는 중...</div>
+  <div class="subline" id="staleWarning" style="margin-top:2px; color:#e5484d; display:none;"></div>
   <div class="subline" style="margin-top:2px; color:var(--accent, #e8a33d);">
     ⏱ 당일 마감가 기준 → 당일 애프터마켓(16:00~18:00 시간외단일가)에서 매수 검토용
   </div>
@@ -202,6 +203,16 @@ async function load() {
       new Date(DATA.generated_at).toLocaleTimeString('ko-KR');
     document.getElementById('updatedAt').textContent =
       '전체 갱신 시각: ' + new Date(DATA.generated_at).toLocaleString('ko-KR');
+
+    const staleEl = document.getElementById('staleWarning');
+    const actualDate = DATA.actual_data_date ? DATA.actual_data_date.replace(/-/g, '') : null;
+    if (staleEl && actualDate && actualDate !== DATA.base_date) {
+      staleEl.style.display = 'block';
+      staleEl.textContent =
+        `⚠ 아직 당일 종가가 없어 실제로는 ${formatDate(actualDate)} 종가 기준입니다 (장마감 전 실행됨)`;
+    } else if (staleEl) {
+      staleEl.style.display = 'none';
+    }
 
     renderMarket('kospi');
     renderMarket('kosdaq');

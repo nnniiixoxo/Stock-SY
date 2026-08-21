@@ -103,6 +103,9 @@ def build_record(code: str, name: str) -> dict | None:
         ma_mid = calc_ma(close, MA_MID)
         ma_long = calc_ma(close, MA_LONG)
 
+        latest_date = price_df["date"].iloc[-1]
+        latest_date_str = latest_date.strftime("%Y-%m-%d") if hasattr(latest_date, "strftime") else str(latest_date)
+
         latest_close = float(close.iloc[-1])
         prev_close = float(close.iloc[-2]) if len(close) >= 2 else None
         change_pct = (
@@ -110,6 +113,13 @@ def build_record(code: str, name: str) -> dict | None:
             if prev_close
             else None
         )
+
+        # 진단: 등락률이 정확히 0%이거나 비정상적으로 큰 경우, 원본 데이터를 로그로 남긴다
+        # (0%가 여러 종목에서 반복되면 데이터 수집 문제, 극단값은 무상증자/액면분할 등
+        #  주가 조정 이벤트로 인한 착시일 가능성이 높다)
+        if change_pct == 0 or (change_pct is not None and abs(change_pct) >= 25):
+            tail3 = price_df[["date", "close", "volume"]].tail(3).to_string(index=False)
+            print(f"[진단] {code}({name}) change_pct={change_pct}% 최근 3일 원본 데이터:\n{tail3}")
 
         latest_rsi = rsi.iloc[-1]
         latest_disparity = disparity.iloc[-1]
@@ -144,6 +154,7 @@ def build_record(code: str, name: str) -> dict | None:
             "name": name,
             "close": latest_close,
             "change_pct": change_pct,
+            "data_date": latest_date_str,
             "rsi": round(float(latest_rsi), 2),
             "disparity": round(float(latest_disparity), 2),
             "net_buy_1d": net_buy_1d,
@@ -162,6 +173,14 @@ def rank_and_tag_records(records: list) -> dict:
     종목 record 리스트(하루치, 한 시장)를 받아서 6개 리스트 + 중복 판정을 계산.
     main.py(실시간 스크리닝)와 backtest.py(과거 검증)가 동일 로직을 쓰도록 분리.
     """
+    # 실제로 수집된 데이터가 어느 거래일 기준인지 (가장 흔한 날짜 = 대부분 종목의 최신 종가일)
+    date_counts: dict = {}
+    for r in records:
+        d = r.get("data_date")
+        if d:
+            date_counts[d] = date_counts.get(d, 0) + 1
+    actual_data_date = max(date_counts, key=date_counts.get) if date_counts else None
+
     rsi_candidates = [r for r in records if r["rsi"] <= RSI_THRESHOLD]
     rsi_list = sorted(rsi_candidates, key=lambda r: r["rsi"])[:RSI_TOP_N]
 
@@ -214,6 +233,7 @@ def rank_and_tag_records(records: list) -> dict:
 
     return {
         "scanned_count": len(records),
+        "actual_data_date": actual_data_date,
         "overlap_3plus": overlap_3plus,
         "overlap_2plus": overlap_2plus,
         "risky_2plus": risky_2plus,
@@ -319,6 +339,15 @@ def main():
             f"이격도:{len(m['disparity_low'])} 거래대금:{len(m['turnover_top'])} "
             f"거래량급증:{len(m['volume_surge_top'])} 정배열:{len(m['ma_align_top'])} "
             f"중복3+:{len(m['overlap_3plus'])} 중복2+:{len(m['overlap_2plus'])}"
+        )
+
+    actual_dates = {result[m].get("actual_data_date") for m in MARKETS if result[m].get("actual_data_date")}
+    actual_data_date = sorted(actual_dates)[-1] if actual_dates else None
+    result["actual_data_date"] = actual_data_date
+    if actual_data_date and actual_data_date.replace("-", "") != base_date:
+        print(
+            f"[WARN] 라벨은 '{base_date}'인데 실제 최신 데이터는 '{actual_data_date}' 기준임 "
+            f"(장 시작 전 등, 아직 당일 종가가 없을 때 실행된 경우 정상적으로 발생할 수 있음)"
         )
 
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
