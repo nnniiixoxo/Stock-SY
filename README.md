@@ -100,8 +100,14 @@ VOLUME_SURGE_MA_PERIOD = 20
 MA_SHORT, MA_MID, MA_LONG = 5, 20, 60   # 정배열 판단 기준 이동평균선
 MA_ALIGN_TOP_N = 10
 TOP_N_PER_MARKET = 150
+HALT_CHECK_DAYS = 3          # 최근 이 기간 중 거래량 0인 날이 있으면 거래정지로 보고 제외
 HISTORY_MAX_ENTRIES = 200    # history.json에 보관할 최대 일수
 ```
+
+**거래정지 종목 필터링**: 최근 `HALT_CHECK_DAYS`일 중 단 하루라도 거래량이 0이면 그 종목은
+스캔에서 완전히 제외됩니다. 거래정지 중엔 가격이 안 움직여 이격도/RSI 값이 왜곡되고,
+거래 재개 시 액면분할·감자 등으로 가격이 급변해 "폭락"처럼 잘못 잡히는 문제가 있었기 때문입니다
+(실제 사례: 거래정지 상태였던 종목이 재개되며 액면분할로 종가가 반토막 나 -59% 폭락처럼 표시된 적 있음).
 
 중복(overlap) 판정 기준 지표는 `main.py`의 `OVERLAP_TAGS` 리스트로 조정할 수 있습니다
 (현재는 순매수를 제외한 5개: rsi, disparity, turnover, volume_surge, ma_align).

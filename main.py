@@ -53,6 +53,7 @@ MA_ALIGN_TOP_N = 10
 PRICE_HISTORY_DAYS = 70      # 60일선 계산을 위해 넉넉히 확보
 INVESTOR_HISTORY_DAYS = 5
 TOP_N_PER_MARKET = 150
+HALT_CHECK_DAYS = 3  # 최근 이 기간 중 거래량 0인 날이 있으면 거래정지로 간주해 제외
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "docs", "results.json")
 HISTORY_PATH = os.path.join(os.path.dirname(__file__), "docs", "history.json")
 HISTORY_MAX_ENTRIES = 200    # 누적 기록 최대 보관 일수 (너무 커지지 않도록 제한)
@@ -96,6 +97,14 @@ def build_record(code: str, name: str) -> dict | None:
 
         close = price_df["close"]
         volume = price_df["volume"]
+
+        # 거래정지(며칠간 거래량 0) 종목 필터링:
+        # - 거래정지 중엔 가격이 안 움직여 이격도/RSI가 왜곡되고,
+        # - 거래 재개 시 액면분할/감자 등으로 가격이 급변해 "폭락"처럼 잘못 잡힌다.
+        # 최근 며칠 중 단 하루라도 거래량이 0이면 그 종목은 이번 스캔에서 제외한다.
+        recent_volumes = volume.tail(HALT_CHECK_DAYS)
+        if (recent_volumes <= 0).any():
+            return None
 
         rsi = calc_rsi(close, period=14)
         disparity = calc_disparity(close, ma_period=DISPARITY_MA_PERIOD)
