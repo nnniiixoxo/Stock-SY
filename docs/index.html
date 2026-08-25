@@ -276,8 +276,7 @@ function formatEok(v) {
 }
 
 const TAG_LABEL = {
-  rsi: 'RSI', net_buy: '순매수', disparity: '이격도',
-  turnover: '거래대금', volume_surge: '거래량급증', ma_align: '정배열'
+  rsi: 'RSI', ma_align: '이평선', macd: 'MACD', stochastic: '스토캐스틱', net_buy: '수급', short_sell: '공매도감소'
 };
 
 function formatChangePct(v) {
@@ -364,27 +363,29 @@ function renderMarket(market) {
   const sections = [];
   sections.push(`<div class="scanned">스캔 종목 수: ${m.scanned_count}개</div>`);
 
-  if (m.overlap_3plus && m.overlap_3plus.length > 0) {
-    sections.push(`
-      <div class="group-title"><h2>⭐⭐ 5개 지표 중 3개 이상 중복</h2><span>${m.overlap_3plus.length}개</span></div>
-      <div class="row-list" id="${market}-overlap3"></div>
-    `);
-  }
-  if (m.overlap_2plus && m.overlap_2plus.length > 0) {
-    sections.push(`
-      <div class="group-title"><h2>⭐ 5개 지표 중 2개 이상 중복</h2><span>${m.overlap_2plus.length}개</span></div>
-      <div class="row-list" id="${market}-overlap2"></div>
-    `);
+  const overlapDefs = [
+    ['overlap6', '⭐⭐⭐⭐ 6개 신호 모두 일치', m.overlap_6, 'overlap3'],
+    ['overlap5', '⭐⭐⭐ 5개 이상 신호 일치', m.overlap_5plus, 'overlap3'],
+    ['overlap4', '⭐⭐ 4개 이상 신호 일치', m.overlap_4plus, 'overlap3'],
+    ['overlap3', '⭐ 3개 이상 신호 일치', m.overlap_3plus, 'overlap2'],
+    ['overlap2', '2개 이상 신호 일치', m.overlap_2plus, 'overlap2'],
+  ];
+  for (const [key, title, list, cls] of overlapDefs) {
+    if (list && list.length > 0) {
+      sections.push(`
+        <div class="group-title"><h2>${title}</h2><span>${list.length}개</span></div>
+        <div class="row-list" id="${market}-${key}"></div>
+      `);
+    }
   }
 
   const groupDefs = [
     ['rsi', 'RSI 30 이하 (과매도)', m.rsi_low],
-    // 아래 5개는 화면에서 숨김 처리 (요청에 따라). 중복 판정 계산에는 계속 사용됨.
-    // ['netbuy', '전일 순매수 상위 10', m.net_buy_top],
-    // ['disparity', '이격도 하위 10', m.disparity_low],
-    // ['turnover', '거래대금 상위 10', m.turnover_top],
-    // ['volsurge', '거래량 급증배수 상위 10', m.volume_surge_top],
-    // ['maalign', '정배열(5>20>60일선) 상위 10', m.ma_align_top],
+    ['maalign', '이평선 정배열 (5>20>60일선)', m.ma_align_top],
+    ['macd', 'MACD 골든크로스', m.macd_top],
+    ['stochastic', '슬로우 스토캐스틱 매수신호', m.stochastic_top],
+    ['netbuy', '외국인+기관 3일 연속 순매수', m.net_buy_top],
+    ['shortsell', '공매도 거래량 감소', m.short_sell_top],
   ];
   for (const [key, title, list] of groupDefs) {
     sections.push(`
@@ -393,33 +394,19 @@ function renderMarket(market) {
     `);
   }
 
-  // 화면 최하단: 2개 이상 중복이지만 "방향 구분이 안 되는 지표 조합"이라 하락 가능성도 있는 종목들
-  if (m.risky_2plus && m.risky_2plus.length > 0) {
-    sections.push(`
-      <div class="group-title"><h2>⚠️ 2개 이상 중복이지만 하락 주의</h2><span>${m.risky_2plus.length}개</span></div>
-      <div class="risky-note">이격도+거래량급증 / 거래대금+거래량급증 / 이격도+RSI 조합은 급락 당일에도 걸릴 수 있어 별도 표시합니다.</div>
-      <div class="row-list" id="${market}-risky"></div>
-    `);
-  }
-
   container.innerHTML = sections.join('');
 
-  if (m.overlap_3plus && m.overlap_3plus.length > 0) {
-    renderGroup(`${market}-overlap3`, m.overlap_3plus, null, '없음', 'overlap3', true);
-  }
-  if (m.overlap_2plus && m.overlap_2plus.length > 0) {
-    renderGroup(`${market}-overlap2`, m.overlap_2plus, null, '없음', 'overlap2', true);
-  }
-  if (m.risky_2plus && m.risky_2plus.length > 0) {
-    renderGroup(`${market}-risky`, m.risky_2plus, null, '없음', 'risky', true);
+  for (const [key, , list, cls] of overlapDefs) {
+    if (list && list.length > 0) {
+      renderGroup(`${market}-${key}`, list, null, '없음', cls, true);
+    }
   }
   renderGroup(`${market}-rsi`, m.rsi_low, (it) => [`RSI ${it.rsi}`, ''], '조건을 만족하는 종목이 없습니다.');
-  // 아래 5개는 화면에서 숨긴 리스트라 렌더링도 생략 (컨테이너 자체가 없음)
-  // renderGroup(`${market}-netbuy`, m.net_buy_top, ...);
-  // renderGroup(`${market}-disparity`, m.disparity_low, ...);
-  // renderGroup(`${market}-turnover`, m.turnover_top, ...);
-  // renderGroup(`${market}-volsurge`, m.volume_surge_top, ...);
-  // renderGroup(`${market}-maalign`, m.ma_align_top, ...);
+  renderGroup(`${market}-maalign`, m.ma_align_top, (it) => ['정배열', 'flow-pos'], '조건을 만족하는 종목이 없습니다.');
+  renderGroup(`${market}-macd`, m.macd_top, (it) => ['골든크로스', 'flow-pos'], '조건을 만족하는 종목이 없습니다.');
+  renderGroup(`${market}-stochastic`, m.stochastic_top, (it) => [`%K ${it.stoch_k}`, 'flow-pos'], '조건을 만족하는 종목이 없습니다.');
+  renderGroup(`${market}-netbuy`, m.net_buy_top, (it) => [formatShares(it.net_buy_1d), it.net_buy_1d >= 0 ? 'flow-pos' : 'flow-neg'], '조건을 만족하는 종목이 없습니다.');
+  renderGroup(`${market}-shortsell`, m.short_sell_top, (it) => [`${it.short_sell_latest.toLocaleString()}주`, 'flow-pos'], '조건을 만족하는 종목이 없습니다.');
 }
 
 function buildAreaChart(history, currentChange) {
