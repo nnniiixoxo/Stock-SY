@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-과거 데이터로 "RSI/이평선/MACD/스토캐스틱/수급 5개 신호 중 2개 이상 중복" 조건이
+과거 데이터로 "RSI/이격도/거래대금/거래량급증/정배열/공매도 6개 신호 중 2개 이상 중복" 조건이
 실제로 매수 후 상승으로 이어졌는지 검증하는 백테스트 스크립트.
 
 main.py와 완전히 동일한 순위/중복 판정 로직(rank_and_tag_records)을 그대로 재사용해서,
@@ -10,9 +10,9 @@ main.py와 완전히 동일한 순위/중복 판정 로직(rank_and_tag_records)
 ★ 중요한 한계 (결과를 볼 때 꼭 감안할 것)
 - 종목 유니버스(시가총액 상위 N)는 "오늘 기준"이다. 과거 그 시점의 실제 상위 N과는
   다를 수 있다 (생존편향: 지금 잘나가는 종목 위주로 평가하게 되는 쏠림이 있을 수 있음).
-- 외국인+기관 순매수, 공매도 거래량 감소 조건은 과거 일별 데이터를 안정적으로 모으기 어려워
-  백테스트에서는 제외했다 (두 signal이 항상 False라, 실질적으로 RSI/이평선/MACD/스토캐스틱
-  4개 신호 기준 검증이 된다).
+- 공매도 거래량 감소 조건은 과거 일별 데이터를 안정적으로 모으기 어려워 백테스트에서는
+  제외했다 (short_sell_signal이 항상 False라, 실질적으로 RSI/이격도/거래대금/거래량급증/정배열
+  5개 신호 기준 검증이 된다).
 - 네이버 증권 스크래핑 특성상 종목 수 x 기간이 커질수록 요청 수가 많아진다.
   워크플로우 수동 실행(workflow_dispatch) 시 top_n / eval_days 값을 조절해서 쓸 것.
 
@@ -25,23 +25,17 @@ import traceback
 
 import pandas as pd
 
-from indicators import calc_rsi, calc_ma, calc_macd, calc_stochastic, crossed_above_series
+from indicators import calc_rsi, calc_disparity, calc_ma
 from naver_price import get_daily_ohlcv
 from naver_universe import get_market_universe
 from retry_util import retry_call
 from main import (
     rank_and_tag_records,
+    DISPARITY_MA_PERIOD,
+    VOLUME_SURGE_MA_PERIOD,
     MA_SHORT,
     MA_MID,
     MA_LONG,
-    MACD_FAST,
-    MACD_SLOW,
-    MACD_SIGNAL,
-    CROSS_LOOKBACK_DAYS,
-    STOCH_K_PERIOD,
-    STOCH_K_SLOW,
-    STOCH_D_PERIOD,
-    STOCH_OVERSOLD,
     RSI_THRESHOLD,
 )
 
@@ -51,7 +45,7 @@ from main import (
 TOP_N_PER_MARKET = int(os.environ.get("BACKTEST_TOP_N", "40"))
 EVAL_TRADING_DAYS = int(os.environ.get("BACKTEST_EVAL_DAYS", "40"))  # 평가할 과거 거래일 수
 FORWARD_HORIZONS = {"1w": 5, "1m": 21}  # 거래일 기준 (달력일 아님)
-WARMUP_DAYS = max(MA_LONG, MACD_SLOW + MACD_SIGNAL, STOCH_K_PERIOD) + 3
+WARMUP_DAYS = max(DISPARITY_MA_PERIOD, VOLUME_SURGE_MA_PERIOD, MA_LONG) + 3
 BUFFER_DAYS = 5
 HISTORY_DAYS = WARMUP_DAYS + EVAL_TRADING_DAYS + max(FORWARD_HORIZONS.values()) + BUFFER_DAYS
 
@@ -60,43 +54,40 @@ MARKETS = {"kospi": 0, "kosdaq": 1}
 
 
 def build_stock_panel(code: str, name: str, days: int) -> pd.DataFrame | None:
-    """종목 하나의 날짜별 지표 시계열(DataFrame)을 만든다. (main.py의 build_record를 시계열 버전으로 확장)"""
+    """종목 하나의 날짜별 지표 시계열(DataFrame)을 만든다. (main.py의 build_price_record를 시계열 버전으로 확장)"""
     try:
         price_df = get_daily_ohlcv(code, days=days)
         if len(price_df) < WARMUP_DAYS + 5:
             return None
 
         close = price_df["close"]
-        high = price_df["high"]
-        low = price_df["low"]
+        volume = price_df["volume"]
 
         rsi = calc_rsi(close, period=14)
+        disparity = calc_disparity(close, ma_period=DISPARITY_MA_PERIOD)
         ma_short = calc_ma(close, MA_SHORT)
         ma_mid = calc_ma(close, MA_MID)
         ma_long = calc_ma(close, MA_LONG)
-        macd_line, macd_signal_line, _ = calc_macd(close, fast=MACD_FAST, slow=MACD_SLOW, signal=MACD_SIGNAL)
-        stoch_k, stoch_d = calc_stochastic(
-            high, low, close, k_period=STOCH_K_PERIOD, k_slow=STOCH_K_SLOW, d_period=STOCH_D_PERIOD
-        )
-
-        macd_cross = crossed_above_series(macd_line, macd_signal_line, lookback=CROSS_LOOKBACK_DAYS)
-        stoch_cross = crossed_above_series(stoch_k, stoch_d, lookback=CROSS_LOOKBACK_DAYS)
+        avg_volume = volume.rolling(window=VOLUME_SURGE_MA_PERIOD).mean()
 
         df = pd.DataFrame(
             {
                 "date": price_df["date"].dt.strftime("%Y-%m-%d"),
                 "close": close,
                 "rsi": rsi,
+                "disparity": disparity,
                 "ma_short": ma_short,
                 "ma_mid": ma_mid,
                 "ma_long": ma_long,
-                "stoch_k": stoch_k,
-                "macd_cross": macd_cross,
-                "stoch_cross": stoch_cross,
+                "volume": volume,
+                "avg_volume": avg_volume,
             }
         ).reset_index(drop=True)
 
+        df["turnover"] = df["close"] * df["volume"]
+        df["volume_surge"] = df["volume"] / df["avg_volume"].replace(0, pd.NA)
         df["ma_aligned"] = (df["ma_short"] > df["ma_mid"]) & (df["ma_mid"] > df["ma_long"])
+        df["ma_strength"] = (df["ma_short"] / df["ma_long"] - 1) * 100
 
         df["code"] = code
         df["name"] = name
@@ -108,9 +99,8 @@ def build_stock_panel(code: str, name: str, days: int) -> pd.DataFrame | None:
 
 def row_to_record(row) -> dict | None:
     """DataFrame의 한 행(하루치)을 rank_and_tag_records가 기대하는 record dict로 변환."""
-    if pd.isna(row["rsi"]) or pd.isna(row["ma_long"]) or pd.isna(row["stoch_k"]):
+    if pd.isna(row["rsi"]) or pd.isna(row["disparity"]) or pd.isna(row["ma_long"]):
         return None
-    stochastic_signal = bool(row["stoch_cross"]) and float(row["stoch_k"]) <= STOCH_OVERSOLD
     return {
         "code": row["code"],
         "name": row["name"],
@@ -118,14 +108,13 @@ def row_to_record(row) -> dict | None:
         "change_pct": None,
         "rsi": round(float(row["rsi"]), 2),
         "rsi_signal": bool(row["rsi"] <= RSI_THRESHOLD),
+        "disparity": round(float(row["disparity"]), 2),
+        "turnover": float(row["turnover"]) if not pd.isna(row["turnover"]) else 0.0,
+        "volume_surge": round(float(row["volume_surge"]), 2) if not pd.isna(row["volume_surge"]) else 0.0,
         "ma_aligned": bool(row["ma_aligned"]),
         "ma_signal": bool(row["ma_aligned"]),
-        "macd_signal": bool(row["macd_cross"]),
-        "stoch_k": round(float(row["stoch_k"]), 2),
-        "stochastic_signal": stochastic_signal,
-        "net_buy_1d": 0,  # 백테스트에서는 수급 데이터 미사용 (과거 일별 데이터 안정적 수집이 어려움)
-        "net_buy_signal": False,
-        "short_sell_latest": 0,  # 공매도도 동일한 이유로 백테스트에서는 미사용
+        "ma_strength": round(float(row["ma_strength"]), 2) if not pd.isna(row["ma_strength"]) else None,
+        "short_sell_latest": 0,  # 공매도는 과거 일별 데이터 수집이 어려워 백테스트에서는 미사용
         "short_sell_signal": False,
     }
 
@@ -246,7 +235,7 @@ def main():
         },
         "caveats": [
             "종목 유니버스는 오늘 기준 시가총액 상위 N (과거 시점 실제 상위 N과 다를 수 있음, 생존편향 가능)",
-            "외국인+기관 순매수, 공매도 거래량 감소 조건은 백테스트에서 제외 (두 signal 항상 False, 실질적으로 RSI/이평선/MACD/스토캐스틱 4개 신호 기준 검증)",
+            "공매도 거래량 감소 조건은 백테스트에서 제외 (short_sell_signal 항상 False, 실질적으로 RSI/이격도/거래대금/거래량급증/정배열 5개 신호 기준 검증)",
             "baseline_all_scanned은 그 날 스캔된 전체 종목의 동일 기간 평균 수익률 (시장 전체 상승/하락 흐름 대비 비교용)",
         ],
     }
