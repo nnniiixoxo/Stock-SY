@@ -1,5 +1,8 @@
 {
-  "updated_at": null,
+  "updated_at": "2026-08-26T08:03:45.396568",
   "prices": {},
-  "indices": {}
+  "indices": {
+    "KOSPI": {},
+    "KOSDAQ": {}
+  }
 }
