@@ -1,20 +1,74 @@
 {
-  "base_date": null,
-  "generated_at": null,
-  "actual_data_date": null,
-  "conditions": {},
+  "base_date": "20260828",
+  "generated_at": "2026-08-28T11:19:23.293153+09:00",
+  "conditions": {
+    "score_rules": [
+      {
+        "key": "ma_aligned",
+        "label": "정배열 (MA5>MA20>MA60)",
+        "points": 2
+      },
+      {
+        "key": "ma_mid_rising",
+        "label": "MA20 상승",
+        "points": 1
+      },
+      {
+        "key": "ma_long_rising",
+        "label": "MA60 상승",
+        "points": 1
+      },
+      {
+        "key": "rsi_zone",
+        "label": "RSI 35~50",
+        "points": 1
+      },
+      {
+        "key": "rsi_upcross",
+        "label": "RSI 상승 전환",
+        "points": 2
+      },
+      {
+        "key": "disparity_bottom_turn",
+        "label": "이격도 저점->상승",
+        "points": 2
+      },
+      {
+        "key": "rvol_high",
+        "label": "RVOL>=2",
+        "points": 2
+      },
+      {
+        "key": "turnover_increase",
+        "label": "거래대금 증가",
+        "points": 1
+      }
+    ],
+    "tier_strong_buy": 12,
+    "tier_buy_candidate": 10,
+    "tier_watch": 8,
+    "ma_periods": [
+      5,
+      20,
+      60
+    ],
+    "disparity_ma_period": 20,
+    "rvol_threshold": 2.0,
+    "data_source": "naver"
+  },
   "kospi": {
-    "scanned_count": 0,
-    "actual_data_date": null,
+    "scanned_count": 1048,
+    "actual_data_date": "2026-08-28",
     "strong_buy": [],
     "buy_candidate": [],
     "watch": []
   },
   "kosdaq": {
-    "scanned_count": 0,
-    "actual_data_date": null,
+    "scanned_count": 852,
+    "actual_data_date": "2026-08-28",
     "strong_buy": [],
     "buy_candidate": [],
     "watch": []
-  }
+  },
+  "actual_data_date": "2026-08-28"
 }
