@@ -236,12 +236,19 @@ def rank_by_score(records: list) -> dict:
     buy_candidate = [r for r in scored if r["tier"] == "buy_candidate"]
     watch = [r for r in scored if r["tier"] == "watch"]
 
+    # 점수 등급과 별개로, "8개 조건 중 몇 개나 걸렸는지"만 보는 리스트 (기존 방식과 유사)
+    condition_2plus = sorted(
+        [r for r in records if len(r["matched"]) >= 2],
+        key=lambda r: (-len(r["matched"]), -r["score"]),
+    )
+
     return {
         "scanned_count": len(records),
         "actual_data_date": actual_data_date,
         "strong_buy": strong_buy,
         "buy_candidate": buy_candidate,
         "watch": watch,
+        "condition_2plus": condition_2plus,
     }
 
 
@@ -347,7 +354,8 @@ def main():
         m = result[market_label]
         print(
             f"[{market_label}] 강한매수후보(12점):{len(m['strong_buy'])} "
-            f"매수후보(10점+):{len(m['buy_candidate'])} 관심종목(8점+):{len(m['watch'])}"
+            f"매수후보(10점+):{len(m['buy_candidate'])} 관심종목(8점+):{len(m['watch'])} "
+            f"조건2개이상:{len(m['condition_2plus'])}"
         )
 
     actual_dates = {result[m].get("actual_data_date") for m in MARKETS if result[m].get("actual_data_date")}

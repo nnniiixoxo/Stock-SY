@@ -443,11 +443,19 @@ function renderMarket(market) {
     `);
   }
 
+  // 화면 최하단: 점수 등급과 무관하게, 8개 조건 중 2개 이상만 걸려도 보여주는 리스트
+  sections.push(`
+    <div class="group-title"><h2>8개 조건 중 2개 이상 충족</h2><span>${(m.condition_2plus || []).length}개</span></div>
+    <div class="risky-note">점수 등급(관심종목 8점 등)과는 별개로, 몇 점이든 상관없이 조건을 2개 이상 만족하는 종목을 모두 보여줍니다.</div>
+    <div class="row-list" id="${market}-condition2plus"></div>
+  `);
+
   container.innerHTML = sections.join('');
 
   for (const [key, , list, cls] of tierDefs) {
     renderGroup(`${market}-${key}`, list, '없음', cls);
   }
+  renderGroup(`${market}-condition2plus`, m.condition_2plus, '없음', '');
 }
 
 function buildAreaChart(history, currentChange) {
