@@ -20,6 +20,7 @@ import os
 import json
 import datetime
 import traceback
+from itertools import combinations
 
 import pandas as pd
 
@@ -62,6 +63,12 @@ SCORE_THRESHOLDS = {
     "buy_candidate_10plus": TIER_BUY_CANDIDATE,
     "strong_buy_12": TIER_STRONG_BUY,
 }
+
+# 어떤 조건(단독) / 어떤 조건 조합(2개 쌍)이 수익률이 좋은지 분석하기 위한 대상 목록
+CONDITION_KEYS = [key for key, _label, _points in SCORE_RULES]
+CONDITION_LABEL = {key: label for key, label, _points in SCORE_RULES}
+CONDITION_PAIRS = list(combinations(CONDITION_KEYS, 2))
+MIN_PAIR_SAMPLE = 5  # 이 건수 미만인 조합은 결과가 우연일 가능성이 높아 요약에서 제외
 
 
 def build_stock_panel(code: str, name: str, days: int) -> pd.DataFrame | None:
@@ -126,10 +133,12 @@ def row_to_record(row) -> dict | None:
         return None
 
     score = 0
+    matched_keys = []
     for key, _label, points in SCORE_RULES:
         val = row.get(key)
         if val is True or val == 1:
             score += points
+            matched_keys.append(key)
 
     if score >= TIER_STRONG_BUY:
         tier = "strong_buy"
@@ -146,6 +155,7 @@ def row_to_record(row) -> dict | None:
         "close": float(row["close"]),
         "score": score,
         "tier": tier,
+        "matched_keys": matched_keys,
     }
 
 
@@ -187,6 +197,10 @@ def backtest_market(sosok: int, market_label: str) -> dict:
     baseline_by_horizon = {h: [] for h in FORWARD_HORIZONS}
     pick_dates_count = {tier: 0 for tier in SCORE_THRESHOLDS}
 
+    # 조건 단독 / 조건 2개 조합별 수익률 추적 (어떤 조건이 겹쳤을 때 수익률이 좋은지 분석용)
+    single_returns = {key: {h: [] for h in FORWARD_HORIZONS} for key in CONDITION_KEYS}
+    pair_returns = {pair: {h: [] for h in FORWARD_HORIZONS} for pair in CONDITION_PAIRS}
+
     for eval_date in eval_dates:
         records = []
         for code, df in panels.items():
@@ -208,12 +222,17 @@ def backtest_market(sosok: int, market_label: str) -> dict:
             if codes:
                 pick_dates_count[tier_name] += 1
 
+        matched_keys_by_code = {r["code"]: r["matched_keys"] for r in records}
+
         for code in [r["code"] for r in records]:
             pos = date_to_pos[code][eval_date]
             df = panels[code]
             base_close = df["close"].iloc[pos]
             if pd.isna(base_close) or base_close == 0:
                 continue
+            matched_keys = matched_keys_by_code.get(code, [])
+            matched_set = set(matched_keys)
+            present_pairs = [p for p in CONDITION_PAIRS if p[0] in matched_set and p[1] in matched_set]
             for h_label, h_days in FORWARD_HORIZONS.items():
                 fwd_pos = pos + h_days
                 if fwd_pos >= len(df):
@@ -226,6 +245,10 @@ def backtest_market(sosok: int, market_label: str) -> dict:
                 for tier_name, codes in picked_by_tier.items():
                     if code in codes:
                         picks_by_tier_horizon[tier_name][h_label].append(return_pct)
+                for key in matched_keys:
+                    single_returns[key][h_label].append(return_pct)
+                for pair in present_pairs:
+                    pair_returns[pair][h_label].append(return_pct)
 
     def summarize(returns: list) -> dict:
         if not returns:
@@ -255,6 +278,45 @@ def backtest_market(sosok: int, market_label: str) -> dict:
                 "edge_vs_baseline": edge,
             }
         result["tiers"][tier_name] = tier_result
+
+    baseline_summary_by_h = {h: summarize(baseline_by_horizon[h]) for h in FORWARD_HORIZONS}
+
+    def edge_of(pick_summary, h_label):
+        base_avg = baseline_summary_by_h[h_label]["avg_return"]
+        if pick_summary["avg_return"] is None or base_avg is None:
+            return None
+        return round(pick_summary["avg_return"] - base_avg, 2)
+
+    single_result = {}
+    for key in CONDITION_KEYS:
+        single_result[key] = {
+            "label": CONDITION_LABEL[key],
+            "horizons": {
+                h_label: {
+                    **summarize(single_returns[key][h_label]),
+                    "edge_vs_baseline": edge_of(summarize(single_returns[key][h_label]), h_label),
+                }
+                for h_label in FORWARD_HORIZONS
+            },
+        }
+
+    pair_result = {}
+    for pair in CONDITION_PAIRS:
+        pair_key = f"{pair[0]}+{pair[1]}"
+        pair_result[pair_key] = {
+            "labels": [CONDITION_LABEL[pair[0]], CONDITION_LABEL[pair[1]]],
+            "horizons": {
+                h_label: {
+                    **summarize(pair_returns[pair][h_label]),
+                    "edge_vs_baseline": edge_of(summarize(pair_returns[pair][h_label]), h_label),
+                }
+                for h_label in FORWARD_HORIZONS
+            },
+        }
+
+    result["baseline"] = baseline_summary_by_h
+    result["condition_singles"] = single_result
+    result["condition_pairs"] = pair_result
     return result
 
 
@@ -303,6 +365,41 @@ def main():
                     f"vs 전체 스캔 평균 {b['avg_return']}%  ->  차이(엣지) {h['edge_vs_baseline']}%p"
                 )
     print(f"\n완료 -> {OUTPUT_PATH}")
+
+    print("\n\n===================== 조건별 수익률 랭킹 (1주일 후 기준) =====================")
+    for market_label in MARKETS:
+        m = output[market_label]
+        if "error" in m:
+            continue
+        print(f"\n[{market_label.upper()}]")
+
+        singles = [
+            (key, data["label"], data["horizons"]["1w"])
+            for key, data in m["condition_singles"].items()
+            if data["horizons"]["1w"]["count"] >= MIN_PAIR_SAMPLE
+        ]
+        singles.sort(key=lambda x: (x[2]["edge_vs_baseline"] is None, -(x[2]["edge_vs_baseline"] or -999)))
+        print("  --- 단일 조건 (표본 5건 이상, 엣지 높은 순) ---")
+        for key, label, h in singles[:8]:
+            print(
+                f"    {label}: 건수 {h['count']} 승률 {h['win_rate']}% 평균 {h['avg_return']}% "
+                f"엣지 {h['edge_vs_baseline']}%p"
+            )
+
+        pairs = [
+            (pair_key, data["labels"], data["horizons"]["1w"])
+            for pair_key, data in m["condition_pairs"].items()
+            if data["horizons"]["1w"]["count"] >= MIN_PAIR_SAMPLE
+        ]
+        pairs.sort(key=lambda x: (x[2]["edge_vs_baseline"] is None, -(x[2]["edge_vs_baseline"] or -999)))
+        print("  --- 조건 2개 조합 (표본 5건 이상, 엣지 높은 순 상위 10개) ---")
+        for pair_key, labels, h in pairs[:10]:
+            print(
+                f"    {' + '.join(labels)}: 건수 {h['count']} 승률 {h['win_rate']}% 평균 {h['avg_return']}% "
+                f"엣지 {h['edge_vs_baseline']}%p"
+            )
+        if not pairs:
+            print("    표본이 5건 이상인 조합이 없습니다 (평가 기간을 늘려보세요: BACKTEST_EVAL_DAYS)")
 
 
 if __name__ == "__main__":

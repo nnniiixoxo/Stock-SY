@@ -24,12 +24,19 @@ def _parse_page(sosok: int, page: int):
     resp = requests.get(
         SISE_SUM_URL, params={"sosok": sosok, "page": page}, headers=HEADERS, timeout=5
     )
+    if page == 1:
+        print(f"[진단] 시가총액 페이지(sosok={sosok}) 응답 상태코드: {resp.status_code}")
     resp.raise_for_status()
     resp.encoding = "euc-kr"
     soup = BeautifulSoup(resp.text, "lxml")
 
     table = soup.select_one("table.type_2")
     if table is None:
+        if page == 1:
+            print(
+                f"[WARN] 시가총액 페이지(sosok={sosok}) table.type_2를 못 찾음. "
+                f"응답 본문(앞 500자): {resp.text[:500]}"
+            )
         return []
 
     header_cols = [th.get_text(strip=True) for th in table.select("thead th")]
