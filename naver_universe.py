@@ -38,9 +38,9 @@ MARKET_TYPE_MAP = {0: "KOSPI", 1: "KOSDAQ"}
 # 응답 JSON에서 종목 리스트가 들어있을 만한 후보 키 (최상위 dict일 경우)
 LIST_KEY_CANDIDATES = ("stocks", "items", "list", "content", "data", "result")
 # 종목 하나(dict)에서 코드/이름/시가총액을 찾을 만한 후보 키
-CODE_KEY_CANDIDATES = ("itemCode", "code", "stockCode", "symbol")
-NAME_KEY_CANDIDATES = ("stockName", "itemName", "name", "korName")
-CAP_KEY_CANDIDATES = ("marketSum", "marketCap", "marketValue", "marketSumFormatted")
+CODE_KEY_CANDIDATES = ("itemcode", "itemCode", "code", "stockCode", "symbol")
+NAME_KEY_CANDIDATES = ("itemname", "stockName", "itemName", "name", "korName")
+CAP_KEY_CANDIDATES = ("marketsum", "marketvalue", "marketcap", "marketSum", "marketCap", "marketValue", "marketSumFormatted", "amount")
 
 
 def _to_number(v):
@@ -114,12 +114,19 @@ def _fetch_via_api(market_type: str, start_idx: int, page_size: int = 100):
         else:
             dropped += 1
     if start_idx == 0 and rows:
+        cap_missing = sum(1 for r in rows if r["market_cap"] is None)
         print(f"[진단] 종목 목록 API(marketType={market_type}) 첫 페이지 파싱 성공: {len(rows)}개 (누락 {dropped}개)")
+        if cap_missing > len(rows) * 0.5 and items:
+            sample = items[0]
+            print(
+                f"[WARN] market_cap 필드를 대부분 못 찾음({cap_missing}/{len(rows)}개, marketType={market_type}). "
+                f"첫 항목 전체 내용: {sample}"
+            )
     elif start_idx == 0 and not rows and items:
         sample = items[0] if items else {}
         print(
             f"[WARN] 종목 목록 API(marketType={market_type}) 항목은 있지만 필드 매칭 실패. "
-            f"첫 항목 키: {list(sample.keys()) if isinstance(sample, dict) else sample}"
+            f"첫 항목 전체 내용: {sample}"
         )
     return rows
 
@@ -204,9 +211,30 @@ def get_market_universe(sosok: int, top_n: int = 200, sleep: float = 0.3) -> lis
             page += 1
             time.sleep(sleep)
 
+    if not all_rows:
+        print(f"[WARN] 모든 방식이 실패해서 종목을 하나도 못 가져옴(marketType={market_type}).")
+        return []
+
+    # API 요청 자체가 orderType=marketSum(시가총액순)이라, 응답으로 온 순서 자체가
+    # 이미 시가총액 내림차순이다. market_cap 필드명을 못 맞춰서 값을 못 읽어도
+    # (필드명이 또 바뀌었을 경우) 이 원래 순서를 그대로 보존해서 쓸 수 있게 해둔다.
+    for idx, row in enumerate(all_rows):
+        row["_api_order"] = idx
+
     df = pd.DataFrame(all_rows).drop_duplicates(subset="code")
-    df = df.dropna(subset=["market_cap"])
-    df = df.sort_values("market_cap", ascending=False)
+    cap_found_ratio = df["market_cap"].notna().mean() if len(df) else 0
+
+    if cap_found_ratio < 0.5:
+        print(
+            f"[WARN] 시가총액(market_cap) 필드를 대부분 못 찾음(matched={cap_found_ratio:.0%}, marketType={market_type}). "
+            f"API가 이미 시가총액순으로 준 원래 순서를 대신 사용함. "
+            f"첫 종목 원본 예시는 위 [WARN] 필드 매칭 실패 로그를 참고."
+        )
+        df = df.sort_values("_api_order", ascending=True)
+    else:
+        df = df.dropna(subset=["market_cap"])
+        df = df.sort_values("market_cap", ascending=False)
+
     return df.head(top_n)[["code", "name"]].to_dict("records")
 
 
