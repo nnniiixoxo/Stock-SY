@@ -36,7 +36,7 @@ stock-screener/
 ├── evaluate_picks.py        # 누적된 픽을 1주일/1개월 후 실제 수익률로 검증
 ├── indicators.py            # RSI, 이격도, 이동평균 계산
 ├── naver_price.py           # 네이버 증권 일봉 시세 크롤링
-├── naver_universe.py        # 네이버 증권 시가총액 순위 크롤링 (시장별 종목 목록)
+├── naver_universe.py        # 시장별 종목 목록 (2026-09~: stock.naver.com JSON API, 실패 시 예전 HTML 방식 폴백)
 ├── naver_investor.py        # (현재 미사용) 외국인/기관 순매매 크롤링 — 나중에 재도입할 경우를 위해 보관
 ├── naver_shortsell.py       # (현재 미사용) 공매도 거래량 크롤링 — 나중에 재도입할 경우를 위해 보관
 ├── hankyung_flow.py          # 한국경제 페이지에서 코스피/코스닥 시장 전체 수급(실험적)
@@ -86,6 +86,14 @@ stock-screener/
 - **코스피/코스닥 시가총액 상위 50%**를 스캔합니다. 전체 상장 종목 목록을 먼저 가져온 뒤
   (`TOP_N_PER_MARKET=3000`으로 사실상 전체 목록 확보), 시가총액 내림차순으로 정렬된 그 목록에서
   앞쪽 절반만 잘라서 스캔합니다 (`SCAN_PERCENTAGE = 0.5`).
+- **종목 목록 데이터 소스 이력**: 2026년 9월, 네이버가 시가총액 순위 페이지
+  (`finance.naver.com/sise/sise_market_sum.naver`)를 Next.js 기반으로 전면 개편하면서
+  기존 HTML 크롤링 방식이 완전히 작동을 멈췄습니다 (`table.type_2` 표 자체가 원본 HTML에
+  없어짐 — 자바스크립트 실행 후에만 채워지는 구조로 바뀜). 그래서 `naver_universe.py`를
+  `stock.naver.com/api/domestic/market/stock/default` (JSON API)를 쓰도록 바꿨습니다.
+  이 API도 비공식/미문서화 상태라 언제든 또 바뀔 수 있는데, 그럴 경우 실행 로그에
+  `[WARN] 종목 목록 API ... 리스트를 못 찾음` 같은 문구와 함께 **실제 응답 구조(키 목록)**가
+  자동으로 남도록 만들어뒀으니, 그 로그를 보면 다음 수정 방향을 바로 알 수 있습니다.
 - 60일 이동평균 계산을 위해 종목당 시세를 넉넉히(70일치) 가져옵니다.
 - 종목이 많은 만큼, 시세 조회는 **동시에 여러 종목씩 병렬로**(`SCAN_WORKERS`, 기본 8개) 처리합니다.
   (공매도 조회 단계가 없어져서, 이전 6개 지표 버전보다 오히려 더 단순하고 빨라졌습니다.)
