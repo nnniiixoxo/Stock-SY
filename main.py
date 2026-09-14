@@ -349,8 +349,16 @@ def main():
         },
     }
 
+    empty_market_result = {
+        "scanned_count": 0, "actual_data_date": None,
+        "strong_buy": [], "buy_candidate": [], "watch": [], "condition_2plus": [],
+    }
     for market_label, sosok in MARKETS.items():
-        result[market_label] = screen_market(sosok, market_label)
+        try:
+            result[market_label] = screen_market(sosok, market_label)
+        except Exception:
+            print(f"[WARN] [{market_label}] 스캔 중 오류로 이 시장은 빈 결과로 처리:\n{traceback.format_exc()}")
+            result[market_label] = dict(empty_market_result)
         m = result[market_label]
         print(
             f"[{market_label}] 강한매수후보(12점):{len(m['strong_buy'])} "

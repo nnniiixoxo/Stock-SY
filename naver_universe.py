@@ -20,6 +20,25 @@ HEADERS = {
 SISE_SUM_URL = "https://finance.naver.com/sise/sise_market_sum.naver"
 
 
+def _find_market_table(soup: BeautifulSoup):
+    """
+    시가총액 순위 표를 찾는다. class="type_2"를 우선 시도하고,
+    (네이버가 클래스명을 바꿨을 경우를 대비해) 헤더에 "종목명"과 "시가총액"이 모두
+    들어있는 표를 텍스트 기준으로 찾는 방식으로 보완한다.
+    """
+    table = soup.select_one("table.type_2")
+    if table is not None:
+        return table, "type_2"
+
+    for table in soup.find_all("table"):
+        header_text = table.find("thead")
+        header_text = header_text.get_text() if header_text else table.get_text()[:300]
+        if "종목명" in header_text and "시가총액" in header_text:
+            return table, "text-anchor"
+
+    return None, None
+
+
 def _parse_page(sosok: int, page: int):
     resp = requests.get(
         SISE_SUM_URL, params={"sosok": sosok, "page": page}, headers=HEADERS, timeout=5
@@ -30,20 +49,28 @@ def _parse_page(sosok: int, page: int):
     resp.encoding = "euc-kr"
     soup = BeautifulSoup(resp.text, "lxml")
 
-    table = soup.select_one("table.type_2")
+    table, matched_by = _find_market_table(soup)
     if table is None:
         if page == 1:
+            all_tables = soup.find_all("table")
+            table_classes = [t.get("class") for t in all_tables]
             print(
-                f"[WARN] 시가총액 페이지(sosok={sosok}) table.type_2를 못 찾음. "
-                f"응답 본문(앞 500자): {resp.text[:500]}"
+                f"[WARN] 시가총액 페이지(sosok={sosok}) 표를 못 찾음. "
+                f"페이지 내 표 개수: {len(all_tables)}, 각 표의 class: {table_classes}"
             )
+            print(f"[진단] 응답 본문(앞 1000자): {resp.text[:1000]}")
         return []
+    elif page == 1 and matched_by == "text-anchor":
+        print(f"[진단] table.type_2 대신 텍스트 기준으로 표를 찾음 (sosok={sosok})")
 
     header_cols = [th.get_text(strip=True) for th in table.select("thead th")]
+    if not header_cols:
+        header_cols = [th.get_text(strip=True) for th in table.select("th")]
     cap_col_idx = next((i for i, h in enumerate(header_cols) if "시가총액" in h), None)
 
     rows = []
-    for tr in table.select("tbody tr"):
+    body_rows = table.select("tbody tr") or table.select("tr")
+    for tr in body_rows:
         link = tr.select_one("a.tltle")
         if link is None:
             continue
