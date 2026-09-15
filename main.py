@@ -105,9 +105,11 @@ def build_price_record(code: str, name: str) -> dict | None:
             return None
 
         close = price_df["close"]
-        volume = price_df["volume"]
+        volume = pd.to_numeric(price_df["volume"], errors="coerce")  # None/누락 값을 NaN으로 안전하게 변환
 
         recent_volumes = volume.tail(HALT_CHECK_DAYS)
+        # 거래량을 몰라서(NaN) 전부 못 채운 경우까지 "거래정지"로 오인하면 안 되므로,
+        # 실제로 0 이하인 값이 있을 때만(NaN은 비교에서 항상 False) 거래정지로 판단한다.
         if (recent_volumes <= 0).any():
             return None
 

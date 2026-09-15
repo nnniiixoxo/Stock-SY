@@ -92,7 +92,7 @@ def _row_from_item(item: dict):
         "open": _to_number(open_) if open_ is not None else close_n,
         "high": _to_number(high) if high is not None else close_n,
         "low": _to_number(low) if low is not None else close_n,
-        "volume": _to_number(volume) if volume is not None else 0.0,
+        "volume": _to_number(volume) if volume is not None else None,
     }
 
 
@@ -139,6 +139,15 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
         if guard == 0 and is_first_diag_target:
             if new_rows:
                 print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개 (bizdate 파라미터={bizdate})")
+                if items:
+                    print(f"[진단] 일별시세 API({code}) 첫 원본 항목 전체 내용(필드명 확인용): {items[0]}")
+                zero_vol_count = sum(1 for r in new_rows if not r["volume"])
+                if zero_vol_count == len(new_rows):
+                    print(
+                        f"[WARN] 일별시세 API({code}) 거래량(volume)이 전부 0/누락으로 처리됨 "
+                        f"-> VOLUME_KEY_CANDIDATES에 맞는 필드를 못 찾았을 가능성 높음. "
+                        f"위 '첫 원본 항목 전체 내용'에서 거래량에 해당하는 실제 키를 확인할 것."
+                    )
             elif items:
                 print(f"[WARN] 일별시세 API({code}) 항목은 있지만 필드 매칭 실패. 첫 항목 전체 내용: {items[0]}")
 
