@@ -104,6 +104,14 @@ def _fetch_via_api(market_type: str, start_idx: int, page_size: int = 100):
             )
         return []
 
+    if is_diag_call and len(items) == 0:
+        # 리스트 자체는 찾았지만 비어있는 경우 (예: 정말 더 이상 데이터가 없거나, startIdx 방식이
+        # 이 API에서 기대와 다르게 동작하는 경우). 전체 응답을 그대로 남겨서 원인을 확인한다.
+        print(
+            f"[진단] 종목 목록 API(marketType={market_type}, startIdx={start_idx}) 목록은 찾았지만 비어있음(길이 0). "
+            f"전체 응답: {str(data)[:1000]}"
+        )
+
     rows = []
     dropped = 0
     for it in items:
@@ -123,6 +131,12 @@ def _fetch_via_api(market_type: str, start_idx: int, page_size: int = 100):
                 f"[WARN] market_cap 필드를 대부분 못 찾음({cap_missing}/{len(rows)}개, marketType={market_type}). "
                 f"첫 항목 전체 내용: {sample}"
             )
+        # 응답 최상위에 페이지네이션 관련 필드(totalCount, hasNext 등)가 있는지 확인.
+        # (있다면 startIdx를 단순히 더하는 대신 그 필드를 활용해야 할 수 있음)
+        if isinstance(data, dict):
+            non_list_fields = {k: v for k, v in data.items() if not isinstance(v, list)}
+            if non_list_fields:
+                print(f"[진단] 종목 목록 API(marketType={market_type}, startIdx={start_idx}) 응답 최상위의 비-목록 필드: {non_list_fields}")
     elif is_diag_call and not rows and items:
         sample = items[0] if items else {}
         print(

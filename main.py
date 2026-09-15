@@ -56,7 +56,10 @@ RSI_ZONE_HIGH = 50               # RSI 35~50 구간 상한
 RVOL_THRESHOLD = 2.0             # RVOL(상대거래량) 기준치
 PRICE_HISTORY_DAYS = 70          # 60일선 계산을 위해 넉넉히 확보
 TOP_N_PER_MARKET = 3000          # 시장 전체 목록을 가져오기 위한 값 (실제 상장 종목 수보다 크게 설정)
-SCAN_PERCENTAGE = 0.5            # 그중 시가총액 상위 몇 %만 실제로 스캔할지 (0.5 = 상위 50%)
+SCAN_PERCENTAGE = 1.0            # 그중 시가총액 상위 몇 %만 실제로 스캔할지 (0.5 = 상위 50%)
+# ↑ 임시로 100%로 올려둠: 종목 목록 API가 페이지네이션 이슈로 시장당 99개밖에 못 가져오는
+#   문제가 아직 안 풀려서, 지금 있는 것이라도 다 쓰려고 100%로 설정. 그 문제가 해결되고
+#   전체 종목(코스피 800개+/코스닥 1500개+)을 제대로 가져오게 되면 0.5로 다시 낮출 것.
 HALT_CHECK_DAYS = 3              # 최근 이 기간 중 거래량 0인 날이 있으면 거래정지로 간주해 제외
 SCAN_WORKERS = 8                 # 시세 조회 동시 요청 수 (너무 높이면 차단 위험)
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "docs", "results.json")
