@@ -101,7 +101,10 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
     rows_by_date = {}
     bizdate = None
     guard = 0
-    max_calls = (days // 15) + 3  # pageSize 대략 20 안팎으로 가정하고 여유있게 반복 횟수 제한
+    call_count = 0
+    max_calls = (days // 15) + 5  # pageSize 대략 20 안팎으로 가정하고 여유있게 반복 횟수 제한
+    is_first_diag_target = not _DIAG_PRINTED
+    prev_oldest = None
 
     while len(rows_by_date) < days and guard < max_calls:
         params = {"pageSize": 20}
@@ -109,20 +112,20 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
             params["bizdate"] = bizdate
         url = SISE_DAY_API_TMPL.format(item_code=code)
         resp = requests.get(url, params=params, headers=HEADERS, timeout=8)
-        if guard == 0 and not _DIAG_PRINTED:
+        call_count += 1
+        if guard == 0 and is_first_diag_target:
             print(f"[진단] 일별시세 API({code}) 응답 상태코드: {resp.status_code}")
         resp.raise_for_status()
         data = resp.json()
 
         items = _extract_items(data)
         if items is None:
-            if guard == 0 and not _DIAG_PRINTED:
+            if guard == 0 and is_first_diag_target:
                 top_keys = list(data.keys()) if isinstance(data, dict) else f"(list, 길이 {len(data)})"
                 print(
                     f"[WARN] 일별시세 API({code}) 응답에서 리스트를 못 찾음. "
                     f"최상위 키: {top_keys}, 응답 앞부분: {str(data)[:500]}"
                 )
-                _DIAG_PRINTED = True
             break
 
         new_rows = []
@@ -133,12 +136,11 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
             if row:
                 new_rows.append(row)
 
-        if guard == 0 and not _DIAG_PRINTED:
+        if guard == 0 and is_first_diag_target:
             if new_rows:
-                print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개")
+                print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개 (bizdate 파라미터={bizdate})")
             elif items:
                 print(f"[WARN] 일별시세 API({code}) 항목은 있지만 필드 매칭 실패. 첫 항목 전체 내용: {items[0]}")
-            _DIAG_PRINTED = True
 
         if not new_rows:
             break
@@ -147,12 +149,25 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
         for r in new_rows:
             rows_by_date[r["date"]] = r
 
+        # 이전 호출보다 더 과거로 진행되지 않으면(예: bizdate 파라미터가 기대와 다르게 동작해서
+        # 같은 구간을 반복 반환하는 경우) 무한/무의미 반복을 막기 위해 중단한다.
+        if prev_oldest is not None and oldest >= prev_oldest:
+            if is_first_diag_target:
+                print(
+                    f"[WARN] 일별시세 API({code}) 페이지네이션이 더 과거로 진행되지 않음 "
+                    f"(이전 oldest={prev_oldest}, 이번 oldest={oldest}) -> 중단, 누적 {len(rows_by_date)}개"
+                )
+            break
+        prev_oldest = oldest
+
         next_bizdate = (oldest - datetime.timedelta(days=1)).strftime("%Y%m%d")
-        if next_bizdate == bizdate:
-            break  # 진행이 안 되면 무한루프 방지
         bizdate = next_bizdate
         guard += 1
         time.sleep(sleep)
+
+    if is_first_diag_target:
+        print(f"[진단] 일별시세 API({code}) 최종 결과: {len(rows_by_date)}개 확보 ({call_count}번 호출)")
+        _DIAG_PRINTED = True
 
     return list(rows_by_date.values())
 
