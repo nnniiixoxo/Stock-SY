@@ -88,17 +88,18 @@ def _fetch_via_api(market_type: str, start_idx: int, page_size: int = 100):
         "pageSize": page_size,
     }
     resp = requests.get(MARKET_STOCK_API, params=params, headers=HEADERS, timeout=8)
-    if start_idx == 0:
-        print(f"[진단] 종목 목록 API(marketType={market_type}) 응답 상태코드: {resp.status_code}")
+    is_diag_call = start_idx == 0 or start_idx == page_size  # 첫 페이지 + 두번째 페이지까지는 진단 로그 남김
+    if is_diag_call:
+        print(f"[진단] 종목 목록 API(marketType={market_type}, startIdx={start_idx}) 응답 상태코드: {resp.status_code}")
     resp.raise_for_status()
     data = resp.json()
 
     items = _extract_items(data)
     if items is None:
-        if start_idx == 0:
+        if is_diag_call:
             top_keys = list(data.keys()) if isinstance(data, dict) else f"(list, 길이 {len(data)})"
             print(
-                f"[WARN] 종목 목록 API(marketType={market_type}) 응답에서 리스트를 못 찾음. "
+                f"[WARN] 종목 목록 API(marketType={market_type}, startIdx={start_idx}) 응답에서 리스트를 못 찾음. "
                 f"최상위 키: {top_keys}, 응답 앞부분: {str(data)[:500]}"
             )
         return []
@@ -113,16 +114,16 @@ def _fetch_via_api(market_type: str, start_idx: int, page_size: int = 100):
             rows.append(row)
         else:
             dropped += 1
-    if start_idx == 0 and rows:
+    if is_diag_call and rows:
         cap_missing = sum(1 for r in rows if r["market_cap"] is None)
-        print(f"[진단] 종목 목록 API(marketType={market_type}) 첫 페이지 파싱 성공: {len(rows)}개 (누락 {dropped}개)")
+        print(f"[진단] 종목 목록 API(marketType={market_type}, startIdx={start_idx}) 파싱 성공: {len(rows)}개 (누락 {dropped}개)")
         if cap_missing > len(rows) * 0.5 and items:
             sample = items[0]
             print(
                 f"[WARN] market_cap 필드를 대부분 못 찾음({cap_missing}/{len(rows)}개, marketType={market_type}). "
                 f"첫 항목 전체 내용: {sample}"
             )
-    elif start_idx == 0 and not rows and items:
+    elif is_diag_call and not rows and items:
         sample = items[0] if items else {}
         print(
             f"[WARN] 종목 목록 API(marketType={market_type}) 항목은 있지만 필드 매칭 실패. "
@@ -192,6 +193,12 @@ def get_market_universe(sosok: int, top_n: int = 200, sleep: float = 0.3) -> lis
         except Exception as e:  # noqa: BLE001
             print(f"[WARN] 종목 목록 API 호출 중 예외(marketType={market_type}, startIdx={start_idx}): {e}")
             rows = []
+
+        if start_idx > 0 and len(rows) == 0:
+            print(
+                f"[진단] 종목 목록 API(marketType={market_type}, startIdx={start_idx})에서 빈 결과 -> "
+                f"여기서 페이지네이션 종료 (지금까지 누적 {len(all_rows)}개)"
+            )
 
         if not rows:
             break
