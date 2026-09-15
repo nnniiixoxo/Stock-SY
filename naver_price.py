@@ -37,7 +37,8 @@ OPEN_KEY_CANDIDATES = ("openprice", "openPrice", "open")
 HIGH_KEY_CANDIDATES = ("highprice", "highPrice", "high")
 LOW_KEY_CANDIDATES = ("lowprice", "lowPrice", "low")
 VOLUME_KEY_CANDIDATES = (
-    "accumulatedtradingvolume", "accumulatedTradingVolume", "volume", "quant", "tradingvolume",
+    "tradeVolume", "tradevolume", "accumulatedtradingvolume", "accumulatedTradingVolume",
+    "volume", "quant", "tradingvolume",
 )
 
 _DIAG_PRINTED = False  # 진단 로그가 너무 많이 찍히지 않도록 실행당 한 번만 남김
