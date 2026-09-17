@@ -11,6 +11,14 @@ naver_universe.py와 같은 이유로, 네이버 증권의 예전 HTML 일별시
 이 API도 비공식/미문서화 상태라 정확한 응답 필드명을 100% 확신할 수 없어서,
 여러 후보 키를 순서대로 시도하고, 실패하면 실제 응답 구조를 로그로 남긴다.
 API가 완전히 실패하면 예전 HTML 방식으로도 한 번 더 시도한다.
+
+2026-09-17 수정:
+장 시작 전(07~08시대)에 이 API를 호출하면 "오늘 날짜" placeholder 레코드
+(시가=고가=저가=종가=전일종가, 거래량 0)가 미리 생성되어 있는 경우가 있다.
+기존 "최근 거래일 중 거래량 0이면 거래정지"로 보는 필터가 이 placeholder 행을
+실제 거래일로 착각해 전체 종목이 거래정지 판정을 받는 문제가 있었다.
+-> 오늘 날짜(KST) & OHLC 전부 동일 & 거래량 0/누락인 행은 애초에 결과에서 제외한다.
+   (과거 날짜의 진짜 거래정지일은 그대로 남겨서 기존 거래정지 판정 로직이 정상 동작하게 함)
 """
 import time
 import datetime
@@ -42,6 +50,8 @@ VOLUME_KEY_CANDIDATES = (
 )
 
 _DIAG_PRINTED = False  # 진단 로그가 너무 많이 찍히지 않도록 실행당 한 번만 남김
+
+KST_OFFSET = datetime.timedelta(hours=9)
 
 
 def _to_number(v):
@@ -97,6 +107,16 @@ def _row_from_item(item: dict):
     }
 
 
+def _is_placeholder_row(row: dict) -> bool:
+    """장 시작 전 '오늘 날짜' placeholder 행 판별 (시가=고가=저가=종가, 거래량 0/없음)."""
+    today_kst = (datetime.datetime.utcnow() + KST_OFFSET).date()
+    if row["date"].date() != today_kst:
+        return False
+    same_price = row["open"] == row["high"] == row["low"] == row["close"]
+    no_volume = not row["volume"]
+    return same_price and no_volume
+
+
 def _fetch_via_api(code: str, days: int, sleep: float) -> list:
     global _DIAG_PRINTED
     rows_by_date = {}
@@ -137,13 +157,19 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
             if row:
                 new_rows.append(row)
 
+        # 장 시작 전 "오늘 날짜" placeholder 행 제외
+        before_filter = len(new_rows)
+        new_rows = [r for r in new_rows if not _is_placeholder_row(r)]
+        if is_first_diag_target and before_filter != len(new_rows):
+            print(f"[진단] 일별시세 API({code}) placeholder 행 {before_filter - len(new_rows)}개 제외")
+
         if guard == 0 and is_first_diag_target:
             if new_rows:
                 print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개 (bizdate 파라미터={bizdate})")
                 if items:
                     print(f"[진단] 일별시세 API({code}) 첫 원본 항목 전체 내용(필드명 확인용): {items[0]}")
                 zero_vol_count = sum(1 for r in new_rows if not r["volume"])
-                if zero_vol_count == len(new_rows):
+                if new_rows and zero_vol_count == len(new_rows):
                     print(
                         f"[WARN] 일별시세 API({code}) 거래량(volume)이 전부 0/누락으로 처리됨 "
                         f"-> VOLUME_KEY_CANDIDATES에 맞는 필드를 못 찾았을 가능성 높음. "
