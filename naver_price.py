@@ -2,18 +2,23 @@
 """
 종목별 일봉 시세(OHLCV)를 가져오는 모듈.
 
-2026-09 시점 상태:
-naver_universe.py와 같은 이유로, 네이버 증권의 예전 HTML 일별시세 페이지
-(finance.naver.com/item/sise_day.naver)가 이제 자바스크립트 렌더링 방식으로
-바뀌어서 requests로는 데이터를 못 읽어오게 됐다. 그래서 새 정식 API로 전환했다:
-  GET https://stock.naver.com/api/domestic/detail/{itemCode}/siseDay
-      ?pageSize={n}&bizdate={yyyyMMdd}
-이 API도 비공식/미문서화 상태라 정확한 응답 필드명을 100% 확신할 수 없어서,
-여러 후보 키를 순서대로 시도하고, 실패하면 실제 응답 구조를 로그로 남긴다.
-API가 완전히 실패하면 예전 HTML 방식으로도 한 번 더 시도한다.
+2026-09-18 시점 상태 (2차 전환):
+기존에 쓰던 https://stock.naver.com/api/domestic/detail/{code}/siseDay 가
+2026-09-17부로 404를 반환하기 시작했고, 최후 수단으로 쓰던 구버전 HTML
+페이지(finance.naver.com/item/sise_day.naver)도 같은 시점부터 410 Gone으로
+완전히 폐기됨을 로그로 확인했다. 두 데이터소스가 동시에 죽어 전 종목이
+예외로 처리되어 "유효 데이터 확보 0개"가 발생.
 
-2026-09-17 수정:
-장 시작 전(07~08시대)에 이 API를 호출하면 "오늘 날짜" placeholder 레코드
+-> 네이버 모바일 프론트가 실제로 쓰는 새 엔드포인트로 전환:
+  GET https://m.stock.naver.com/api/stock/{itemCode}/price?pageSize={n}&page={p}
+  응답은 JSON 배열이며 각 항목은
+  {localTradedAt, closePrice, openPrice, highPrice, lowPrice,
+   accumulatedTradingVolume, ...} 형태. 숫자 필드는 "354,000" 처럼
+  쉼표 포함 문자열로 오므로 _to_number에서 쉼표를 제거해서 처리한다.
+  페이지네이션은 bizdate 커서 대신 page 번호 증가 방식으로 바뀌었다.
+
+2026-09-17 수정 (1차, siseDay 기준. 새 엔드포인트에도 안전장치로 유지):
+장 시작 전(07~08시대)에 API를 호출하면 "오늘 날짜" placeholder 레코드
 (시가=고가=저가=종가=전일종가, 거래량 0)가 미리 생성되어 있는 경우가 있다.
 기존 "최근 거래일 중 거래량 0이면 거래정지"로 보는 필터가 이 placeholder 행을
 실제 거래일로 착각해 전체 종목이 거래정지 판정을 받는 문제가 있었다.
@@ -31,22 +36,25 @@ HEADERS = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
     ),
-    "Referer": "https://stock.naver.com/",
+    "Referer": "https://m.stock.naver.com/",
     "Accept": "application/json",
 }
 
-SISE_DAY_API_TMPL = "https://stock.naver.com/api/domestic/detail/{item_code}/siseDay"
-SISE_DAY_HTML_URL = "https://finance.naver.com/item/sise_day.naver"
+# 2026-09-18: stock.naver.com/api/domestic/detail/.../siseDay 가 404로 죽어서
+# m.stock.naver.com의 price 엔드포인트로 전환. pageSize/page로 페이지네이션.
+SISE_DAY_API_TMPL = "https://m.stock.naver.com/api/stock/{item_code}/price"
+SISE_DAY_HTML_URL = "https://finance.naver.com/item/sise_day.naver"  # 2026-09-17부로 410, 최후 수단으로만 시도
+SISE_DAY_PAGE_SIZE = 20
 
 LIST_KEY_CANDIDATES = ("siseDays", "siseDayList", "items", "list", "content", "data", "result")
-DATE_KEY_CANDIDATES = ("bizdate", "bizDate", "date", "localDate", "tradeDate")
+DATE_KEY_CANDIDATES = ("localTradedAt", "bizdate", "bizDate", "date", "localDate", "tradeDate")
 CLOSE_KEY_CANDIDATES = ("closeprice", "closePrice", "close", "ncv")
 OPEN_KEY_CANDIDATES = ("openprice", "openPrice", "open")
 HIGH_KEY_CANDIDATES = ("highprice", "highPrice", "high")
 LOW_KEY_CANDIDATES = ("lowprice", "lowPrice", "low")
 VOLUME_KEY_CANDIDATES = (
-    "tradeVolume", "tradevolume", "accumulatedtradingvolume", "accumulatedTradingVolume",
-    "volume", "quant", "tradingvolume",
+    "accumulatedTradingVolume", "tradeVolume", "tradevolume",
+    "accumulatedtradingvolume", "volume", "quant", "tradingvolume",
 )
 
 _DIAG_PRINTED = False  # 진단 로그가 너무 많이 찍히지 않도록 실행당 한 번만 남김
@@ -118,30 +126,27 @@ def _is_placeholder_row(row: dict) -> bool:
 
 
 def _fetch_via_api(code: str, days: int, sleep: float) -> list:
+    """m.stock.naver.com/api/stock/{code}/price 를 page=1,2,3... 순으로 호출해 누적."""
     global _DIAG_PRINTED
     rows_by_date = {}
-    bizdate = None
-    guard = 0
+    page = 1
     call_count = 0
-    max_calls = (days // 15) + 5  # pageSize 대략 20 안팎으로 가정하고 여유있게 반복 횟수 제한
+    max_calls = (days // SISE_DAY_PAGE_SIZE) + 5  # 여유 있게 반복 횟수 제한
     is_first_diag_target = not _DIAG_PRINTED
-    prev_oldest = None
 
-    while len(rows_by_date) < days and guard < max_calls:
-        params = {"pageSize": 20}
-        if bizdate:
-            params["bizdate"] = bizdate
+    while len(rows_by_date) < days and page <= max_calls:
+        params = {"pageSize": SISE_DAY_PAGE_SIZE, "page": page}
         url = SISE_DAY_API_TMPL.format(item_code=code)
         resp = requests.get(url, params=params, headers=HEADERS, timeout=8)
         call_count += 1
-        if guard == 0 and is_first_diag_target:
+        if page == 1 and is_first_diag_target:
             print(f"[진단] 일별시세 API({code}) 응답 상태코드: {resp.status_code}")
         resp.raise_for_status()
         data = resp.json()
 
         items = _extract_items(data)
         if items is None:
-            if guard == 0 and is_first_diag_target:
+            if page == 1 and is_first_diag_target:
                 top_keys = list(data.keys()) if isinstance(data, dict) else f"(list, 길이 {len(data)})"
                 print(
                     f"[WARN] 일별시세 API({code}) 응답에서 리스트를 못 찾음. "
@@ -163,9 +168,9 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
         if is_first_diag_target and before_filter != len(new_rows):
             print(f"[진단] 일별시세 API({code}) placeholder 행 {before_filter - len(new_rows)}개 제외")
 
-        if guard == 0 and is_first_diag_target:
+        if page == 1 and is_first_diag_target:
             if new_rows:
-                print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개 (bizdate 파라미터={bizdate})")
+                print(f"[진단] 일별시세 API({code}) 첫 응답 파싱 성공: {len(new_rows)}개 (page=1)")
                 if items:
                     print(f"[진단] 일별시세 API({code}) 첫 원본 항목 전체 내용(필드명 확인용): {items[0]}")
                 zero_vol_count = sum(1 for r in new_rows if not r["volume"])
@@ -178,27 +183,14 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
             elif items:
                 print(f"[WARN] 일별시세 API({code}) 항목은 있지만 필드 매칭 실패. 첫 항목 전체 내용: {items[0]}")
 
-        if not new_rows:
+        if not items:
+            # 빈 배열 응답 -> 더 이상 페이지 없음
             break
 
-        oldest = min(r["date"] for r in new_rows)
         for r in new_rows:
             rows_by_date[r["date"]] = r
 
-        # 이전 호출보다 더 과거로 진행되지 않으면(예: bizdate 파라미터가 기대와 다르게 동작해서
-        # 같은 구간을 반복 반환하는 경우) 무한/무의미 반복을 막기 위해 중단한다.
-        if prev_oldest is not None and oldest >= prev_oldest:
-            if is_first_diag_target:
-                print(
-                    f"[WARN] 일별시세 API({code}) 페이지네이션이 더 과거로 진행되지 않음 "
-                    f"(이전 oldest={prev_oldest}, 이번 oldest={oldest}) -> 중단, 누적 {len(rows_by_date)}개"
-                )
-            break
-        prev_oldest = oldest
-
-        next_bizdate = (oldest - datetime.timedelta(days=1)).strftime("%Y%m%d")
-        bizdate = next_bizdate
-        guard += 1
+        page += 1
         time.sleep(sleep)
 
     if is_first_diag_target:
@@ -209,7 +201,7 @@ def _fetch_via_api(code: str, days: int, sleep: float) -> list:
 
 
 def _fetch_via_legacy_html(code: str, days: int, sleep: float) -> list:
-    """예전 HTML 페이지 방식 (2026-09 기준 더 이상 동작하지 않을 가능성이 높지만 최후 수단으로 유지)."""
+    """예전 HTML 페이지 방식. 2026-09-17부로 410 Gone으로 폐기 확인됨 -> 최후 수단으로만 시도."""
     rows = []
     page = 1
     max_page = (days // 10) + 2
@@ -266,7 +258,12 @@ def get_daily_ohlcv(code: str, days: int = 40, sleep: float = 0.3) -> pd.DataFra
         print(f"[WARN] {code} 일별시세 API 호출 중 예외: {e}")
 
     if not rows:
-        rows = _fetch_via_legacy_html(code, days, sleep)
+        try:
+            rows = _fetch_via_legacy_html(code, days, sleep)
+        except Exception as e:  # noqa: BLE001
+            # 2026-09-17부로 410 Gone으로 폐기됨이 확인된 최후 수단이므로,
+            # 실패해도 예외를 상위로 전파하지 않고 빈 결과로 처리한다.
+            print(f"[WARN] {code} 구버전 HTML 폴백도 실패: {e}")
 
     if not rows:
         return pd.DataFrame(columns=["date", "close", "open", "high", "low", "volume"])
