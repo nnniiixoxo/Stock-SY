@@ -310,7 +310,7 @@ function scoreRowHtml(item, rank, rowExtraClass) {
   const tags = (item.matched || [])
     .map((m) => `<span class="tag">${m.label} +${m.points}</span>`)
     .join('');
-  const naverUrl = `https://finance.naver.com/item/main.naver?code=${item.code}`;
+  const naverUrl = `https://m.stock.naver.com/domestic/stock/${item.code}/total`;
   const chg = formatChangePct(item.change_pct);
   const bigCls = item.change_pct > 0 ? 'flow-pos' : item.change_pct < 0 ? 'flow-neg' : '';
   return `
