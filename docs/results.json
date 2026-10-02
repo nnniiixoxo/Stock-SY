@@ -1,6 +1,6 @@
 {
-  "base_date": "20261001",
-  "generated_at": "2026-10-01T09:39:00.583696+09:00",
+  "base_date": "20261002",
+  "generated_at": "2026-10-02T09:57:37.989492+09:00",
   "conditions": {
     "score_rules": [
       {
@@ -58,21 +58,64 @@
   },
   "kospi": {
     "scanned_count": 99,
-    "actual_data_date": "2026-10-01",
+    "actual_data_date": "2026-10-02",
     "strong_buy": [],
     "buy_candidate": [],
     "watch": [],
     "condition_2plus": [
       {
-        "code": "011200",
-        "name": "HMM",
-        "close": 21000.0,
-        "change_pct": 0.48,
-        "data_date": "2026-10-01",
-        "rsi": 48.28,
-        "disparity": 100.04,
-        "rvol": 0.37,
-        "turnover": 5904612000.0,
+        "code": "011790",
+        "name": "SKC",
+        "close": 109100.0,
+        "change_pct": 4.7,
+        "data_date": "2026-10-02",
+        "rsi": 77.16,
+        "disparity": 120.35,
+        "rvol": 2.74,
+        "turnover": 57343832800.0,
+        "score": 7,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RVOL>=2",
+            "points": 2
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": true,
+        "turnover_increase": true
+      },
+      {
+        "code": "096770",
+        "name": "SK이노베이션",
+        "close": 146400.0,
+        "change_pct": 3.76,
+        "data_date": "2026-10-02",
+        "rsi": 55.5,
+        "disparity": 102.44,
+        "rvol": 0.76,
+        "turnover": 109485093600.0,
         "score": 6,
         "tier": null,
         "matched": [
@@ -81,321 +124,6 @@
             "points": 2
           },
           {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "005935",
-        "name": "삼성전자우",
-        "close": 193800.0,
-        "change_pct": -1.32,
-        "data_date": "2026-10-01",
-        "rsi": 47.09,
-        "disparity": 97.92,
-        "rvol": 0.14,
-        "turnover": 100629874800.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "005930",
-        "name": "삼성전자",
-        "close": 265250.0,
-        "change_pct": -1.58,
-        "data_date": "2026-10-01",
-        "rsi": 48.34,
-        "disparity": 100.46,
-        "rvol": 0.25,
-        "turnover": 1083442537250.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "close": 1761000.0,
-        "change_pct": -1.23,
-        "data_date": "2026-10-01",
-        "rsi": 47.43,
-        "disparity": 99.5,
-        "rvol": 0.2,
-        "turnover": 1084504806000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "006400",
-        "name": "삼성SDI",
-        "close": 511000.0,
-        "change_pct": -0.39,
-        "data_date": "2026-10-01",
-        "rsi": 43.7,
-        "disparity": 95.09,
-        "rvol": 0.26,
-        "turnover": 44640960000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "066570",
-        "name": "LG전자",
-        "close": 207000.0,
-        "change_pct": -3.04,
-        "data_date": "2026-10-01",
-        "rsi": 50.63,
-        "disparity": 100.85,
-        "rvol": 0.39,
-        "turnover": 53389233000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "042700",
-        "name": "한미반도체",
-        "close": 261000.0,
-        "change_pct": 1.16,
-        "data_date": "2026-10-01",
-        "rsi": 62.45,
-        "disparity": 110.11,
-        "rvol": 0.84,
-        "turnover": 140935563000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "close": 147200.0,
-        "change_pct": -1.34,
-        "data_date": "2026-10-01",
-        "rsi": 55.95,
-        "disparity": 103.32,
-        "rvol": 0.13,
-        "turnover": 18394700800.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "316140",
-        "name": "우리금융지주",
-        "close": 33150.0,
-        "change_pct": -4.88,
-        "data_date": "2026-10-01",
-        "rsi": 40.33,
-        "disparity": 94.26,
-        "rvol": 0.5,
-        "turnover": 53793466350.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "138040",
-        "name": "메리츠금융지주",
-        "close": 127000.0,
-        "change_pct": 0.08,
-        "data_date": "2026-10-01",
-        "rsi": 50.36,
-        "disparity": 98.13,
-        "rvol": 0.13,
-        "turnover": 3738118000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
             "label": "MA20 상승",
             "points": 1
           },
@@ -408,7 +136,7 @@
             "points": 2
           }
         ],
-        "ma_aligned": false,
+        "ma_aligned": true,
         "ma_mid_rising": true,
         "ma_long_rising": true,
         "rsi_zone": false,
@@ -420,13 +148,165 @@
       {
         "code": "010950",
         "name": "S-Oil",
-        "close": 155800.0,
-        "change_pct": -3.83,
-        "data_date": "2026-10-01",
-        "rsi": 53.25,
-        "disparity": 100.96,
-        "rvol": 0.11,
-        "turnover": 7012869600.0,
+        "close": 159400.0,
+        "change_pct": 5.35,
+        "data_date": "2026-10-02",
+        "rsi": 56.1,
+        "disparity": 103.16,
+        "rvol": 0.59,
+        "turnover": 38266839200.0,
+        "score": 6,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "이격도 저점->상승",
+            "points": 2
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": true,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "047050",
+        "name": "포스코인터내셔널",
+        "close": 56700.0,
+        "change_pct": 1.98,
+        "data_date": "2026-10-02",
+        "rsi": 52.58,
+        "disparity": 100.68,
+        "rvol": 0.13,
+        "turnover": 18080155800.0,
+        "score": 6,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "이격도 저점->상승",
+            "points": 2
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": true,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "042700",
+        "name": "한미반도체",
+        "close": 278000.0,
+        "change_pct": 3.73,
+        "data_date": "2026-10-02",
+        "rsi": 71.03,
+        "disparity": 115.54,
+        "rvol": 1.18,
+        "turnover": 221625214000.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "034730",
+        "name": "SK",
+        "close": 573000.0,
+        "change_pct": -2.05,
+        "data_date": "2026-10-02",
+        "rsi": 49.39,
+        "disparity": 99.02,
+        "rvol": 0.24,
+        "turnover": 16262313000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "066570",
+        "name": "LG전자",
+        "close": 211000.0,
+        "change_pct": -0.47,
+        "data_date": "2026-10-02",
+        "rsi": 55.65,
+        "disparity": 102.41,
+        "rvol": 0.34,
+        "turnover": 47034643000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -453,15 +333,120 @@
         "turnover_increase": false
       },
       {
+        "code": "000150",
+        "name": "두산",
+        "close": 1331000.0,
+        "change_pct": -3.83,
+        "data_date": "2026-10-02",
+        "rsi": 49.99,
+        "disparity": 99.03,
+        "rvol": 0.58,
+        "turnover": 64468316000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "011200",
+        "name": "HMM",
+        "close": 21100.0,
+        "change_pct": 0.0,
+        "data_date": "2026-10-02",
+        "rsi": 50.91,
+        "disparity": 100.42,
+        "rvol": 0.31,
+        "turnover": 4920161300.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "003550",
+        "name": "LG",
+        "close": 110000.0,
+        "change_pct": 0.18,
+        "data_date": "2026-10-02",
+        "rsi": 43.9,
+        "disparity": 95.99,
+        "rvol": 0.08,
+        "turnover": 2132130000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          },
+          {
+            "label": "이격도 저점->상승",
+            "points": 2
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": true,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
         "code": "003490",
         "name": "대한항공",
-        "close": 31300.0,
-        "change_pct": -2.34,
-        "data_date": "2026-10-01",
-        "rsi": 62.31,
-        "disparity": 103.9,
-        "rvol": 0.1,
-        "turnover": 8374721900.0,
+        "close": 30500.0,
+        "change_pct": -1.77,
+        "data_date": "2026-10-02",
+        "rsi": 57.05,
+        "disparity": 101.02,
+        "rvol": 0.2,
+        "turnover": 16541614000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -490,123 +475,53 @@
       {
         "code": "443060",
         "name": "HD현대마린솔루션",
-        "close": 233000.0,
-        "change_pct": -1.89,
-        "data_date": "2026-10-01",
-        "rsi": 54.24,
-        "disparity": 101.75,
-        "rvol": 0.1,
-        "turnover": 2355397000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "047050",
-        "name": "포스코인터내셔널",
-        "close": 55300.0,
-        "change_pct": -5.15,
-        "data_date": "2026-10-01",
-        "rsi": 48.8,
-        "disparity": 98.53,
-        "rvol": 0.28,
-        "turnover": 37527243600.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "000500",
-        "name": "가온전선",
-        "close": 311000.0,
-        "change_pct": -1.58,
-        "data_date": "2026-10-01",
-        "rsi": 65.62,
-        "disparity": 115.69,
-        "rvol": 0.15,
-        "turnover": 15085677000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "180640",
-        "name": "한진칼",
-        "close": 132600.0,
-        "change_pct": 0.38,
-        "data_date": "2026-10-01",
-        "rsi": 46.67,
-        "disparity": 95.07,
+        "close": 234000.0,
+        "change_pct": -1.27,
+        "data_date": "2026-10-02",
+        "rsi": 55.91,
+        "disparity": 101.32,
         "rvol": 0.14,
-        "turnover": 1518004800.0,
+        "turnover": 3404700000.0,
         "score": 4,
         "tier": null,
         "matched": [
           {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
             "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "078930",
+        "name": "GS",
+        "close": 105100.0,
+        "change_pct": 2.94,
+        "data_date": "2026-10-02",
+        "rsi": 41.86,
+        "disparity": 91.73,
+        "rvol": 0.34,
+        "turnover": 14072469600.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA60 상승",
             "points": 1
           },
           {
@@ -619,8 +534,8 @@
           }
         ],
         "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
         "rsi_zone": true,
         "rsi_upcross": false,
         "disparity_bottom_turn": true,
@@ -628,15 +543,155 @@
         "turnover_increase": false
       },
       {
+        "code": "000500",
+        "name": "가온전선",
+        "close": 323500.0,
+        "change_pct": 0.62,
+        "data_date": "2026-10-02",
+        "rsi": 68.6,
+        "disparity": 117.43,
+        "rvol": 0.63,
+        "turnover": 64909628000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
         "code": "007660",
         "name": "이수페타시스",
-        "close": 116300.0,
-        "change_pct": 0.78,
-        "data_date": "2026-10-01",
-        "rsi": 56.44,
-        "disparity": 104.76,
-        "rvol": 0.23,
-        "turnover": 16962703900.0,
+        "close": 122200.0,
+        "change_pct": -0.49,
+        "data_date": "2026-10-02",
+        "rsi": 61.42,
+        "disparity": 109.25,
+        "rvol": 0.51,
+        "turnover": 41875618200.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "353200",
+        "name": "대덕전자",
+        "close": 150400.0,
+        "change_pct": 1.62,
+        "data_date": "2026-10-02",
+        "rsi": 77.25,
+        "disparity": 134.79,
+        "rvol": 0.33,
+        "turnover": 51142316800.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "021240",
+        "name": "코웨이",
+        "close": 100500.0,
+        "change_pct": 1.41,
+        "data_date": "2026-10-02",
+        "rsi": 52.49,
+        "disparity": 100.32,
+        "rvol": 0.12,
+        "turnover": 2352001500.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "이격도 저점->상승",
+            "points": 2
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": true,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "062040",
+        "name": "산일전기",
+        "close": 218000.0,
+        "change_pct": 2.11,
+        "data_date": "2026-10-02",
+        "rsi": 63.06,
+        "disparity": 107.72,
+        "rvol": 0.83,
+        "turnover": 49808858000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -665,13 +720,13 @@
       {
         "code": "128940",
         "name": "한미약품",
-        "close": 499500.0,
-        "change_pct": 0.2,
-        "data_date": "2026-10-01",
-        "rsi": 55.07,
-        "disparity": 101.82,
-        "rvol": 0.13,
-        "turnover": 7185307500.0,
+        "close": 497500.0,
+        "change_pct": -0.5,
+        "data_date": "2026-10-02",
+        "rsi": 55.77,
+        "disparity": 101.16,
+        "rvol": 0.24,
+        "turnover": 12787242500.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -700,13 +755,13 @@
       {
         "code": "000990",
         "name": "DB하이텍",
-        "close": 139000.0,
-        "change_pct": 0.94,
-        "data_date": "2026-10-01",
-        "rsi": 64.77,
-        "disparity": 118.22,
-        "rvol": 0.36,
-        "turnover": 36218952000.0,
+        "close": 143600.0,
+        "change_pct": 1.56,
+        "data_date": "2026-10-02",
+        "rsi": 68.95,
+        "disparity": 119.25,
+        "rvol": 0.39,
+        "turnover": 41357805200.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -733,24 +788,59 @@
         "turnover_increase": false
       },
       {
-        "code": "001440",
-        "name": "대한전선",
-        "close": 29050.0,
-        "change_pct": -2.68,
-        "data_date": "2026-10-01",
-        "rsi": 47.92,
-        "disparity": 98.98,
-        "rvol": 0.17,
-        "turnover": 12162450650.0,
+        "code": "175330",
+        "name": "JB금융지주",
+        "close": 28650.0,
+        "change_pct": 0.88,
+        "data_date": "2026-10-02",
+        "rsi": 41.87,
+        "disparity": 92.33,
+        "rvol": 0.16,
+        "turnover": 2285553750.0,
         "score": 4,
         "tier": null,
         "matched": [
           {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
+            "label": "MA60 상승",
+            "points": 1
           },
           {
+            "label": "RSI 35~50",
+            "points": 1
+          },
+          {
+            "label": "이격도 저점->상승",
+            "points": 2
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": true,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "086280",
+        "name": "현대글로비스",
+        "close": 200500.0,
+        "change_pct": 1.37,
+        "data_date": "2026-10-02",
+        "rsi": 48.75,
+        "disparity": 98.94,
+        "rvol": 0.18,
+        "turnover": 5142624500.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
             "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
             "points": 1
           },
           {
@@ -758,9 +848,9 @@
             "points": 1
           }
         ],
-        "ma_aligned": true,
+        "ma_aligned": false,
         "ma_mid_rising": true,
-        "ma_long_rising": false,
+        "ma_long_rising": true,
         "rsi_zone": true,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
@@ -768,15 +858,85 @@
         "turnover_increase": false
       },
       {
-        "code": "009150",
-        "name": "삼성전기",
-        "close": 1478000.0,
-        "change_pct": -2.38,
-        "data_date": "2026-10-01",
-        "rsi": 52.65,
-        "disparity": 104.1,
-        "rvol": 0.4,
-        "turnover": 328716068000.0,
+        "code": "000720",
+        "name": "현대건설",
+        "close": 115700.0,
+        "change_pct": -1.36,
+        "data_date": "2026-10-02",
+        "rsi": 43.86,
+        "disparity": 92.55,
+        "rvol": 0.39,
+        "turnover": 31149563900.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "009830",
+        "name": "한화솔루션",
+        "close": 35950.0,
+        "change_pct": 5.27,
+        "data_date": "2026-10-02",
+        "rsi": 65.91,
+        "disparity": 118.31,
+        "rvol": 0.92,
+        "turnover": 95563116850.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "000660",
+        "name": "SK하이닉스",
+        "close": 1847000.0,
+        "change_pct": 1.04,
+        "data_date": "2026-10-02",
+        "rsi": 55.68,
+        "disparity": 103.48,
+        "rvol": 0.28,
+        "turnover": 1628488818000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -799,15 +959,108 @@
         "turnover_increase": false
       },
       {
-        "code": "012450",
-        "name": "한화에어로스페이스",
-        "close": 1017000.0,
+        "code": "009150",
+        "name": "삼성전기",
+        "close": 1551000.0,
+        "change_pct": -0.19,
+        "data_date": "2026-10-02",
+        "rsi": 60.42,
+        "disparity": 108.38,
+        "rvol": 0.39,
+        "turnover": 335521626000.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "005930",
+        "name": "삼성전자",
+        "close": 276500.0,
+        "change_pct": 0.73,
+        "data_date": "2026-10-02",
+        "rsi": 56.84,
+        "disparity": 104.03,
+        "rvol": 0.33,
+        "turnover": 1468144216000.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "005935",
+        "name": "삼성전자우",
+        "close": 202000.0,
+        "change_pct": 0.0,
+        "data_date": "2026-10-02",
+        "rsi": 53.06,
+        "disparity": 101.43,
+        "rvol": 0.14,
+        "turnover": 107113732000.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "012330",
+        "name": "현대모비스",
+        "close": 384000.0,
         "change_pct": 0.79,
-        "data_date": "2026-10-01",
-        "rsi": 42.71,
-        "disparity": 96.48,
-        "rvol": 0.28,
-        "turnover": 34237305000.0,
+        "data_date": "2026-10-02",
+        "rsi": 37.23,
+        "disparity": 97.35,
+        "rvol": 0.33,
+        "turnover": 33802752000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -830,46 +1083,15 @@
         "turnover_increase": false
       },
       {
-        "code": "034730",
-        "name": "SK",
-        "close": 575000.0,
-        "change_pct": -2.21,
-        "data_date": "2026-10-01",
-        "rsi": 49.4,
-        "disparity": 99.69,
-        "rvol": 0.15,
-        "turnover": 10137825000.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "068270",
-        "name": "셀트리온",
-        "close": 182000.0,
-        "change_pct": 2.36,
-        "data_date": "2026-10-01",
-        "rsi": 48.01,
-        "disparity": 100.51,
-        "rvol": 0.48,
-        "turnover": 32413472000.0,
+        "code": "035420",
+        "name": "NAVER",
+        "close": 192300.0,
+        "change_pct": 0.21,
+        "data_date": "2026-10-02",
+        "rsi": 35.52,
+        "disparity": 94.94,
+        "rvol": 0.36,
+        "turnover": 44215154400.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -894,44 +1116,13 @@
       {
         "code": "010120",
         "name": "LS ELECTRIC",
-        "close": 200500.0,
-        "change_pct": -2.43,
-        "data_date": "2026-10-01",
-        "rsi": 46.71,
-        "disparity": 98.72,
-        "rvol": 0.4,
-        "turnover": 30359309000.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "000150",
-        "name": "두산",
-        "close": 1397000.0,
-        "change_pct": 1.97,
-        "data_date": "2026-10-01",
-        "rsi": 54.7,
-        "disparity": 104.7,
-        "rvol": 0.36,
-        "turnover": 40394255000.0,
+        "close": 208000.0,
+        "change_pct": 0.97,
+        "data_date": "2026-10-02",
+        "rsi": 52.55,
+        "disparity": 101.97,
+        "rvol": 0.65,
+        "turnover": 51503088000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -954,15 +1145,46 @@
         "turnover_increase": false
       },
       {
-        "code": "017670",
-        "name": "SK텔레콤",
-        "close": 85500.0,
-        "change_pct": -0.23,
-        "data_date": "2026-10-01",
-        "rsi": 37.18,
-        "disparity": 96.0,
-        "rvol": 0.11,
-        "turnover": 6931998000.0,
+        "code": "138040",
+        "name": "메리츠금융지주",
+        "close": 128000.0,
+        "change_pct": 0.39,
+        "data_date": "2026-10-02",
+        "rsi": 51.76,
+        "disparity": 98.95,
+        "rvol": 0.12,
+        "turnover": 3267712000.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "010140",
+        "name": "삼성중공업",
+        "close": 19840.0,
+        "change_pct": 0.51,
+        "data_date": "2026-10-02",
+        "rsi": 42.0,
+        "disparity": 95.14,
+        "rvol": 0.29,
+        "turnover": 18385450240.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -985,15 +1207,15 @@
         "turnover_increase": false
       },
       {
-        "code": "051910",
-        "name": "LG화학",
-        "close": 258000.0,
-        "change_pct": 2.79,
-        "data_date": "2026-10-01",
-        "rsi": 43.74,
-        "disparity": 96.13,
-        "rvol": 0.34,
-        "turnover": 16992138000.0,
+        "code": "024110",
+        "name": "기업은행",
+        "close": 20200.0,
+        "change_pct": 0.0,
+        "data_date": "2026-10-02",
+        "rsi": 44.61,
+        "disparity": 98.48,
+        "rvol": 0.19,
+        "turnover": 3237050000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -1016,15 +1238,15 @@
         "turnover_increase": false
       },
       {
-        "code": "035720",
-        "name": "카카오",
-        "close": 33550.0,
-        "change_pct": -0.15,
-        "data_date": "2026-10-01",
-        "rsi": 37.19,
-        "disparity": 97.3,
-        "rvol": 0.08,
-        "turnover": 3773569800.0,
+        "code": "267250",
+        "name": "HD현대",
+        "close": 200500.0,
+        "change_pct": 0.96,
+        "data_date": "2026-10-02",
+        "rsi": 37.79,
+        "disparity": 89.96,
+        "rvol": 0.25,
+        "turnover": 8087769000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -1049,13 +1271,13 @@
       {
         "code": "272210",
         "name": "한화시스템",
-        "close": 75000.0,
-        "change_pct": -0.27,
-        "data_date": "2026-10-01",
-        "rsi": 51.67,
-        "disparity": 103.14,
-        "rvol": 0.24,
-        "turnover": 10003425000.0,
+        "close": 79000.0,
+        "change_pct": 0.38,
+        "data_date": "2026-10-02",
+        "rsi": 58.36,
+        "disparity": 107.47,
+        "rvol": 0.36,
+        "turnover": 16405772000.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -1078,15 +1300,15 @@
         "turnover_increase": false
       },
       {
-        "code": "005940",
-        "name": "NH투자증권",
-        "close": 26100.0,
-        "change_pct": 0.19,
-        "data_date": "2026-10-01",
-        "rsi": 43.24,
-        "disparity": 99.65,
-        "rvol": 0.11,
-        "turnover": 1202557500.0,
+        "code": "161390",
+        "name": "한국타이어앤테크놀로지",
+        "close": 59400.0,
+        "change_pct": 1.19,
+        "data_date": "2026-10-02",
+        "rsi": 41.02,
+        "disparity": 97.55,
+        "rvol": 0.1,
+        "turnover": 1478644200.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -1109,46 +1331,15 @@
         "turnover_increase": false
       },
       {
-        "code": "064400",
-        "name": "LG씨엔에스",
-        "close": 69100.0,
-        "change_pct": 0.14,
-        "data_date": "2026-10-01",
-        "rsi": 40.49,
-        "disparity": 96.83,
-        "rvol": 0.11,
-        "turnover": 3399581800.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "062040",
-        "name": "산일전기",
-        "close": 205500.0,
-        "change_pct": -3.07,
-        "data_date": "2026-10-01",
-        "rsi": 54.78,
-        "disparity": 102.62,
-        "rvol": 0.33,
-        "turnover": 18138457500.0,
+        "code": "001440",
+        "name": "대한전선",
+        "close": 30900.0,
+        "change_pct": 1.64,
+        "data_date": "2026-10-02",
+        "rsi": 55.28,
+        "disparity": 104.44,
+        "rvol": 0.35,
+        "turnover": 27176426400.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -1171,15 +1362,46 @@
         "turnover_increase": false
       },
       {
-        "code": "402340",
-        "name": "SK스퀘어",
-        "close": 1099500.0,
-        "change_pct": -2.87,
-        "data_date": "2026-10-01",
-        "rsi": 49.25,
-        "disparity": 101.61,
-        "rvol": 0.27,
-        "turnover": 148713972000.0,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "close": 365000.0,
+        "change_pct": 1.39,
+        "data_date": "2026-10-02",
+        "rsi": 53.95,
+        "disparity": 101.44,
+        "rvol": 0.28,
+        "turnover": 28028350000.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "close": 81500.0,
+        "change_pct": -0.97,
+        "data_date": "2026-10-02",
+        "rsi": 47.28,
+        "disparity": 95.89,
+        "rvol": 0.34,
+        "turnover": 77711880000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1202,15 +1424,77 @@
         "turnover_increase": false
       },
       {
-        "code": "207940",
-        "name": "삼성바이오로직스",
-        "close": 1424000.0,
-        "change_pct": 2.15,
-        "data_date": "2026-10-01",
-        "rsi": 47.26,
-        "disparity": 100.28,
-        "rvol": 0.5,
-        "turnover": 24528400000.0,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "close": 1041000.0,
+        "change_pct": 0.97,
+        "data_date": "2026-10-02",
+        "rsi": 47.68,
+        "disparity": 98.62,
+        "rvol": 0.17,
+        "turnover": 21230154000.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "329180",
+        "name": "HD현대중공업",
+        "close": 427500.0,
+        "change_pct": -1.04,
+        "data_date": "2026-10-02",
+        "rsi": 40.11,
+        "disparity": 95.3,
+        "rvol": 0.25,
+        "turnover": 27837090000.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "068270",
+        "name": "셀트리온",
+        "close": 181000.0,
+        "change_pct": -1.25,
+        "data_date": "2026-10-02",
+        "rsi": 49.29,
+        "disparity": 100.07,
+        "rvol": 0.36,
+        "turnover": 24704871000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1233,15 +1517,77 @@
         "turnover_increase": false
       },
       {
-        "code": "034020",
-        "name": "두산에너빌리티",
-        "close": 81900.0,
-        "change_pct": 0.0,
-        "data_date": "2026-10-01",
-        "rsi": 46.98,
-        "disparity": 96.66,
-        "rvol": 0.98,
-        "turnover": 227740067100.0,
+        "code": "086790",
+        "name": "하나금융지주",
+        "close": 128400.0,
+        "change_pct": -0.39,
+        "data_date": "2026-10-02",
+        "rsi": 40.12,
+        "disparity": 94.9,
+        "rvol": 0.2,
+        "turnover": 17788022400.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "316140",
+        "name": "우리금융지주",
+        "close": 33300.0,
+        "change_pct": -0.89,
+        "data_date": "2026-10-02",
+        "rsi": 40.99,
+        "disparity": 94.78,
+        "rvol": 0.17,
+        "turnover": 24741766800.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": false,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "298040",
+        "name": "효성중공업",
+        "close": 2785000.0,
+        "change_pct": -0.71,
+        "data_date": "2026-10-02",
+        "rsi": 45.71,
+        "disparity": 98.22,
+        "rvol": 0.34,
+        "turnover": 31718365000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1264,15 +1610,15 @@
         "turnover_increase": false
       },
       {
-        "code": "086790",
-        "name": "하나금융지주",
-        "close": 128900.0,
-        "change_pct": -1.38,
-        "data_date": "2026-10-01",
-        "rsi": 40.49,
-        "disparity": 95.04,
-        "rvol": 0.16,
-        "turnover": 13808541400.0,
+        "code": "017670",
+        "name": "SK텔레콤",
+        "close": 89100.0,
+        "change_pct": 3.36,
+        "data_date": "2026-10-02",
+        "rsi": 49.01,
+        "disparity": 100.13,
+        "rvol": 0.77,
+        "turnover": 51703037100.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1297,13 +1643,13 @@
       {
         "code": "033780",
         "name": "KT&G",
-        "close": 176900.0,
-        "change_pct": 0.23,
-        "data_date": "2026-10-01",
-        "rsi": 56.37,
-        "disparity": 102.25,
-        "rvol": 0.09,
-        "turnover": 3453264900.0,
+        "close": 175200.0,
+        "change_pct": 0.29,
+        "data_date": "2026-10-02",
+        "rsi": 51.61,
+        "disparity": 101.31,
+        "rvol": 0.14,
+        "turnover": 5313816000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1328,13 +1674,13 @@
       {
         "code": "018260",
         "name": "삼성에스디에스",
-        "close": 220000.0,
-        "change_pct": 0.69,
-        "data_date": "2026-10-01",
-        "rsi": 45.96,
-        "disparity": 98.19,
-        "rvol": 0.17,
-        "turnover": 5445660000.0,
+        "close": 218000.0,
+        "change_pct": -2.02,
+        "data_date": "2026-10-02",
+        "rsi": 45.58,
+        "disparity": 97.57,
+        "rvol": 0.37,
+        "turnover": 11335782000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1357,46 +1703,46 @@
         "turnover_increase": false
       },
       {
-        "code": "003550",
-        "name": "LG",
-        "close": 109500.0,
-        "change_pct": -1.17,
-        "data_date": "2026-10-01",
-        "rsi": 41.1,
-        "disparity": 95.21,
-        "rvol": 0.06,
-        "turnover": 1801932000.0,
+        "code": "003670",
+        "name": "포스코퓨처엠",
+        "close": 187700.0,
+        "change_pct": 2.79,
+        "data_date": "2026-10-02",
+        "rsi": 56.14,
+        "disparity": 102.03,
+        "rvol": 0.48,
+        "turnover": 25783035100.0,
         "score": 2,
         "tier": null,
         "matched": [
           {
-            "label": "MA60 상승",
+            "label": "MA20 상승",
             "points": 1
           },
           {
-            "label": "RSI 35~50",
+            "label": "MA60 상승",
             "points": 1
           }
         ],
         "ma_aligned": false,
-        "ma_mid_rising": false,
+        "ma_mid_rising": true,
         "ma_long_rising": true,
-        "rsi_zone": true,
+        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
         "turnover_increase": false
       },
       {
-        "code": "079550",
-        "name": "LIG디펜스앤에어로스페이스",
-        "close": 696000.0,
+        "code": "047810",
+        "name": "한국항공우주",
+        "close": 129400.0,
         "change_pct": 2.05,
-        "data_date": "2026-10-01",
-        "rsi": 48.13,
-        "disparity": 101.62,
-        "rvol": 0.19,
-        "turnover": 9803160000.0,
+        "data_date": "2026-10-02",
+        "rsi": 48.53,
+        "disparity": 100.45,
+        "rvol": 0.25,
+        "turnover": 7234883400.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1419,108 +1765,15 @@
         "turnover_increase": false
       },
       {
-        "code": "000720",
-        "name": "현대건설",
-        "close": 115800.0,
-        "change_pct": -1.95,
-        "data_date": "2026-10-01",
-        "rsi": 43.15,
-        "disparity": 92.8,
-        "rvol": 0.69,
-        "turnover": 57009034800.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
         "code": "005830",
         "name": "DB손해보험",
-        "close": 182500.0,
-        "change_pct": -1.56,
-        "data_date": "2026-10-01",
-        "rsi": 47.34,
-        "disparity": 96.32,
-        "rvol": 0.11,
-        "turnover": 4176877500.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "307950",
-        "name": "현대오토에버",
-        "close": 369000.0,
-        "change_pct": -1.07,
-        "data_date": "2026-10-01",
-        "rsi": 39.29,
-        "disparity": 97.27,
-        "rvol": 1.11,
-        "turnover": 18223065000.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "거래대금 증가",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": true
-      },
-      {
-        "code": "078930",
-        "name": "GS",
-        "close": 104800.0,
-        "change_pct": -1.69,
-        "data_date": "2026-10-01",
-        "rsi": 39.57,
-        "disparity": 90.78,
-        "rvol": 0.08,
-        "turnover": 3313042400.0,
+        "close": 179700.0,
+        "change_pct": -1.8,
+        "data_date": "2026-10-02",
+        "rsi": 44.85,
+        "disparity": 95.11,
+        "rvol": 0.1,
+        "turnover": 3706671900.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1545,13 +1798,44 @@
       {
         "code": "028050",
         "name": "삼성E&A",
-        "close": 47100.0,
-        "change_pct": -1.67,
-        "data_date": "2026-10-01",
-        "rsi": 42.36,
-        "disparity": 95.56,
-        "rvol": 0.16,
-        "turnover": 13289830200.0,
+        "close": 47600.0,
+        "change_pct": 0.32,
+        "data_date": "2026-10-02",
+        "rsi": 45.05,
+        "disparity": 96.16,
+        "rvol": 0.17,
+        "turnover": 14346402000.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "006260",
+        "name": "LS",
+        "close": 297000.0,
+        "change_pct": -0.5,
+        "data_date": "2026-10-02",
+        "rsi": 42.99,
+        "disparity": 95.18,
+        "rvol": 0.64,
+        "turnover": 19925136000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1576,13 +1860,13 @@
       {
         "code": "003230",
         "name": "삼양식품",
-        "close": 1232000.0,
-        "change_pct": 1.73,
-        "data_date": "2026-10-01",
-        "rsi": 41.76,
-        "disparity": 95.5,
-        "rvol": 0.15,
-        "turnover": 8812496000.0,
+        "close": 1224000.0,
+        "change_pct": 0.0,
+        "data_date": "2026-10-02",
+        "rsi": 41.12,
+        "disparity": 95.85,
+        "rvol": 0.2,
+        "turnover": 11724696000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1599,68 +1883,6 @@
         "ma_mid_rising": false,
         "ma_long_rising": true,
         "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "090430",
-        "name": "아모레퍼시픽",
-        "close": 137800.0,
-        "change_pct": -0.58,
-        "data_date": "2026-10-01",
-        "rsi": 43.97,
-        "disparity": 97.2,
-        "rvol": 0.09,
-        "turnover": 2437268600.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "009830",
-        "name": "한화솔루션",
-        "close": 34100.0,
-        "change_pct": 3.02,
-        "data_date": "2026-10-01",
-        "rsi": 60.1,
-        "disparity": 113.28,
-        "rvol": 0.5,
-        "turnover": 47834525200.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
@@ -1669,13 +1891,13 @@
       {
         "code": "047040",
         "name": "대우건설",
-        "close": 17670.0,
-        "change_pct": -0.34,
-        "data_date": "2026-10-01",
-        "rsi": 46.47,
-        "disparity": 96.04,
-        "rvol": 0.23,
-        "turnover": 32913043170.0,
+        "close": 17690.0,
+        "change_pct": -0.79,
+        "data_date": "2026-10-02",
+        "rsi": 47.7,
+        "disparity": 95.74,
+        "rvol": 0.15,
+        "turnover": 21460605810.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1698,46 +1920,15 @@
         "turnover_increase": false
       },
       {
-        "code": "021240",
-        "name": "코웨이",
-        "close": 99400.0,
-        "change_pct": 0.0,
-        "data_date": "2026-10-01",
-        "rsi": 50.11,
-        "disparity": 99.3,
-        "rvol": 0.05,
-        "turnover": 956228000.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
         "code": "000880",
         "name": "한화",
-        "close": 123800.0,
-        "change_pct": -1.04,
-        "data_date": "2026-10-01",
-        "rsi": 46.43,
-        "disparity": 92.21,
-        "rvol": 0.1,
-        "turnover": 1489437800.0,
+        "close": 124000.0,
+        "change_pct": -0.32,
+        "data_date": "2026-10-02",
+        "rsi": 47.21,
+        "disparity": 92.43,
+        "rvol": 0.14,
+        "turnover": 1780516000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1754,37 +1945,6 @@
         "ma_mid_rising": false,
         "ma_long_rising": true,
         "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "353200",
-        "name": "대덕전자",
-        "close": 132500.0,
-        "change_pct": 0.15,
-        "data_date": "2026-10-01",
-        "rsi": 68.31,
-        "disparity": 121.86,
-        "rvol": 0.14,
-        "turnover": 18193972500.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
@@ -1793,13 +1953,13 @@
       {
         "code": "032640",
         "name": "LG유플러스",
-        "close": 14470.0,
-        "change_pct": -0.69,
-        "data_date": "2026-10-01",
-        "rsi": 43.13,
-        "disparity": 98.22,
+        "close": 14500.0,
+        "change_pct": -0.14,
+        "data_date": "2026-10-02",
+        "rsi": 43.85,
+        "disparity": 98.54,
         "rvol": 0.09,
-        "turnover": 1139599320.0,
+        "turnover": 1064329000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1822,15 +1982,15 @@
         "turnover_increase": false
       },
       {
-        "code": "267270",
-        "name": "HD건설기계",
-        "close": 122600.0,
-        "change_pct": -1.21,
-        "data_date": "2026-10-01",
-        "rsi": 37.84,
-        "disparity": 90.71,
-        "rvol": 0.28,
-        "turnover": 7881218400.0,
+        "code": "377300",
+        "name": "카카오페이",
+        "close": 40150.0,
+        "change_pct": 0.25,
+        "data_date": "2026-10-02",
+        "rsi": 39.41,
+        "disparity": 92.98,
+        "rvol": 0.22,
+        "turnover": 2247155350.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1855,13 +2015,13 @@
       {
         "code": "000100",
         "name": "유한양행",
-        "close": 73400.0,
-        "change_pct": 0.96,
-        "data_date": "2026-10-01",
-        "rsi": 35.66,
-        "disparity": 94.71,
-        "rvol": 0.16,
-        "turnover": 2314375400.0,
+        "close": 73800.0,
+        "change_pct": -1.07,
+        "data_date": "2026-10-02",
+        "rsi": 39.89,
+        "disparity": 95.61,
+        "rvol": 0.33,
+        "turnover": 4737738600.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -1882,89 +2042,27 @@
         "disparity_bottom_turn": false,
         "rvol_high": false,
         "turnover_increase": false
-      },
-      {
-        "code": "175330",
-        "name": "JB금융지주",
-        "close": 28700.0,
-        "change_pct": -1.2,
-        "data_date": "2026-10-01",
-        "rsi": 41.79,
-        "disparity": 92.16,
-        "rvol": 0.11,
-        "turnover": 1565814600.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "036570",
-        "name": "NC",
-        "close": 231500.0,
-        "change_pct": 8.18,
-        "data_date": "2026-10-01",
-        "rsi": 59.18,
-        "disparity": 108.81,
-        "rvol": 1.92,
-        "turnover": 40024035000.0,
-        "score": 2,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "거래대금 증가",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": true
       }
     ]
   },
   "kosdaq": {
     "scanned_count": 98,
-    "actual_data_date": "2026-10-01",
+    "actual_data_date": "2026-10-02",
     "strong_buy": [],
     "buy_candidate": [],
     "watch": [],
     "condition_2plus": [
       {
-        "code": "058610",
-        "name": "에스피지",
-        "close": 97100.0,
-        "change_pct": 0.0,
-        "data_date": "2026-10-01",
-        "rsi": 49.79,
-        "disparity": 101.39,
-        "rvol": 0.26,
-        "turnover": 9383161400.0,
-        "score": 5,
+        "code": "078600",
+        "name": "대주전자재료",
+        "close": 109800.0,
+        "change_pct": 12.62,
+        "data_date": "2026-10-02",
+        "rsi": 74.8,
+        "disparity": 123.86,
+        "rvol": 4.04,
+        "turnover": 57648513600.0,
+        "score": 7,
         "tier": null,
         "matched": [
           {
@@ -1980,121 +2078,8 @@
             "points": 1
           },
           {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "140410",
-        "name": "메지온",
-        "close": 71400.0,
-        "change_pct": -2.06,
-        "data_date": "2026-10-01",
-        "rsi": 49.78,
-        "disparity": 98.53,
-        "rvol": 0.19,
-        "turnover": 1173958800.0,
-        "score": 5,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
+            "label": "RVOL>=2",
             "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "041510",
-        "name": "에스엠",
-        "close": 79900.0,
-        "change_pct": -2.8,
-        "data_date": "2026-10-01",
-        "rsi": 48.33,
-        "disparity": 97.51,
-        "rvol": 0.19,
-        "turnover": 1869819800.0,
-        "score": 5,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "096530",
-        "name": "씨젠",
-        "close": 36550.0,
-        "change_pct": 3.1,
-        "data_date": "2026-10-01",
-        "rsi": 70.13,
-        "disparity": 111.16,
-        "rvol": 0.97,
-        "turnover": 9443898650.0,
-        "score": 5,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
           },
           {
             "label": "거래대금 증가",
@@ -2107,20 +2092,20 @@
         "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
-        "rvol_high": false,
+        "rvol_high": true,
         "turnover_increase": true
       },
       {
-        "code": "204270",
-        "name": "제이앤티씨",
-        "close": 21250.0,
-        "change_pct": -3.85,
-        "data_date": "2026-10-01",
-        "rsi": 48.31,
-        "disparity": 96.54,
-        "rvol": 0.26,
-        "turnover": 5788415000.0,
-        "score": 5,
+        "code": "056190",
+        "name": "SFA",
+        "close": 31950.0,
+        "change_pct": 5.97,
+        "data_date": "2026-10-02",
+        "rsi": 75.9,
+        "disparity": 118.38,
+        "rvol": 2.2,
+        "turnover": 9625991850.0,
+        "score": 7,
         "tier": null,
         "matched": [
           {
@@ -2136,32 +2121,40 @@
             "points": 1
           },
           {
-            "label": "RSI 35~50",
+            "label": "RVOL>=2",
+            "points": 2
+          },
+          {
+            "label": "거래대금 증가",
             "points": 1
           }
         ],
         "ma_aligned": true,
         "ma_mid_rising": true,
         "ma_long_rising": true,
-        "rsi_zone": true,
+        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
+        "rvol_high": true,
+        "turnover_increase": true
       },
       {
-        "code": "003380",
-        "name": "하림지주",
-        "close": 10900.0,
-        "change_pct": 0.93,
-        "data_date": "2026-10-01",
-        "rsi": 47.93,
-        "disparity": 98.3,
-        "rvol": 0.09,
-        "turnover": 349464900.0,
-        "score": 5,
+        "code": "101490",
+        "name": "에스앤에스텍",
+        "close": 53400.0,
+        "change_pct": 0.38,
+        "data_date": "2026-10-02",
+        "rsi": 72.12,
+        "disparity": 124.07,
+        "rvol": 2.2,
+        "turnover": 31682807400.0,
+        "score": 7,
         "tier": null,
         "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
           {
             "label": "MA20 상승",
             "points": 1
@@ -2171,7 +2164,89 @@
             "points": 1
           },
           {
-            "label": "RSI 35~50",
+            "label": "RVOL>=2",
+            "points": 2
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": true,
+        "turnover_increase": true
+      },
+      {
+        "code": "032500",
+        "name": "케이엠더블유",
+        "close": 21600.0,
+        "change_pct": 11.23,
+        "data_date": "2026-10-02",
+        "rsi": 75.16,
+        "disparity": 123.66,
+        "rvol": 3.05,
+        "turnover": 19624593600.0,
+        "score": 7,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RVOL>=2",
+            "points": 2
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": true,
+        "turnover_increase": true
+      },
+      {
+        "code": "204270",
+        "name": "제이앤티씨",
+        "close": 22650.0,
+        "change_pct": 3.9,
+        "data_date": "2026-10-02",
+        "rsi": 55.83,
+        "disparity": 101.88,
+        "rvol": 0.34,
+        "turnover": 8438461350.0,
+        "score": 6,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
             "points": 1
           },
           {
@@ -2179,25 +2254,25 @@
             "points": 2
           }
         ],
-        "ma_aligned": false,
+        "ma_aligned": true,
         "ma_mid_rising": true,
         "ma_long_rising": true,
-        "rsi_zone": true,
+        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": true,
         "rvol_high": false,
         "turnover_increase": false
       },
       {
-        "code": "056190",
-        "name": "SFA",
-        "close": 29550.0,
-        "change_pct": 2.25,
-        "data_date": "2026-10-01",
-        "rsi": 67.6,
-        "disparity": 111.33,
-        "rvol": 1.65,
-        "turnover": 5982397500.0,
+        "code": "058470",
+        "name": "리노공업",
+        "close": 85800.0,
+        "change_pct": 4.76,
+        "data_date": "2026-10-02",
+        "rsi": 72.88,
+        "disparity": 121.38,
+        "rvol": 1.63,
+        "turnover": 115124209200.0,
         "score": 5,
         "tier": null,
         "matched": [
@@ -2228,15 +2303,15 @@
         "turnover_increase": true
       },
       {
-        "code": "425420",
-        "name": "티에프이",
-        "close": 71500.0,
-        "change_pct": 12.95,
-        "data_date": "2026-10-01",
-        "rsi": 75.19,
-        "disparity": 124.01,
-        "rvol": 1.27,
-        "turnover": 12621895000.0,
+        "code": "222800",
+        "name": "심텍",
+        "close": 168400.0,
+        "change_pct": 5.25,
+        "data_date": "2026-10-02",
+        "rsi": 72.52,
+        "disparity": 124.06,
+        "rvol": 1.21,
+        "turnover": 142961159200.0,
         "score": 5,
         "tier": null,
         "matched": [
@@ -2267,15 +2342,522 @@
         "turnover_increase": true
       },
       {
-        "code": "039030",
-        "name": "이오테크닉스",
-        "close": 536000.0,
-        "change_pct": 4.08,
-        "data_date": "2026-10-01",
-        "rsi": 68.63,
-        "disparity": 115.7,
-        "rvol": 0.27,
-        "turnover": 17024432000.0,
+        "code": "005290",
+        "name": "동진쎄미켐",
+        "close": 53200.0,
+        "change_pct": 0.38,
+        "data_date": "2026-10-02",
+        "rsi": 73.06,
+        "disparity": 122.57,
+        "rvol": 1.11,
+        "turnover": 23701344800.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "043260",
+        "name": "성호전자",
+        "close": 31850.0,
+        "change_pct": 12.94,
+        "data_date": "2026-10-02",
+        "rsi": 76.12,
+        "disparity": 145.68,
+        "rvol": 1.25,
+        "turnover": 184223807950.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "131970",
+        "name": "두산테스나",
+        "close": 109300.0,
+        "change_pct": 3.31,
+        "data_date": "2026-10-02",
+        "rsi": 68.86,
+        "disparity": 124.68,
+        "rvol": 1.07,
+        "turnover": 41626467800.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "140410",
+        "name": "메지온",
+        "close": 70800.0,
+        "change_pct": -3.8,
+        "data_date": "2026-10-02",
+        "rsi": 49.24,
+        "disparity": 97.24,
+        "rvol": 0.33,
+        "turnover": 2056669200.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": true,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "323280",
+        "name": "태성",
+        "close": 60200.0,
+        "change_pct": -1.15,
+        "data_date": "2026-10-02",
+        "rsi": 71.66,
+        "disparity": 124.02,
+        "rvol": 0.89,
+        "turnover": 20478715600.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "218410",
+        "name": "RFHIC",
+        "close": 62900.0,
+        "change_pct": 4.66,
+        "data_date": "2026-10-02",
+        "rsi": 67.79,
+        "disparity": 116.39,
+        "rvol": 1.53,
+        "turnover": 57931591900.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "007390",
+        "name": "네이처셀",
+        "close": 24850.0,
+        "change_pct": -0.6,
+        "data_date": "2026-10-02",
+        "rsi": 52.48,
+        "disparity": 100.32,
+        "rvol": 1.03,
+        "turnover": 4494346150.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "347700",
+        "name": "스피어",
+        "close": 24700.0,
+        "change_pct": 7.63,
+        "data_date": "2026-10-02",
+        "rsi": 60.71,
+        "disparity": 114.89,
+        "rvol": 0.98,
+        "turnover": 27596643100.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "086450",
+        "name": "동국제약",
+        "close": 22800.0,
+        "change_pct": 2.47,
+        "data_date": "2026-10-02",
+        "rsi": 65.73,
+        "disparity": 108.78,
+        "rvol": 1.26,
+        "turnover": 13137519600.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "327260",
+        "name": "RF머트리얼즈",
+        "close": 56700.0,
+        "change_pct": 14.55,
+        "data_date": "2026-10-02",
+        "rsi": 73.11,
+        "disparity": 127.62,
+        "rvol": 1.25,
+        "turnover": 76310885700.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "036830",
+        "name": "솔브레인홀딩스",
+        "close": 48700.0,
+        "change_pct": 10.43,
+        "data_date": "2026-10-02",
+        "rsi": 69.65,
+        "disparity": 115.65,
+        "rvol": 1.78,
+        "turnover": 4844578600.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "161580",
+        "name": "필옵틱스",
+        "close": 41525.0,
+        "change_pct": 2.78,
+        "data_date": "2026-10-02",
+        "rsi": 76.04,
+        "disparity": 124.12,
+        "rvol": 1.42,
+        "turnover": 31451076525.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "065350",
+        "name": "신성델타테크",
+        "close": 32900.0,
+        "change_pct": 2.97,
+        "data_date": "2026-10-02",
+        "rsi": 62.04,
+        "disparity": 106.44,
+        "rvol": 1.2,
+        "turnover": 3461836700.0,
+        "score": 5,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "close": 248000.0,
+        "change_pct": 3.12,
+        "data_date": "2026-10-02",
+        "rsi": 73.68,
+        "disparity": 119.56,
+        "rvol": 0.4,
+        "turnover": 133471864000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2304,13 +2886,13 @@
       {
         "code": "240810",
         "name": "원익IPS",
-        "close": 138500.0,
-        "change_pct": 5.16,
-        "data_date": "2026-10-01",
-        "rsi": 63.53,
-        "disparity": 114.97,
-        "rvol": 0.42,
-        "turnover": 58861392000.0,
+        "close": 144300.0,
+        "change_pct": 0.84,
+        "data_date": "2026-10-02",
+        "rsi": 68.7,
+        "disparity": 117.86,
+        "rvol": 0.32,
+        "turnover": 48975131400.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2337,85 +2919,15 @@
         "turnover_increase": false
       },
       {
-        "code": "036930",
-        "name": "주성엔지니어링",
-        "close": 235000.0,
-        "change_pct": 1.08,
-        "data_date": "2026-10-01",
-        "rsi": 69.14,
-        "disparity": 115.51,
-        "rvol": 0.29,
-        "turnover": 89446640000.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "222800",
-        "name": "심텍",
-        "close": 147300.0,
-        "change_pct": -2.06,
-        "data_date": "2026-10-01",
-        "rsi": 61.21,
-        "disparity": 110.87,
-        "rvol": 0.27,
-        "turnover": 26109661500.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "095340",
-        "name": "ISC",
-        "close": 216000.0,
-        "change_pct": 1.41,
-        "data_date": "2026-10-01",
-        "rsi": 67.33,
-        "disparity": 112.06,
-        "rvol": 0.2,
-        "turnover": 6536376000.0,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "close": 558000.0,
+        "change_pct": -0.18,
+        "data_date": "2026-10-02",
+        "rsi": 73.02,
+        "disparity": 118.17,
+        "rvol": 0.3,
+        "turnover": 19957986000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2444,13 +2956,13 @@
       {
         "code": "403870",
         "name": "HPSP",
-        "close": 66100.0,
-        "change_pct": 4.09,
-        "data_date": "2026-10-01",
-        "rsi": 75.31,
-        "disparity": 120.19,
-        "rvol": 0.48,
-        "turnover": 66752407000.0,
+        "close": 68500.0,
+        "change_pct": -1.58,
+        "data_date": "2026-10-02",
+        "rsi": 76.28,
+        "disparity": 122.16,
+        "rvol": 0.55,
+        "turnover": 85521017000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2477,15 +2989,85 @@
         "turnover_increase": false
       },
       {
+        "code": "095340",
+        "name": "ISC",
+        "close": 213500.0,
+        "change_pct": -4.69,
+        "data_date": "2026-10-02",
+        "rsi": 62.89,
+        "disparity": 109.32,
+        "rvol": 0.53,
+        "turnover": 17694880000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "000250",
+        "name": "삼천당제약",
+        "close": 196200.0,
+        "change_pct": -1.6,
+        "data_date": "2026-10-02",
+        "rsi": 68.48,
+        "disparity": 118.47,
+        "rvol": 2.26,
+        "turnover": 45484457400.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RVOL>=2",
+            "points": 2
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": true,
+        "turnover_increase": true
+      },
+      {
         "code": "440110",
         "name": "파두",
-        "close": 84600.0,
-        "change_pct": 2.67,
-        "data_date": "2026-10-01",
-        "rsi": 61.08,
-        "disparity": 119.91,
-        "rvol": 0.23,
-        "turnover": 10160121600.0,
+        "close": 87800.0,
+        "change_pct": -1.57,
+        "data_date": "2026-10-02",
+        "rsi": 64.68,
+        "disparity": 121.89,
+        "rvol": 0.29,
+        "turnover": 14168988400.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2514,48 +3096,13 @@
       {
         "code": "084370",
         "name": "유진테크",
-        "close": 177500.0,
-        "change_pct": 5.22,
-        "data_date": "2026-10-01",
-        "rsi": 69.02,
-        "disparity": 122.74,
-        "rvol": 0.48,
-        "turnover": 13616557500.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "064760",
-        "name": "티씨케이",
-        "close": 305500.0,
-        "change_pct": 0.83,
-        "data_date": "2026-10-01",
-        "rsi": 70.46,
-        "disparity": 113.14,
-        "rvol": 0.14,
-        "turnover": 2839622500.0,
+        "close": 186000.0,
+        "change_pct": 1.69,
+        "data_date": "2026-10-02",
+        "rsi": 73.72,
+        "disparity": 126.1,
+        "rvol": 0.39,
+        "turnover": 12166446000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2584,48 +3131,13 @@
       {
         "code": "031980",
         "name": "피에스케이홀딩스",
-        "close": 186400.0,
-        "change_pct": 4.37,
-        "data_date": "2026-10-01",
-        "rsi": 68.92,
-        "disparity": 117.24,
-        "rvol": 0.24,
-        "turnover": 8189297600.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "357780",
-        "name": "솔브레인",
-        "close": 421000.0,
-        "change_pct": 3.95,
-        "data_date": "2026-10-01",
-        "rsi": 74.47,
-        "disparity": 121.61,
-        "rvol": 0.47,
-        "turnover": 6017774000.0,
+        "close": 194600.0,
+        "change_pct": 0.31,
+        "data_date": "2026-10-02",
+        "rsi": 72.31,
+        "disparity": 119.39,
+        "rvol": 0.2,
+        "turnover": 7165172000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2654,13 +3166,83 @@
       {
         "code": "067310",
         "name": "하나마이크론",
-        "close": 48800.0,
-        "change_pct": 2.52,
-        "data_date": "2026-10-01",
-        "rsi": 70.89,
-        "disparity": 123.94,
-        "rvol": 0.32,
-        "turnover": 27086976800.0,
+        "close": 53900.0,
+        "change_pct": 5.69,
+        "data_date": "2026-10-02",
+        "rsi": 78.44,
+        "disparity": 133.37,
+        "rvol": 0.49,
+        "turnover": 49395361400.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "064760",
+        "name": "티씨케이",
+        "close": 307000.0,
+        "change_pct": -1.13,
+        "data_date": "2026-10-02",
+        "rsi": 70.24,
+        "disparity": 112.34,
+        "rvol": 0.25,
+        "turnover": 5134268000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "095610",
+        "name": "테스",
+        "close": 186300.0,
+        "change_pct": 2.59,
+        "data_date": "2026-10-02",
+        "rsi": 71.11,
+        "disparity": 122.73,
+        "rvol": 0.27,
+        "turnover": 18455809500.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2689,13 +3271,48 @@
       {
         "code": "131290",
         "name": "티에스이",
-        "close": 295000.0,
-        "change_pct": 2.25,
-        "data_date": "2026-10-01",
-        "rsi": 59.36,
-        "disparity": 111.81,
-        "rvol": 0.16,
-        "turnover": 6400025000.0,
+        "close": 300500.0,
+        "change_pct": -0.33,
+        "data_date": "2026-10-02",
+        "rsi": 61.48,
+        "disparity": 112.34,
+        "rvol": 0.27,
+        "turnover": 10880504000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "357780",
+        "name": "솔브레인",
+        "close": 429000.0,
+        "change_pct": 0.23,
+        "data_date": "2026-10-02",
+        "rsi": 77.97,
+        "disparity": 122.05,
+        "rvol": 0.29,
+        "turnover": 3878589000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2724,13 +3341,13 @@
       {
         "code": "010170",
         "name": "대한광통신",
-        "close": 16460.0,
-        "change_pct": -1.67,
-        "data_date": "2026-10-01",
-        "rsi": 57.09,
-        "disparity": 105.82,
-        "rvol": 0.08,
-        "turnover": 17727057880.0,
+        "close": 17890.0,
+        "change_pct": 4.62,
+        "data_date": "2026-10-02",
+        "rsi": 66.49,
+        "disparity": 113.21,
+        "rvol": 0.62,
+        "turnover": 158944062800.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2757,15 +3374,15 @@
         "turnover_increase": false
       },
       {
-        "code": "005290",
-        "name": "동진쎄미켐",
-        "close": 50200.0,
-        "change_pct": 4.15,
-        "data_date": "2026-10-01",
-        "rsi": 66.62,
-        "disparity": 117.78,
-        "rvol": 1.68,
-        "turnover": 29757455600.0,
+        "code": "098460",
+        "name": "고영",
+        "close": 34225.0,
+        "change_pct": 0.81,
+        "data_date": "2026-10-02",
+        "rsi": 69.59,
+        "disparity": 118.46,
+        "rvol": 0.48,
+        "turnover": 19837905200.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2778,29 +3395,99 @@
             "points": 1
           },
           {
-            "label": "거래대금 증가",
+            "label": "MA60 상승",
             "points": 1
           }
         ],
         "ma_aligned": true,
         "ma_mid_rising": true,
-        "ma_long_rising": false,
+        "ma_long_rising": true,
         "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
-        "turnover_increase": true
+        "turnover_increase": false
       },
       {
-        "code": "098460",
-        "name": "고영",
-        "close": 31850.0,
-        "change_pct": 3.24,
-        "data_date": "2026-10-01",
-        "rsi": 62.59,
-        "disparity": 111.84,
+        "code": "058610",
+        "name": "에스피지",
+        "close": 102800.0,
+        "change_pct": 2.59,
+        "data_date": "2026-10-02",
+        "rsi": 56.61,
+        "disparity": 106.2,
+        "rvol": 0.59,
+        "turnover": 23234136400.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "140860",
+        "name": "파크시스템스",
+        "close": 300000.0,
+        "change_pct": 1.18,
+        "data_date": "2026-10-02",
+        "rsi": 72.5,
+        "disparity": 114.16,
         "rvol": 0.34,
-        "turnover": 11533999750.0,
+        "turnover": 2712900000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "089030",
+        "name": "테크윙",
+        "close": 56800.0,
+        "change_pct": -0.35,
+        "data_date": "2026-10-02",
+        "rsi": 67.38,
+        "disparity": 117.28,
+        "rvol": 0.48,
+        "turnover": 17835824800.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2829,118 +3516,13 @@
       {
         "code": "030530",
         "name": "원익홀딩스",
-        "close": 26600.0,
-        "change_pct": 0.57,
-        "data_date": "2026-10-01",
-        "rsi": 60.95,
-        "disparity": 109.96,
-        "rvol": 0.07,
-        "turnover": 5156037600.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "043260",
-        "name": "성호전자",
-        "close": 27050.0,
-        "change_pct": -1.1,
-        "data_date": "2026-10-01",
-        "rsi": 65.9,
-        "disparity": 128.56,
-        "rvol": 0.37,
-        "turnover": 41693625700.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "263750",
-        "name": "펄어비스",
-        "close": 32850.0,
-        "change_pct": 1.86,
-        "data_date": "2026-10-01",
-        "rsi": 45.25,
-        "disparity": 96.9,
-        "rvol": 0.49,
-        "turnover": 4559284350.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "089030",
-        "name": "테크윙",
-        "close": 54300.0,
-        "change_pct": 3.63,
-        "data_date": "2026-10-01",
-        "rsi": 62.43,
-        "disparity": 113.54,
-        "rvol": 0.66,
-        "turnover": 21431884200.0,
+        "close": 29100.0,
+        "change_pct": 3.74,
+        "data_date": "2026-10-02",
+        "rsi": 68.66,
+        "disparity": 117.12,
+        "rvol": 0.24,
+        "turnover": 20449210200.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -2969,13 +3551,13 @@
       {
         "code": "036540",
         "name": "SFA반도체",
-        "close": 11400.0,
-        "change_pct": 5.85,
-        "data_date": "2026-10-01",
-        "rsi": 84.37,
-        "disparity": 135.88,
-        "rvol": 0.45,
-        "turnover": 35563075200.0,
+        "close": 11620.0,
+        "change_pct": 4.5,
+        "data_date": "2026-10-02",
+        "rsi": 86.55,
+        "disparity": 134.07,
+        "rvol": 0.42,
+        "turnover": 37528463280.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3002,15 +3584,50 @@
         "turnover_increase": false
       },
       {
-        "code": "323280",
-        "name": "태성",
-        "close": 58400.0,
-        "change_pct": 2.28,
-        "data_date": "2026-10-01",
-        "rsi": 69.32,
-        "disparity": 122.48,
-        "rvol": 0.81,
-        "turnover": 17006897600.0,
+        "code": "096530",
+        "name": "씨젠",
+        "close": 36800.0,
+        "change_pct": -0.67,
+        "data_date": "2026-10-02",
+        "rsi": 69.73,
+        "disparity": 111.04,
+        "rvol": 0.59,
+        "turnover": 5946732800.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "437730",
+        "name": "삼현",
+        "close": 51400.0,
+        "change_pct": 1.38,
+        "data_date": "2026-10-02",
+        "rsi": 63.1,
+        "disparity": 114.34,
+        "rvol": 0.46,
+        "turnover": 12937534200.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3039,83 +3656,13 @@
       {
         "code": "060370",
         "name": "LS마린솔루션",
-        "close": 31450.0,
-        "change_pct": -2.48,
-        "data_date": "2026-10-01",
-        "rsi": 46.15,
-        "disparity": 98.32,
-        "rvol": 0.32,
-        "turnover": 1201075500.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "007390",
-        "name": "네이처셀",
-        "close": 24350.0,
-        "change_pct": 0.41,
-        "data_date": "2026-10-01",
-        "rsi": 46.45,
-        "disparity": 98.67,
-        "rvol": 0.35,
-        "turnover": 1492606300.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "437730",
-        "name": "삼현",
-        "close": 48750.0,
-        "change_pct": -2.69,
-        "data_date": "2026-10-01",
-        "rsi": 57.9,
-        "disparity": 111.38,
-        "rvol": 0.48,
-        "turnover": 12502668750.0,
+        "close": 32750.0,
+        "change_pct": 0.77,
+        "data_date": "2026-10-02",
+        "rsi": 54.05,
+        "disparity": 101.87,
+        "rvol": 0.55,
+        "turnover": 2306124000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3142,15 +3689,15 @@
         "turnover_increase": false
       },
       {
-        "code": "078600",
-        "name": "대주전자재료",
-        "close": 93300.0,
-        "change_pct": -0.53,
-        "data_date": "2026-10-01",
-        "rsi": 56.76,
-        "disparity": 107.06,
-        "rvol": 0.42,
-        "turnover": 4123953300.0,
+        "code": "039200",
+        "name": "오스코텍",
+        "close": 37550.0,
+        "change_pct": -1.7,
+        "data_date": "2026-10-02",
+        "rsi": 57.86,
+        "disparity": 104.83,
+        "rvol": 0.35,
+        "turnover": 1276211850.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3179,48 +3726,13 @@
       {
         "code": "232140",
         "name": "와이씨",
-        "close": 15405.0,
-        "change_pct": 4.87,
-        "data_date": "2026-10-01",
-        "rsi": 70.02,
-        "disparity": 121.04,
-        "rvol": 0.45,
-        "turnover": 18300323535.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "252990",
-        "name": "샘씨엔에스",
-        "close": 20400.0,
-        "change_pct": 2.15,
-        "data_date": "2026-10-01",
-        "rsi": 73.71,
-        "disparity": 125.65,
-        "rvol": 0.19,
-        "turnover": 2995536000.0,
+        "close": 16730.0,
+        "change_pct": 4.24,
+        "data_date": "2026-10-02",
+        "rsi": 76.02,
+        "disparity": 128.76,
+        "rvol": 0.54,
+        "turnover": 23304070230.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3249,13 +3761,13 @@
       {
         "code": "166090",
         "name": "하나머티리얼즈",
-        "close": 62000.0,
-        "change_pct": 3.68,
-        "data_date": "2026-10-01",
-        "rsi": 62.32,
-        "disparity": 113.85,
-        "rvol": 0.44,
-        "turnover": 4205522000.0,
+        "close": 64800.0,
+        "change_pct": 2.37,
+        "data_date": "2026-10-02",
+        "rsi": 67.7,
+        "disparity": 117.27,
+        "rvol": 0.46,
+        "turnover": 4721133600.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3282,15 +3794,85 @@
         "turnover_increase": false
       },
       {
-        "code": "086450",
-        "name": "동국제약",
-        "close": 22250.0,
-        "change_pct": 3.01,
-        "data_date": "2026-10-01",
-        "rsi": 61.4,
-        "disparity": 106.4,
-        "rvol": 0.42,
-        "turnover": 4211101750.0,
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "close": 20275.0,
+        "change_pct": -0.12,
+        "data_date": "2026-10-02",
+        "rsi": 74.39,
+        "disparity": 122.37,
+        "rvol": 0.14,
+        "turnover": 2145013900.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "356860",
+        "name": "티엘비",
+        "close": 49250.0,
+        "change_pct": 1.97,
+        "data_date": "2026-10-02",
+        "rsi": 69.7,
+        "disparity": 121.6,
+        "rvol": 0.95,
+        "turnover": 30179415000.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "293490",
+        "name": "카카오게임즈",
+        "close": 9930.0,
+        "change_pct": 0.51,
+        "data_date": "2026-10-02",
+        "rsi": 60.67,
+        "disparity": 106.71,
+        "rvol": 0.37,
+        "turnover": 1101654060.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3319,13 +3901,13 @@
       {
         "code": "445680",
         "name": "큐리옥스바이오시스템즈",
-        "close": 57600.0,
-        "change_pct": 0.0,
-        "data_date": "2026-10-01",
-        "rsi": 66.54,
-        "disparity": 116.59,
-        "rvol": 0.28,
-        "turnover": 1065542400.0,
+        "close": 59900.0,
+        "change_pct": 1.53,
+        "data_date": "2026-10-02",
+        "rsi": 71.5,
+        "disparity": 119.79,
+        "rvol": 0.38,
+        "turnover": 1516727900.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3354,13 +3936,13 @@
       {
         "code": "083450",
         "name": "GST",
-        "close": 52500.0,
-        "change_pct": 2.54,
-        "data_date": "2026-10-01",
-        "rsi": 61.69,
-        "disparity": 112.62,
-        "rvol": 0.85,
-        "turnover": 5391960000.0,
+        "close": 54500.0,
+        "change_pct": -0.37,
+        "data_date": "2026-10-02",
+        "rsi": 66.34,
+        "disparity": 115.39,
+        "rvol": 0.87,
+        "turnover": 6245046000.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3387,15 +3969,15 @@
         "turnover_increase": false
       },
       {
-        "code": "119850",
-        "name": "지엔씨에너지",
-        "close": 57800.0,
-        "change_pct": 2.48,
-        "data_date": "2026-10-01",
-        "rsi": 64.57,
-        "disparity": 114.81,
-        "rvol": 0.21,
-        "turnover": 7713872400.0,
+        "code": "417200",
+        "name": "LS머트리얼즈",
+        "close": 14440.0,
+        "change_pct": 3.0,
+        "data_date": "2026-10-02",
+        "rsi": 68.49,
+        "disparity": 115.22,
+        "rvol": 0.55,
+        "turnover": 9557200640.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3422,50 +4004,15 @@
         "turnover_increase": false
       },
       {
-        "code": "161580",
-        "name": "필옵틱스",
-        "close": 39250.0,
-        "change_pct": 0.13,
-        "data_date": "2026-10-01",
-        "rsi": 70.69,
-        "disparity": 120.32,
-        "rvol": 0.58,
-        "turnover": 11040436250.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "388210",
-        "name": "씨엠티엑스",
-        "close": 91300.0,
-        "change_pct": 2.82,
-        "data_date": "2026-10-01",
-        "rsi": 64.09,
-        "disparity": 117.38,
-        "rvol": 0.46,
-        "turnover": 2080361800.0,
+        "code": "100790",
+        "name": "미래에셋벤처투자",
+        "close": 18230.0,
+        "change_pct": 1.33,
+        "data_date": "2026-10-02",
+        "rsi": 60.5,
+        "disparity": 109.86,
+        "rvol": 0.39,
+        "turnover": 3793316630.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3494,13 +4041,83 @@
       {
         "code": "115180",
         "name": "큐리언트",
-        "close": 23650.0,
-        "change_pct": 7.01,
-        "data_date": "2026-10-01",
-        "rsi": 55.59,
-        "disparity": 106.42,
-        "rvol": 0.45,
-        "turnover": 1611794800.0,
+        "close": 24750.0,
+        "change_pct": 1.23,
+        "data_date": "2026-10-02",
+        "rsi": 60.06,
+        "disparity": 110.12,
+        "rvol": 0.18,
+        "turnover": 678125250.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "425420",
+        "name": "티에프이",
+        "close": 73700.0,
+        "change_pct": 0.41,
+        "data_date": "2026-10-02",
+        "rsi": 77.62,
+        "disparity": 124.89,
+        "rvol": 0.42,
+        "turnover": 4419715300.0,
+        "score": 4,
+        "tier": null,
+        "matched": [
+          {
+            "label": "정배열 (MA5>MA20>MA60)",
+            "points": 2
+          },
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": true,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "388210",
+        "name": "씨엠티엑스",
+        "close": 93700.0,
+        "change_pct": -0.64,
+        "data_date": "2026-10-02",
+        "rsi": 66.78,
+        "disparity": 118.41,
+        "rvol": 0.67,
+        "turnover": 3388847900.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3529,13 +4146,13 @@
       {
         "code": "160190",
         "name": "하이젠알앤엠",
-        "close": 27900.0,
-        "change_pct": -2.62,
-        "data_date": "2026-10-01",
-        "rsi": 61.92,
-        "disparity": 114.28,
-        "rvol": 0.07,
-        "turnover": 788788800.0,
+        "close": 29050.0,
+        "change_pct": 1.75,
+        "data_date": "2026-10-02",
+        "rsi": 67.34,
+        "disparity": 116.05,
+        "rvol": 0.08,
+        "turnover": 926230200.0,
         "score": 4,
         "tier": null,
         "matched": [
@@ -3562,85 +4179,15 @@
         "turnover_increase": false
       },
       {
-        "code": "065350",
-        "name": "신성델타테크",
-        "close": 31250.0,
-        "change_pct": 1.63,
-        "data_date": "2026-10-01",
-        "rsi": 52.25,
-        "disparity": 101.86,
-        "rvol": 0.44,
-        "turnover": 1142312500.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "053800",
-        "name": "안랩",
-        "close": 76600.0,
-        "change_pct": 2.41,
-        "data_date": "2026-10-01",
-        "rsi": 82.11,
-        "disparity": 118.09,
-        "rvol": 0.32,
-        "turnover": 1962951600.0,
-        "score": 4,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "108490",
-        "name": "로보티즈",
-        "close": 279000.0,
-        "change_pct": -3.29,
-        "data_date": "2026-10-01",
-        "rsi": 45.86,
-        "disparity": 93.45,
-        "rvol": 0.22,
-        "turnover": 25046109000.0,
+        "code": "086520",
+        "name": "에코프로",
+        "close": 89600.0,
+        "change_pct": 5.66,
+        "data_date": "2026-10-02",
+        "rsi": 60.41,
+        "disparity": 108.44,
+        "rvol": 1.83,
+        "turnover": 91676211200.0,
         "score": 3,
         "tier": null,
         "matched": [
@@ -3653,14 +4200,80 @@
             "points": 1
           },
           {
-            "label": "RSI 35~50",
+            "label": "거래대금 증가",
             "points": 1
           }
         ],
         "ma_aligned": false,
         "ma_mid_rising": true,
         "ma_long_rising": true,
-        "rsi_zone": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "080220",
+        "name": "제주반도체",
+        "close": 93900.0,
+        "change_pct": 5.03,
+        "data_date": "2026-10-02",
+        "rsi": 69.47,
+        "disparity": 123.71,
+        "rvol": 1.34,
+        "turnover": 146988243000.0,
+        "score": 3,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          },
+          {
+            "label": "거래대금 증가",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": true
+      },
+      {
+        "code": "108490",
+        "name": "로보티즈",
+        "close": 308500.0,
+        "change_pct": 4.22,
+        "data_date": "2026-10-02",
+        "rsi": 58.44,
+        "disparity": 101.99,
+        "rvol": 0.57,
+        "turnover": 74566609500.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
@@ -3669,451 +4282,13 @@
       {
         "code": "032820",
         "name": "우리기술",
-        "close": 12350.0,
-        "change_pct": 0.0,
-        "data_date": "2026-10-01",
-        "rsi": 47.13,
-        "disparity": 96.98,
-        "rvol": 0.12,
-        "turnover": 10008612900.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "MA20 상승",
-            "points": 1
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          },
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": true,
-        "ma_long_rising": true,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "058470",
-        "name": "리노공업",
-        "close": 75300.0,
-        "change_pct": 2.17,
-        "data_date": "2026-10-01",
-        "rsi": 59.67,
-        "disparity": 108.67,
-        "rvol": 0.47,
-        "turnover": 25274972100.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "095610",
-        "name": "테스",
-        "close": 172500.0,
-        "change_pct": 2.25,
-        "data_date": "2026-10-01",
-        "rsi": 63.66,
-        "disparity": 115.91,
-        "rvol": 0.29,
-        "turnover": 18548752500.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "226950",
-        "name": "올릭스",
-        "close": 103300.0,
-        "change_pct": 0.68,
-        "data_date": "2026-10-01",
-        "rsi": 46.78,
-        "disparity": 100.23,
-        "rvol": 0.15,
-        "turnover": 3309938600.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "237690",
-        "name": "에스티팜",
-        "close": 92900.0,
-        "change_pct": 0.98,
-        "data_date": "2026-10-01",
-        "rsi": 44.62,
-        "disparity": 100.3,
-        "rvol": 0.23,
-        "turnover": 1947091100.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "131970",
-        "name": "두산테스나",
-        "close": 99100.0,
-        "change_pct": 1.23,
-        "data_date": "2026-10-01",
-        "rsi": 61.21,
-        "disparity": 115.53,
-        "rvol": 0.4,
-        "turnover": 12999838900.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "068760",
-        "name": "셀트리온제약",
-        "close": 38650.0,
-        "change_pct": 1.58,
-        "data_date": "2026-10-01",
-        "rsi": 39.39,
-        "disparity": 97.76,
-        "rvol": 0.38,
-        "turnover": 1127343200.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "218410",
-        "name": "RFHIC",
-        "close": 57800.0,
-        "change_pct": -1.03,
-        "data_date": "2026-10-01",
-        "rsi": 57.84,
-        "disparity": 108.73,
-        "rvol": 0.18,
-        "turnover": 5929355200.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "347700",
-        "name": "스피어",
-        "close": 22300.0,
-        "change_pct": 1.59,
-        "data_date": "2026-10-01",
-        "rsi": 51.46,
-        "disparity": 105.21,
-        "rvol": 0.1,
-        "turnover": 2342369700.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "195940",
-        "name": "HK이노엔",
-        "close": 39500.0,
-        "change_pct": 0.89,
-        "data_date": "2026-10-01",
-        "rsi": 45.36,
-        "disparity": 98.82,
-        "rvol": 0.17,
-        "turnover": 612052500.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "RSI 35~50",
-            "points": 1
-          },
-          {
-            "label": "이격도 저점->상승",
-            "points": 2
-          }
-        ],
-        "ma_aligned": false,
-        "ma_mid_rising": false,
-        "ma_long_rising": false,
-        "rsi_zone": true,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": true,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "293490",
-        "name": "카카오게임즈",
-        "close": 9670.0,
-        "change_pct": 4.09,
-        "data_date": "2026-10-01",
-        "rsi": 56.38,
-        "disparity": 104.55,
-        "rvol": 0.6,
-        "turnover": 1793785000.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA60 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": false,
-        "ma_long_rising": true,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "417200",
-        "name": "LS머트리얼즈",
-        "close": 13620.0,
-        "change_pct": -2.99,
-        "data_date": "2026-10-01",
-        "rsi": 59.42,
-        "disparity": 110.48,
-        "rvol": 0.29,
-        "turnover": 4543986120.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "100790",
-        "name": "미래에셋벤처투자",
-        "close": 17030.0,
-        "change_pct": 0.83,
-        "data_date": "2026-10-01",
-        "rsi": 52.91,
-        "disparity": 104.03,
-        "rvol": 0.09,
-        "turnover": 778049610.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "327260",
-        "name": "RF머트리얼즈",
-        "close": 47750.0,
-        "change_pct": -3.14,
-        "data_date": "2026-10-01",
-        "rsi": 58.44,
-        "disparity": 110.34,
-        "rvol": 0.09,
-        "turnover": 4495041750.0,
-        "score": 3,
-        "tier": null,
-        "matched": [
-          {
-            "label": "정배열 (MA5>MA20>MA60)",
-            "points": 2
-          },
-          {
-            "label": "MA20 상승",
-            "points": 1
-          }
-        ],
-        "ma_aligned": true,
-        "ma_mid_rising": true,
-        "ma_long_rising": false,
-        "rsi_zone": false,
-        "rsi_upcross": false,
-        "disparity_bottom_turn": false,
-        "rvol_high": false,
-        "turnover_increase": false
-      },
-      {
-        "code": "140860",
-        "name": "파크시스템스",
-        "close": 285000.0,
-        "change_pct": 3.07,
-        "data_date": "2026-10-01",
-        "rsi": 65.82,
-        "disparity": 109.72,
-        "rvol": 0.31,
-        "turnover": 2268030000.0,
+        "close": 12640.0,
+        "change_pct": 0.48,
+        "data_date": "2026-10-02",
+        "rsi": 50.76,
+        "disparity": 98.39,
+        "rvol": 0.08,
+        "turnover": 6969114560.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -4130,6 +4305,37 @@
         "ma_mid_rising": true,
         "ma_long_rising": true,
         "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
+        "code": "263750",
+        "name": "펄어비스",
+        "close": 33550.0,
+        "change_pct": -0.15,
+        "data_date": "2026-10-02",
+        "rsi": 49.47,
+        "disparity": 98.44,
+        "rvol": 0.13,
+        "turnover": 1224809850.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "RSI 35~50",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": false,
+        "rsi_zone": true,
         "rsi_upcross": false,
         "disparity_bottom_turn": false,
         "rvol_high": false,
@@ -4138,13 +4344,13 @@
       {
         "code": "083650",
         "name": "비에이치아이",
-        "close": 60400.0,
-        "change_pct": -0.49,
-        "data_date": "2026-10-01",
-        "rsi": 47.55,
-        "disparity": 95.65,
-        "rvol": 0.92,
-        "turnover": 24673339600.0,
+        "close": 59600.0,
+        "change_pct": -1.16,
+        "data_date": "2026-10-02",
+        "rsi": 46.93,
+        "disparity": 94.39,
+        "rvol": 0.3,
+        "turnover": 7881682800.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -4167,15 +4373,15 @@
         "turnover_increase": false
       },
       {
-        "code": "082920",
-        "name": "비츠로셀",
-        "close": 28250.0,
-        "change_pct": 0.18,
-        "data_date": "2026-10-01",
-        "rsi": 45.37,
-        "disparity": 99.59,
-        "rvol": 0.08,
-        "turnover": 756704500.0,
+        "code": "041510",
+        "name": "에스엠",
+        "close": 75800.0,
+        "change_pct": -2.7,
+        "data_date": "2026-10-02",
+        "rsi": 41.58,
+        "disparity": 92.53,
+        "rvol": 0.27,
+        "turnover": 2565830000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -4198,15 +4404,46 @@
         "turnover_increase": false
       },
       {
+        "code": "003380",
+        "name": "하림지주",
+        "close": 10960.0,
+        "change_pct": 0.18,
+        "data_date": "2026-10-02",
+        "rsi": 50.15,
+        "disparity": 98.71,
+        "rvol": 0.1,
+        "turnover": 375029280.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
+      },
+      {
         "code": "241710",
         "name": "코스메카코리아",
-        "close": 110800.0,
-        "change_pct": -2.89,
-        "data_date": "2026-10-01",
-        "rsi": 38.1,
-        "disparity": 86.66,
-        "rvol": 0.35,
-        "turnover": 4348789200.0,
+        "close": 110700.0,
+        "change_pct": -4.4,
+        "data_date": "2026-10-02",
+        "rsi": 38.61,
+        "disparity": 87.4,
+        "rvol": 0.45,
+        "turnover": 5664519000.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -4229,15 +4466,15 @@
         "turnover_increase": false
       },
       {
-        "code": "101490",
-        "name": "에스앤에스텍",
-        "close": 47900.0,
-        "change_pct": 5.74,
-        "data_date": "2026-10-01",
-        "rsi": 62.25,
-        "disparity": 113.72,
-        "rvol": 1.27,
-        "turnover": 13779153500.0,
+        "code": "458870",
+        "name": "씨어스",
+        "close": 27050.0,
+        "change_pct": 2.85,
+        "data_date": "2026-10-02",
+        "rsi": 63.37,
+        "disparity": 111.72,
+        "rvol": 1.23,
+        "turnover": 6224313200.0,
         "score": 2,
         "tier": null,
         "matched": [
@@ -4258,8 +4495,39 @@
         "disparity_bottom_turn": false,
         "rvol_high": false,
         "turnover_increase": true
+      },
+      {
+        "code": "491000",
+        "name": "리브스메드",
+        "close": 37350.0,
+        "change_pct": 1.49,
+        "data_date": "2026-10-02",
+        "rsi": 61.29,
+        "disparity": 116.69,
+        "rvol": 0.38,
+        "turnover": 2856229200.0,
+        "score": 2,
+        "tier": null,
+        "matched": [
+          {
+            "label": "MA20 상승",
+            "points": 1
+          },
+          {
+            "label": "MA60 상승",
+            "points": 1
+          }
+        ],
+        "ma_aligned": false,
+        "ma_mid_rising": true,
+        "ma_long_rising": true,
+        "rsi_zone": false,
+        "rsi_upcross": false,
+        "disparity_bottom_turn": false,
+        "rvol_high": false,
+        "turnover_increase": false
       }
     ]
   },
-  "actual_data_date": "2026-10-01"
+  "actual_data_date": "2026-10-02"
 }
